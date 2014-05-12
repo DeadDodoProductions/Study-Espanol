@@ -1,0 +1,34 @@
+Things Still Need to Do:
+    Search Screen Functionality -- Default, Error warnings
+    AddEditView Functionality -- Edit
+    WordList Functionality -- Dispaly Word View when cell selected, go to Edit View
+    QuizConjugation Interface
+    QuizVocab Functionality -- gather and compare answers, go to QuizAnswers
+    QuizConjugation Functionality -- change words, gather and compare canswers, go to QuizAnswers
+    QuizAnswers Interface
+    QuizAnswers Functionality -- display Word View when cell selected, go to home page
+    FlashCards Interface
+    Flashcards Functionality -- change word, go to home page, display Word View when requested
+    Database - Edit
+    ViewWord Interface
+
+
+Notes:
+
+
+
+Done:
+    Home Screen Interface
+    Home Screen Functionality
+    SearchView Interface
+    AddEditView Interface
+    WordList Interface
+    QuizVocab Interface
+    WordListCell Display
+    QuizVocabCell Display
+    QuizAnswerCell Display
+    ConjugationView Interface
+    Switch
+    Button
+    TextView
+    BaseView

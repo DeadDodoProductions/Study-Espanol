@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="5053" systemVersion="12F45" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="F3t-5v-A5M">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="3733"/>
+    </dependencies>
+    <scenes>
+        <!--Home - Home-->
+        <scene sceneID="Cz7-Vv-Lxu">
+            <objects>
+                <viewController storyboardIdentifier="Home" title="Home" useStoryboardIdentifierAsRestorationIdentifier="YES" id="F3t-5v-A5M" customClass="Home" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="GMN-vI-eAX"/>
+                        <viewControllerLayoutGuide type="bottom" id="hop-ua-9Uf"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="HYA-gZ-V6C">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bHe-SC-Txq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-332" y="-93"/>
+        </scene>
+        <!--Add Edit View - AddEditView-->
+        <scene sceneID="pwJ-Yv-sAK">
+            <objects>
+                <viewController storyboardIdentifier="AddEditView" title="AddEditView" useStoryboardIdentifierAsRestorationIdentifier="YES" id="gdd-jm-Gq2" customClass="AddEditView" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="arP-EY-0nQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="Y3u-0r-WGe"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="LF6-Bn-prR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u4c-2y-2qV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="18" y="-92"/>
+        </scene>
+        <!--Quiz Conjugation - QuizConjugation-->
+        <scene sceneID="lKn-TM-72B">
+            <objects>
+                <viewController storyboardIdentifier="QuizConjugation" title="QuizConjugation" useStoryboardIdentifierAsRestorationIdentifier="YES" id="RPo-NM-Bi9" customClass="QuizConjugation" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AOU-ig-qcU"/>
+                        <viewControllerLayoutGuide type="bottom" id="OwX-wc-eKN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="9m7-aW-baN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="1JI-wa-m53" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="369" y="-89"/>
+        </scene>
+        <!--Quiz Vocab - QuizVocab-->
+        <scene sceneID="ai7-Pi-M5C">
+            <objects>
+                <viewController storyboardIdentifier="QuizVocab" title="QuizVocab" useStoryboardIdentifierAsRestorationIdentifier="YES" id="jks-mc-wix" customClass="QuizVocab" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="iD0-W2-isL"/>
+                        <viewControllerLayoutGuide type="bottom" id="t5D-jw-Axk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="fN6-Uo-W2Q">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ziF-cu-UBg" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="18" y="579"/>
+        </scene>
+        <!--Quiz Answer - QuizAnswer-->
+        <scene sceneID="x40-k6-xwF">
+            <objects>
+                <viewController storyboardIdentifier="QuizAnswer" title="QuizAnswer" useStoryboardIdentifierAsRestorationIdentifier="YES" id="tZb-fJ-Ta4" customClass="QuizAnswer" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="2Xh-2W-rQE"/>
+                        <viewControllerLayoutGuide type="bottom" id="tgo-Zc-qVE"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="etw-03-6pT">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fgO-6L-BeJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="381" y="587"/>
+        </scene>
+        <!--Word List - WordList-->
+        <scene sceneID="0vd-ue-hPk">
+            <objects>
+                <viewController storyboardIdentifier="WordList" title="WordList" useStoryboardIdentifierAsRestorationIdentifier="YES" id="MDA-ye-Qkg" customClass="WordList" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="SIQ-LH-S3V"/>
+                        <viewControllerLayoutGuide type="bottom" id="oXF-FO-jtk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="5ab-0v-min">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ilJ-d0-euP" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-332" y="574"/>
+        </scene>
+    </scenes>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="5063" systemVersion="12F45" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Conjugation" representedClassName="Conjugation" syncable="YES">
+        <attribute name="el" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="ellos" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="nosotros" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tense" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="tu" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="vosotros" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="yo" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="word" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Word" inverseName="conjugations" inverseEntity="Word" syncable="YES"/>
+    </entity>
+    <entity name="Tag" representedClassName="Tag" syncable="YES">
+        <attribute name="tag" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="word" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Word" inverseName="tags" inverseEntity="Word" syncable="YES"/>
+    </entity>
+    <entity name="Word" representedClassName="Word" syncable="YES">
+        <attribute name="answered" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="correct" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="definition" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="english" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="gender" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="learned" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="pronunciation" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="spanish" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="verbEnding" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="verbType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <attribute name="wordType" optional="YES" attributeType="Integer 16" defaultValueString="0" syncable="YES"/>
+        <relationship name="conjugations" optional="YES" toMany="YES" maxCount="8" deletionRule="Nullify" destinationEntity="Conjugation" inverseName="word" inverseEntity="Conjugation" syncable="YES"/>
+        <relationship name="tags" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Tag" inverseName="word" inverseEntity="Tag" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Conjugation" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Tag" positionX="0" positionY="0" width="0" height="0"/>
+        <element name="Word" positionX="0" positionY="0" width="0" height="0"/>
+    </elements>
+</model>
