@@ -13,6 +13,7 @@
 #import "Button.h"
 #import "Database.h"
 #import "Utilities.h"
+#import "QuizAnswer.h"
 
 @interface QuizConjugation ()
 
@@ -169,6 +170,13 @@
     {
         
     }
+}
+
+-(void)ActionButtonPressed:(Button*)button
+{
+    QuizAnswer *quizAnswer;
+    quizAnswer = [self.storyboard instantiateViewControllerWithIdentifier:@"QuizAnswer"];
+    [self presentViewController:quizAnswer animated:false completion:nil];
 }
 
 @end

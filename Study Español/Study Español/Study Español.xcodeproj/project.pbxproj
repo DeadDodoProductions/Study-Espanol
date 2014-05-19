@@ -19,6 +19,7 @@
 		209C38F618F1D13400DA6F78 /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 209C38F518F1D13400DA6F78 /* SearchView.m */; };
 		209D625218EE661C00CA5EF0 /* Storyboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 209D625018EE661C00CA5EF0 /* Storyboard_iPad.storyboard */; };
 		209D625318EE661C00CA5EF0 /* Storyboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 209D625118EE661C00CA5EF0 /* Storyboard_iPhone.storyboard */; };
+		20A2324B19299F01007819F4 /* SwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A2324A19299F01007819F4 /* SwitchController.m */; };
 		20D1DD57190625F90095E575 /* WordSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D1DD56190625F90095E575 /* WordSection.m */; };
 		20D9E24D18EA705500127FBA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20D9E24C18EA705500127FBA /* Foundation.framework */; };
 		20D9E24F18EA705500127FBA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20D9E24E18EA705500127FBA /* CoreGraphics.framework */; };
@@ -87,6 +88,8 @@
 		209C38F518F1D13400DA6F78 /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		209D625018EE661C00CA5EF0 /* Storyboard_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard_iPad.storyboard; sourceTree = "<group>"; };
 		209D625118EE661C00CA5EF0 /* Storyboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard_iPhone.storyboard; sourceTree = "<group>"; };
+		20A2324919299F01007819F4 /* SwitchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchController.h; sourceTree = "<group>"; };
+		20A2324A19299F01007819F4 /* SwitchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchController.m; sourceTree = "<group>"; };
 		20D1DD55190625F90095E575 /* WordSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordSection.h; sourceTree = "<group>"; };
 		20D1DD56190625F90095E575 /* WordSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordSection.m; sourceTree = "<group>"; };
 		20D9E24918EA705500127FBA /* Study Español.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Study Español.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -299,6 +302,8 @@
 			children = (
 				20D9E29918EA729300127FBA /* Switch.h */,
 				20D9E29A18EA729300127FBA /* Switch.m */,
+				20A2324919299F01007819F4 /* SwitchController.h */,
+				20A2324A19299F01007819F4 /* SwitchController.m */,
 				20D9E29F18EA72BB00127FBA /* Button.h */,
 				20D9E2A018EA72BB00127FBA /* Button.m */,
 				20D9E2DE18EA833200127FBA /* TextView.h */,
@@ -455,6 +460,7 @@
 				20D9E2C218EA76EF00127FBA /* Tag.m in Sources */,
 				20D9E2B618EA732100127FBA /* ConjugationView.m in Sources */,
 				2031F25819047F8200305A46 /* VerbTypeSection.m in Sources */,
+				20A2324B19299F01007819F4 /* SwitchController.m in Sources */,
 				204AA958190F74A0000A0D1F /* WordListCell.m in Sources */,
 				20D9E2DD18EA776A00127FBA /* FlashCards.m in Sources */,
 				2031F25E19047FA100305A46 /* WordTagSection.m in Sources */,

@@ -211,7 +211,7 @@ static Database *instance = nil;
     }
     
     //resets values of static fields
-    for (int i = 0; i < 7; i++)
+    for (int i = 0; i < 5; i++)
     {
         [self SetValue:nil Group:i Remove:true];
     }
@@ -273,6 +273,10 @@ static Database *instance = nil;
             
         case 5:
             quizType = value;
+            if ([value isEqualToNumber:[NSNumber numberWithInt:1]])
+            {
+                wordType = value;
+            }
             NSLog(@"Set Quiz Type");
             break;
             

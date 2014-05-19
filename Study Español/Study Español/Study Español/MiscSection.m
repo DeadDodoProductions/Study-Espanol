@@ -8,6 +8,7 @@
 
 #import "MiscSection.h"
 #import "Switch.h"
+#import "Database.h"
 
 @implementation MiscSection
 -(void)CreateSearchSection:(UIView*)view SuperView:(UIView*)superView Layout:(int)layout
@@ -17,20 +18,26 @@
     [vocabQuiz setText:@"Vocab Quiz"];
     [view addSubview:vocabQuiz];
     
+    //Creating Vocab Quiz Switch
+    //Is Default
     Switch *vocabQuizSwitch = [[Switch alloc]initWithFrame:CGRectMake(view.frame.size.width * .7 + 5, 6, 0, 0)];
     [vocabQuizSwitch setGroup:5];
     [vocabQuizSwitch setValue:[NSNumber numberWithInt:0]];
+    [vocabQuizSwitch setOn:true];
+    [[Database GetInstance] setQuizType:[NSNumber numberWithInt:0]];
     [view addSubview:vocabQuizSwitch];
     
     UILabel *conjugationQuiz = [[UILabel alloc]initWithFrame:CGRectMake(5, vocabQuizSwitch.frame.origin.y + vocabQuizSwitch.frame.size.height + 5, view.frame.size.width * .7, 30)];
     [conjugationQuiz setText:@"Conjugation Quiz"];
     [view addSubview:conjugationQuiz];
     
+    //Creating Conjugation Quiz Switch
     Switch *conjugationQuizSwitch = [[Switch alloc]initWithFrame:CGRectMake(view.frame.size.width * .7 + 5, vocabQuizSwitch.frame.origin.y + vocabQuizSwitch.frame.size.height + 5, 0, 0)];
     [conjugationQuizSwitch setGroup:5];
     [conjugationQuizSwitch setValue:[NSNumber numberWithInt:1]];
     [view addSubview:conjugationQuizSwitch];
     
+    //Listeners don't allow both to be selected at the same time
     [vocabQuizSwitch addTarget:conjugationQuizSwitch action:@selector(TurnOff:) forControlEvents:UIControlEventAllEvents];
     [conjugationQuizSwitch addTarget:vocabQuizSwitch action:@selector(TurnOff:) forControlEvents:UIControlEventAllEvents];
     
@@ -39,22 +46,28 @@
     [translateSE setText:@"Español to English"];
     [view addSubview:translateSE];
     
+    //Creating Spanish to English Translation Switch
+    //Is Default
     Switch *translateSESwitch = [[Switch alloc]initWithFrame:CGRectMake(view.frame.size.width * .7 + 5, conjugationQuiz.frame.origin.y + conjugationQuiz.frame.size.height + 30, 0, 0)];
     [translateSESwitch setGroup:6];
     [translateSESwitch setValue:[NSNumber numberWithInt:0]];
+    [translateSESwitch setOn:true];
+    [[Database GetInstance] setTranslate:[NSNumber numberWithInt:0]];
     [view addSubview:translateSESwitch];
     
     UILabel *translateES = [[UILabel alloc]initWithFrame:CGRectMake(5, translateSE.frame.origin.y + translateSE.frame.size.height + 5, view.frame.size.width * .7, 30)];
     [translateES setText:@"English to Español"];
     [view addSubview:translateES];
     
+    //Creating English to Spanish Translation Switch
     Switch *translateESSwitch = [[Switch alloc]initWithFrame:CGRectMake(view.frame.size.width * .7 + 5, translateSE.frame.origin.y + translateSE.frame.size.height + 5, 0, 0)];
     [translateESSwitch setGroup:6];
     [translateESSwitch setValue:[NSNumber numberWithInt:1]];
     [view addSubview:translateESSwitch];
     
-    [translateESSwitch addTarget:translateSESwitch action:@selector(TurnOff:) forControlEvents:UIControlEventAllEvents];
+    //Listeners don't allow both to be selected at the same time
     [translateSESwitch addTarget:translateESSwitch action:@selector(TurnOff:) forControlEvents:UIControlEventAllEvents];
+    [translateESSwitch addTarget:translateSESwitch action:@selector(TurnOff:) forControlEvents:UIControlEventAllEvents];
     
     
     UILabel *amount = [[UILabel alloc]initWithFrame:CGRectMake(5, translateES.frame.origin.y + translateES.frame.size.height + 30, view.frame.size.width * .7, 30)];

@@ -11,6 +11,7 @@
 #import "Utilities.h"
 #import "Database.h"
 #import "Word.h"
+#import "QuizAnswer.h"
 
 @interface QuizVocab ()
 
@@ -116,6 +117,13 @@
             [layout setItemSize:CGSizeMake((contentWidth - 4) * .497, 40)];
         }
     }
+}
+
+-(void)ActionButtonPressed:(Button*)button
+{
+    QuizAnswer *quizAnswer;
+    quizAnswer = [self.storyboard instantiateViewControllerWithIdentifier:@"QuizAnswer"];
+    [self presentViewController:quizAnswer animated:false completion:nil];
 }
 
 @end

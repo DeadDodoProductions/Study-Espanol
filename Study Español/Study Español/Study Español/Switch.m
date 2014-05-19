@@ -25,14 +25,22 @@
 //is called when a switch is pressed
 -(void)SwitchWasPressed:(Switch*)aSwitch
 {
-    NSLog(@"Value: %@ Group: %d", value, group);
-    if ([aSwitch isOn])
+    NSLog(@"Value: %@ Group: %d QuizType: %@", value, group, [[Database GetInstance] quizType]);
+    if (group == 0 && [[[Database GetInstance] quizType] isEqualToNumber:[NSNumber numberWithInt:1]] && ![value isEqualToNumber:[NSNumber numberWithInt:1]])
     {
-        [[Database GetInstance] SetValue:value Group:group Remove:false];
+        [self TurnOff:aSwitch];
+        [[Database GetInstance] SetValue:value Group:group Remove:true];
     }
     else
     {
-        [[Database GetInstance] SetValue:value Group:group Remove:true];
+        if ([aSwitch isOn])
+        {
+            [[Database GetInstance] SetValue:value Group:group Remove:false];
+        }
+        else
+        {
+            [[Database GetInstance] SetValue:value Group:group Remove:true];
+        }
     }
     //determines if it was a press or a slide
     //calls [DeselectSwitches(group, value)] from SwitchController.m if press
@@ -40,7 +48,15 @@
 
 -(void)TurnOff:(Switch*)aSwitch
 {
-    [self setOn:false animated:true];
+    //toggles the switch on and off
+    if (group == 0 || group == 4 || group == 1)
+    {
+        [self setOn:false animated:true];
+    }
+    else
+    {
+        [self setOn:!aSwitch.on animated:true];
+    }
 }
 
 @end
