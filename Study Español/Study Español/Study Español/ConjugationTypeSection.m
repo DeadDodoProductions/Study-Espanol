@@ -9,11 +9,13 @@
 #import "ConjugationTypeSection.h"
 #import "Switch.h"
 #import "ConjugationView.h"
+#import "SwitchController.h"
 
 @implementation ConjugationTypeSection
 -(void)CreateSearchSection:(UIView*)view SuperView:(UIView*)superView Layout:(int)layout
 {
     NSLog(@"Creating Conjugation Type Section");
+    [SwitchController GetInstance].ctSwitches = [[NSMutableArray alloc]init];
     UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, view.frame.size.width * .5, 30)];
     title.text = @"Conjugation Type";
     [view addSubview:title];
@@ -29,6 +31,7 @@
         Switch *newSwitch = [[Switch alloc]initWithFrame:CGRectMake(view.frame.size.width * .7 + 5, 40 + (i * 35), 0, 0)];
         [newSwitch setGroup:4];
         [newSwitch setValue:[NSNumber numberWithInt:i]];
+        [[[SwitchController GetInstance] ctSwitches] addObject:newSwitch];
         [view addSubview:newSwitch];
     }
 }

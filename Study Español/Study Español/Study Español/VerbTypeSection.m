@@ -8,6 +8,7 @@
 
 #import "VerbTypeSection.h"
 #import "Switch.h"
+#import "SwitchController.h"
 
 @implementation VerbTypeSection
 -(void)CreateSearchSection:(UIView*)view SuperView:(UIView*)superView Layout:(int)layout
@@ -29,6 +30,8 @@
 -(void)CreateSection:(UIView*)view SuperView:(UIView*)superView Layout:(int)layout
 {
     NSLog(@"Creating Verb Type Section");
+    [SwitchController GetInstance].veSwitches = [[NSMutableArray alloc]init];
+    [SwitchController GetInstance].vrSwitches = [[NSMutableArray alloc]init];
     UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, view.frame.size.width * .5, 30)];
     title.text = @"Verb Type";
     [view addSubview:title];
@@ -46,21 +49,8 @@
         [newSwitch setGroup:1];
         [newSwitch setValue:[NSNumber numberWithInt:i]];
         [newSwitch setTag:1];
+        [[[SwitchController GetInstance] veSwitches] addObject:newSwitch];
         [view addSubview:newSwitch];
-    }
-    int i = 2;
-    while (i < 7)
-    {
-        int j = 2;
-        while (j < 7)
-        {
-            if (i != j)
-            {
-                [view.subviews[j] addTarget:view.subviews[i] action:@selector(TurnOff:) forControlEvents:UIControlEventAllEvents];
-            }
-            j+=2;
-        }
-        i+=2;
     }
     for (int i = 0; i < 2; i++)
     {
@@ -74,21 +64,8 @@
         [newSwitch setGroup:2];
         [newSwitch setValue:[NSNumber numberWithInt:i + 3]];
         [newSwitch setTag:1];
+        [[[SwitchController GetInstance] vrSwitches] addObject:newSwitch];
         [view addSubview:newSwitch];
-    }
-    i = 8;
-    while (i < 11)
-    {
-        int j = 8;
-        while (j < 11)
-        {
-            if (i != j)
-            {
-                [view.subviews[j] addTarget:view.subviews[i] action:@selector(TurnOff:) forControlEvents:UIControlEventAllEvents];
-            }
-            j+=2;
-        }
-        i+=2;
     }
 }
 
