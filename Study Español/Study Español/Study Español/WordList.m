@@ -83,7 +83,10 @@
     NSLog(@"Hello World");
     Word *word = [Database GetInstance].words[indexPath.row];
     [[Database GetInstance] setActiveWord:word];
-    ViewWord *viewWord = [[ViewWord alloc]initWithFrame:CGRectMake(200, 200, 300, 300)];
+    int x = [[collectionView subviews][indexPath.row] frame].origin.x;
+    int y = [[collectionView subviews][indexPath.row] frame].origin.y;
+    int h = [[collectionView subviews][indexPath.row] frame].size.height;
+    ViewWord *viewWord = [[ViewWord alloc]initWithFrame:CGRectMake(x + 2, y + h, layout.itemSize.width, 300)];
     [viewWord CreateWordView:word];
     [content addSubview:viewWord];
 }
@@ -91,17 +94,18 @@
 {
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
     NSString *string = [Utilities GetDevice];
+    float width;
     if ([string isEqualToString:@"iPad"])
     {
         if (UIInterfaceOrientationIsPortrait(orientation))
         {
             NSLog(@"iPad Portrait");
-            [layout setItemSize:CGSizeMake((contentWidth - 4) * .498, 40)];
+            width = roundf((contentWidth - 4) * .498);
         }
         else
         {
             NSLog(@"iPad Landscape");
-            [layout setItemSize:CGSizeMake((contentWidth - 4) * .332, 40)];
+            width = roundf((contentWidth - 4) * .331);
         }
     }
     else
@@ -109,13 +113,15 @@
         if (UIInterfaceOrientationIsPortrait(orientation))
         {
             NSLog(@"iPhone Portrait");
-            [layout setItemSize:CGSizeMake(contentWidth - 4, 40)];
+            width = roundf((contentWidth - 4));
         }
         else
         {
             NSLog(@"iPhone Landscape");
-            [layout setItemSize:CGSizeMake((contentWidth - 4) * .497, 40)];
+            width = roundf((contentWidth - 4) * .497);
         }
     }
+    [layout setItemSize:CGSizeMake(width, 40)];
+    NSLog(@"Cell Width: %f", [layout itemSize].width);
 }
 @end

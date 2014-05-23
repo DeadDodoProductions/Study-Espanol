@@ -70,24 +70,16 @@
 -(void)CreateWordView:(Word*)word
 {
     NSLog(@"Adding Word to Word View");
-    UILabel *english = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, 150, 25)];
-    [english setText:[NSString stringWithFormat:@"%@", word.english]];
-    [self addSubview:english];
-    
-    UILabel *spanish = [[UILabel alloc]initWithFrame:CGRectMake(155, 5, 150, 25)];
-    [spanish setText:[NSString stringWithFormat:@"%@", word.spanish]];
-    [self addSubview:spanish];
-    
-    UILabel *pronunciation = [[UILabel alloc]initWithFrame:CGRectMake(5, 35, 150, 25)];
+    UILabel *pronunciation = [[UILabel alloc]initWithFrame:CGRectMake(5, 55, 150, 25)];
     [pronunciation setText:[NSString stringWithFormat:@"Pronunciation: %@", word.pronunciation]];
     [self addSubview:pronunciation];
     
-    TextView *definition = [[TextView alloc]initWithFrame:CGRectMake(5, 65, self.frame.size.width - 10, 50)];
+    TextView *definition = [[TextView alloc]initWithFrame:CGRectMake(5, 35, self.frame.size.width - 10, 50)];
     [definition setText:[NSString stringWithFormat:@"Definition: %@", word.definition]];
     [self addSubview:definition];
     
     
-    UILabel *wordType = [[UILabel alloc]initWithFrame:CGRectMake(5, 125, 150, 25)];
+    UILabel *wordType = [[UILabel alloc]initWithFrame:CGRectMake(5, 85, 150, 25)];
     NSArray *wordTypes = [[NSArray alloc]initWithObjects:@"Noun", @"Verb", @"Adjective", @"Adverb", @"Pronoun", @"Conjunction", @"Preposition", @"Number", nil];
     int index = [[word wordType] intValue];
     NSLog(@"%d", index);
@@ -95,7 +87,7 @@
     [wordType setText:[NSString stringWithFormat:@"Word Type: %@", wordTypes[index]]];
     [self addSubview:wordType];
     
-    UILabel *wordInfo = [[UILabel alloc]initWithFrame:CGRectMake(155, 125, 150, 25)];
+    UILabel *wordInfo = [[UILabel alloc]initWithFrame:CGRectMake(155, 85, 150, 25)];
     if ([[word wordType] isEqualToNumber:[NSNumber numberWithInt:1]])
     {
         NSArray *verbEnding = [[NSArray alloc]initWithObjects:@"AR", @"ER", @"IR", nil];
@@ -126,7 +118,7 @@
     }
     [self addSubview:wordInfo];
     
-    UILabel *tagsLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, 155, self.frame.size.width - 10, 50)];
+    UILabel *tagsLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, 125, self.frame.size.width - 10, 50)];
     NSString *aString = @"Tags: ";
     for (Tag *a in [[[Database GetInstance] activeWord] tags])
     {
@@ -137,7 +129,7 @@
     
     if ([[word wordType] isEqualToNumber:[NSNumber numberWithInt:1]])
     {
-        conjugationTable = [[UITableView alloc]initWithFrame:CGRectMake(5, 210, self.frame.size.width - 10, 75)];
+        conjugationTable = [[UITableView alloc]initWithFrame:CGRectMake(5, 180, self.frame.size.width - 10, 75)];
         [conjugationTable setTag:1];
         [conjugationTable setRowHeight:150];
         [conjugationTable setDelegate:self];
