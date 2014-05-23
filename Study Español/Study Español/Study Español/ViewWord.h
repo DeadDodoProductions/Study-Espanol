@@ -9,6 +9,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewWord : UIView
+@class Word;
+
+@interface ViewWord : UIView <UITableViewDataSource, UITableViewDelegate>
+{
+    NSMutableArray *conjugationArray;
+    NSArray *tagArray;
+    UITableView *conjugationTable;
+    UITableView *tagsTable;
+}
+-(void)CreateWordView:(Word*)word;
 
 @end

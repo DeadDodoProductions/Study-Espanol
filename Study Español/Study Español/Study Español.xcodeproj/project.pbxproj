@@ -17,6 +17,7 @@
 		204AA95E190F74CA000A0D1F /* QuizAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 204AA95D190F74CA000A0D1F /* QuizAnswerCell.m */; };
 		20937AD7191F21D800260F82 /* Development Notes in Resources */ = {isa = PBXBuildFile; fileRef = 20937AD6191F21D800260F82 /* Development Notes */; };
 		209C38F618F1D13400DA6F78 /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 209C38F518F1D13400DA6F78 /* SearchView.m */; };
+		209C7A88192E9C1000C06E21 /* ConjugationWordViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 209C7A87192E9C1000C06E21 /* ConjugationWordViewCell.m */; };
 		209D625218EE661C00CA5EF0 /* Storyboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 209D625018EE661C00CA5EF0 /* Storyboard_iPad.storyboard */; };
 		209D625318EE661C00CA5EF0 /* Storyboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 209D625118EE661C00CA5EF0 /* Storyboard_iPhone.storyboard */; };
 		20A2324B19299F01007819F4 /* SwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A2324A19299F01007819F4 /* SwitchController.m */; };
@@ -86,6 +87,8 @@
 		20937AD6191F21D800260F82 /* Development Notes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Development Notes"; sourceTree = "<group>"; };
 		209C38F418F1D13400DA6F78 /* SearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
 		209C38F518F1D13400DA6F78 /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
+		209C7A86192E9C1000C06E21 /* ConjugationWordViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConjugationWordViewCell.h; sourceTree = "<group>"; };
+		209C7A87192E9C1000C06E21 /* ConjugationWordViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConjugationWordViewCell.m; sourceTree = "<group>"; };
 		209D625018EE661C00CA5EF0 /* Storyboard_iPad.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard_iPad.storyboard; sourceTree = "<group>"; };
 		209D625118EE661C00CA5EF0 /* Storyboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard_iPhone.storyboard; sourceTree = "<group>"; };
 		20A2324919299F01007819F4 /* SwitchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchController.h; sourceTree = "<group>"; };
@@ -202,6 +205,8 @@
 				204AA95A190F74B6000A0D1F /* QuizVocabCell.m */,
 				204AA95C190F74CA000A0D1F /* QuizAnswerCell.h */,
 				204AA95D190F74CA000A0D1F /* QuizAnswerCell.m */,
+				209C7A86192E9C1000C06E21 /* ConjugationWordViewCell.h */,
+				209C7A87192E9C1000C06E21 /* ConjugationWordViewCell.m */,
 			);
 			name = Cells;
 			sourceTree = "<group>";
@@ -488,6 +493,7 @@
 				20D9E2E018EA833200127FBA /* TextView.m in Sources */,
 				20D9E2B018EA730800127FBA /* Database.m in Sources */,
 				20D9E2D418EA774700127FBA /* QuizVocab.m in Sources */,
+				209C7A88192E9C1000C06E21 /* ConjugationWordViewCell.m in Sources */,
 				20D1DD57190625F90095E575 /* WordSection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

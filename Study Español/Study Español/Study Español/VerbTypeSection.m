@@ -62,7 +62,7 @@
         
         Switch *newSwitch = [[Switch alloc]initWithFrame:CGRectMake(view.frame.size.width * .7 + 5, titleSpace2 + (i * switchSpace), 0, 0)];
         [newSwitch setGroup:2];
-        [newSwitch setValue:[NSNumber numberWithInt:i + 3]];
+        [newSwitch setValue:[NSNumber numberWithInt:i]];
         [newSwitch setTag:1];
         [[[SwitchController GetInstance] vrSwitches] addObject:newSwitch];
         [view addSubview:newSwitch];

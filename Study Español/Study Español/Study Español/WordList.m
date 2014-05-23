@@ -8,11 +8,16 @@
 
 #import "WordList.h"
 #import "WordListCell.h"
+#import "ViewWord.h"
 
 #import "Utilities.h"
 #import "Database.h"
 
 #import "Word.h"
+#import "Conjugation.h"
+
+#import "AddEditView.h"
+#import "ConjugationWordViewCell.h"
 
 @interface WordList ()
 
@@ -73,9 +78,14 @@
     [[cell cellLabel] setTextAlignment:NSTextAlignmentCenter];
     return cell;
 }
--(void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    
+    NSLog(@"Hello World");
+    Word *word = [Database GetInstance].words[indexPath.row];
+    [[Database GetInstance] setActiveWord:word];
+    ViewWord *viewWord = [[ViewWord alloc]initWithFrame:CGRectMake(200, 200, 300, 300)];
+    [viewWord CreateWordView:word];
+    [content addSubview:viewWord];
 }
 -(void)SetCellWidth
 {
@@ -108,5 +118,4 @@
         }
     }
 }
-
 @end

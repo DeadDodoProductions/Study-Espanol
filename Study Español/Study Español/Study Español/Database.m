@@ -213,7 +213,15 @@ static Database *instance = nil;
     //resets values of static fields
     for (int i = 0; i < 5; i++)
     {
-        [self SetValue:nil Group:i Remove:true];
+        wordMax = 0;
+        wordType = nil;
+        wordString = @"";
+        quizType = nil;
+        translate = nil;
+        verbEnding = nil;
+        verbRegular = nil;
+        conjugationType.removeAllObjects;
+        tags = [[NSArray alloc]init];
     }
     
     return [NSCompoundPredicate andPredicateWithSubpredicates:predicateArray];
