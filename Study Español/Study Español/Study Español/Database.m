@@ -101,6 +101,16 @@ static Database *instance = nil;
 //Edits the Database (hopefully)
 -(void)Edit
 {
+    [activeWord setEnglish:english];
+    [activeWord setSpanish:spanish];
+    [activeWord setPronunciation:pronunciation];
+    [activeWord setDefinition:definition];
+    [activeWord setWordType:wordType];
+    [activeWord setGender:gender];
+    [activeWord setVerbEnding:verbEnding];
+    [activeWord setVerbType:verbRegular];
+    [activeWord setTags:[NSSet setWithArray:tags]];
+    [activeWord setConjugations:[NSSet setWithArray:conjugations]];
     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
     [appDelegate.managedObjectContext mergeChangesFromContextDidSaveNotification:nil];
 }

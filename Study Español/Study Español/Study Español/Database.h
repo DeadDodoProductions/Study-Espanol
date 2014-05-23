@@ -40,6 +40,7 @@
 -(void)Save;
 -(void)Delete;
 -(void)Search;
+-(void)Edit;
 -(NSArray*)RandomizeArray:(NSArray*)array;
 -(NSPredicate*)CreateSearchPredicate;
 -(void)SetValue:(NSNumber*)value Group:(int)group Remove:(bool)remove;

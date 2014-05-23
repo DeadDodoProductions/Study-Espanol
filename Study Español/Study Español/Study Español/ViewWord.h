@@ -15,9 +15,16 @@
 {
     NSMutableArray *conjugationArray;
     NSArray *tagArray;
-    UITableView *conjugationTable;
     UITableView *tagsTable;
+    UITableView *conjugationTable;
+    id theDelegate;
 }
 -(void)CreateWordView:(Word*)word;
+-(void)SetDelegate:(id)delegate;
 
+@end
+
+@protocol ViewWordDelagate<NSObject>
+@optional
+-(void)ViewWordDissmiss:(ViewWord*)wordView;
 @end

@@ -17,6 +17,7 @@
 #import "ConjugationView.h"
 #import "ViewWord.h"
 #import "Home.h"
+#import "Database.h"
 
 @interface BaseView ()
 
@@ -141,6 +142,7 @@
             NSLog(@"Home Button Pressed");
             [actionButton1 setHidden:true];
             [actionButton2 setHidden:true];
+            [[Database GetInstance] setActiveWord:nil];
             home = [self.storyboard instantiateViewControllerWithIdentifier:@"Home"];
             [self presentViewController:home animated:false completion:nil];
             break;

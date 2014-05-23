@@ -12,6 +12,7 @@
 
 #import "Utilities.h"
 #import "Database.h"
+#import "Button.h"
 
 #import "Word.h"
 #import "Conjugation.h"
@@ -38,6 +39,8 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self CreateGUI];
+    viewWord = [[ViewWord alloc]init];
+    [content addSubview:viewWord];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -55,12 +58,12 @@
     [self SetCellWidth];
     
 
-    UICollectionView *newView = [[UICollectionView alloc]initWithFrame:CGRectMake(2, 2, contentWidth - 4, contentHeight - 4) collectionViewLayout:layout];
-    [newView setDelegate:self];
-    [newView setDataSource:self];
-    [newView setBackgroundColor:[UIColor whiteColor]];
-    [newView registerClass:[WordListCell class] forCellWithReuseIdentifier:@"WordListCell"];
-    [content addSubview:newView];
+    wordCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(2, 2, contentWidth - 4, contentHeight - 4) collectionViewLayout:layout];
+    [wordCollectionView setDelegate:self];
+    [wordCollectionView setDataSource:self];
+    [wordCollectionView setBackgroundColor:[UIColor whiteColor]];
+    [wordCollectionView registerClass:[WordListCell class] forCellWithReuseIdentifier:@"WordListCell"];
+    [content addSubview:wordCollectionView];
 }
 
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
@@ -86,9 +89,17 @@
     int x = [[collectionView subviews][indexPath.row] frame].origin.x;
     int y = [[collectionView subviews][indexPath.row] frame].origin.y;
     int h = [[collectionView subviews][indexPath.row] frame].size.height;
-    ViewWord *viewWord = [[ViewWord alloc]initWithFrame:CGRectMake(x + 2, y + h, layout.itemSize.width, 300)];
+    [viewWord setFrame:CGRectMake(x + 2, y + h, layout.itemSize.width, 0)];
+    [viewWord SetDelegate:self];
     [viewWord CreateWordView:word];
-    [content addSubview:viewWord];
+    
+    [super SetActionButton:1 Title:@"Edit"];
+    [super SetActionButton:2 Title:@"Delete"];
+}
+-(void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [actionButton1 setHidden:true];
+    [actionButton2 setHidden:true];
 }
 -(void)SetCellWidth
 {
@@ -123,5 +134,43 @@
     }
     [layout setItemSize:CGSizeMake(width, 40)];
     NSLog(@"Cell Width: %f", [layout itemSize].width);
+}
+
+-(void)ActionButtonPressed:(Button*)button
+{
+    [viewWord setHidden:true];
+    [actionButton1 setHidden:true];
+    [actionButton2 setHidden:true];
+    if (button.tag == 2)
+    {
+        NSLog(@"Edit(Action1) Button Pressed");
+        AddEditView *addEditView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddEditView"];
+        [addEditView setEditingWord:true];
+        [self presentViewController:addEditView animated:false completion:nil];
+    }
+    else
+    {
+        NSLog(@"Delete(Action2) Button Pressed");
+        //This should delete the word from the database and the table datasource then refresh the table
+        NSLog(@"Word Count Before Deletion: %lu", (unsigned long)[[[Database GetInstance] words] count]);
+        for (Word *a in [[Database GetInstance] words])
+        {
+            if ([a isEqual:[Database GetInstance].activeWord])
+            {
+                NSMutableArray *array = [[NSMutableArray alloc]initWithArray:[Database GetInstance].words];
+                [array removeObject:a];
+                [[Database GetInstance] setWords:array];
+            }
+        }
+        [[Database GetInstance] Delete];
+        NSLog(@"Word Count After Deletion: %lu", (unsigned long)[[[Database GetInstance] words] count]);
+        [wordCollectionView reloadData];
+    }
+}
+
+-(void)ViewWordDissmiss:(ViewWord *)wordView
+{
+    [actionButton1 setHidden:true];
+    [actionButton2 setHidden:true];
 }
 @end

@@ -10,6 +10,7 @@
 #import "Switch.h"
 #import "Database.h"
 #import "SwitchController.h"
+#import "Word.h"
 
 @implementation MiscSection
 -(void)CreateSearchSection:(UIView*)view SuperView:(UIView*)superView Layout:(int)layout
@@ -103,6 +104,14 @@
         [newSwitch setTag:1];
         [[[SwitchController GetInstance] gSwitches] addObject:newSwitch];
         [view addSubview:newSwitch];
+        if ([[Database GetInstance] activeWord] != nil)
+        {
+            if ([[[[Database GetInstance] activeWord] gender] isEqualToNumber:[NSNumber numberWithInt:i]])
+            {
+                NSLog(@"It Worked!!");
+                [newSwitch setOn:true animated:true];
+            }
+        }
     }
 
 }

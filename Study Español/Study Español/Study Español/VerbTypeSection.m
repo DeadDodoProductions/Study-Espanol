@@ -9,6 +9,8 @@
 #import "VerbTypeSection.h"
 #import "Switch.h"
 #import "SwitchController.h"
+#import "Database.h"
+#import "Word.h"
 
 @implementation VerbTypeSection
 -(void)CreateSearchSection:(UIView*)view SuperView:(UIView*)superView Layout:(int)layout
@@ -51,6 +53,14 @@
         [newSwitch setTag:1];
         [[[SwitchController GetInstance] veSwitches] addObject:newSwitch];
         [view addSubview:newSwitch];
+        if ([[Database GetInstance] activeWord] != nil)
+        {
+            if ([[[[Database GetInstance] activeWord] verbEnding] isEqualToNumber:[NSNumber numberWithInt:i]])
+            {
+                NSLog(@"It Worked!!");
+                [newSwitch setOn:true animated:true];
+            }
+        }
     }
     for (int i = 0; i < 2; i++)
     {
@@ -66,6 +76,14 @@
         [newSwitch setTag:1];
         [[[SwitchController GetInstance] vrSwitches] addObject:newSwitch];
         [view addSubview:newSwitch];
+        if ([[Database GetInstance] activeWord] != nil)
+        {
+            if ([[[[Database GetInstance] activeWord] verbType] isEqualToNumber:[NSNumber numberWithInt:i]])
+            {
+                NSLog(@"It Worked!!");
+                [newSwitch setOn:true animated:true];
+            }
+        }
     }
 }
 

@@ -11,9 +11,10 @@
 @interface AddEditView : BaseView <UITableViewDataSource, UITableViewDelegate>
 {
     CGRect startRect;
-    bool editing;
     int layout;
     NSMutableArray *tags;
 }
+@property (nonatomic, readwrite) bool editingWord;
+- (void)isEditingWord;
 
 @end

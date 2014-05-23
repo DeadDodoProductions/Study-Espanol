@@ -8,6 +8,8 @@
 
 #import "WordSection.h"
 #import "TextView.h"
+#import "Database.h"
+#import "Word.h"
 
 @implementation WordSection
 -(void)CreateAddEditSection:(UIView*)view SuperView:(UIViewController*)superView Layout:(int)layout
@@ -26,6 +28,30 @@
             [newTextView setFrame:CGRectMake(newTextView.frame.origin.x, newTextView.frame.origin.y, newTextView.frame.size.width, newTextView.frame.size.height * 4)];
         }
         [view addSubview:newTextView];
+        if ([[Database GetInstance] activeWord] != nil)
+        {
+            switch (i)
+            {
+                case 0:
+                    [newTextView setText:[[[Database GetInstance]activeWord] english]];
+                    break;
+                    
+                case 1:
+                    [newTextView setText:[[[Database GetInstance]activeWord] spanish]];
+                    break;
+                    
+                case 2:
+                    [newTextView setText:[[[Database GetInstance]activeWord] pronunciation]];
+                    break;
+                    
+                case 3:
+                    [newTextView setText:[[[Database GetInstance]activeWord] definition]];
+                    break;
+                    
+                default:
+                    break;
+            }
+        }
     }
 }
 

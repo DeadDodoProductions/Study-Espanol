@@ -36,6 +36,7 @@
 @end
 
 @implementation AddEditView
+@synthesize editingWord;
 
 //Initializtion
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -46,6 +47,7 @@
     }
     return self;
 }
+
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -71,11 +73,9 @@
         NSLog(@"Search(Action1) Button Pressed");
         [self RetrieveInfoAndSave];
     }
-    else
-    {
-        NSLog(@"Clear(Action2) Button Pressed");
-        [self ClearAll];
-    }
+    NSLog(@"Clear(Action2) Button Pressed");
+    [self ClearAll];
+    [[Database GetInstance] setActiveWord:nil];
 }
 //Saves the Item
 -(void)RetrieveInfoAndSave
@@ -104,8 +104,14 @@
         NSLog(@"%@: %@, %@, %@, %@, %@, %@", [[new labels][0] text], [[new inputs][0] text], [[new inputs][1] text], [[new inputs][2] text], [[new inputs][3] text], [[new inputs][4] text], [[new inputs][5] text]);
     }
     [[Database GetInstance] setConjugations:a];
-    [[Database GetInstance] Save];
-    [self ClearAll];
+    if (editingWord)
+    {
+        [[Database GetInstance] Edit];
+    }
+    else
+    {
+        [[Database GetInstance] Save];
+    }
 }
 //Clears the Form
 -(void)ClearAll
@@ -202,6 +208,14 @@
         layout = 2;
         sectionsArray = [[NSArray alloc]initWithObjects:wordSection, tagSection, wordTypeSection, verbTypeSection, genderSection, conjugationSection, nil];
         [self GUIforiPhone:sectionsArray];
+    }
+    
+    if ([[Database GetInstance] activeWord] != nil)
+    {
+        for (Tag *a in [[[Database GetInstance]activeWord]tags])
+        {
+            [tags addObject:a.tag];
+        }
     }
     NSLog(@"Add/Edit GUI Created");
 }

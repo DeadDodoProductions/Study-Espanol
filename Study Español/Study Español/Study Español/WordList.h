@@ -7,10 +7,11 @@
 //
 
 #import "BaseView.h"
+#import "ViewWord.h"
 
-@interface WordList : BaseView
+@interface WordList : BaseView <ViewWordDelagate>
 {
-    UICollectionView *collectionView;
+    UICollectionView *wordCollectionView;
     ViewWord *viewWord;
     UICollectionViewFlowLayout *layout;
 }

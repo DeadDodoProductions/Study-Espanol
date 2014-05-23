@@ -9,6 +9,9 @@
 #import "WordTypeSection.h"
 #import "Switch.h"
 #import "SwitchController.h"
+#import "AddEditView.h"
+#import "Database.h"
+#import "Word.h"
 
 @implementation WordTypeSection
 -(void)CreateSearchSection:(UIView*)view SuperView:(UIView*)superView Layout:(int)layout
@@ -48,6 +51,15 @@
         [newSwitch setTag:1];
         [[[SwitchController GetInstance] wtSwitches] addObject:newSwitch];
         [view addSubview:newSwitch];
+
+        if ([[Database GetInstance] activeWord] != nil)
+        {
+            if ([[[[Database GetInstance] activeWord] wordType] isEqualToNumber:[NSNumber numberWithInt:i]])
+            {
+                NSLog(@"It Worked!!");
+                [newSwitch setOn:true animated:true];
+            }
+        }
     }
 }
 

@@ -14,6 +14,7 @@
 #import "TextView.h"
 #import "ConjugationWordViewCell.h"
 #import "Database.h"
+#import "Button.h";
 
 @implementation ViewWord
 
@@ -24,45 +25,7 @@
     {
         [self setBackgroundColor:[UIColor grayColor]];
         // Initialization code
-        tagArray = [[NSMutableArray alloc]initWithArray:[Database GetInstance].activeWord.tags.allObjects];
-        conjugationArray = [[NSMutableArray alloc]initWithArray:[Database GetInstance].activeWord.conjugations.allObjects];
-        for (Conjugation *a in [[[Database GetInstance] activeWord] conjugations])
-        {
-            NSLog(@"%@", a.tense);
-            if ([[a.tense uppercaseString]  isEqual: @"PRESENT"])
-            {
-                [conjugationArray replaceObjectAtIndex:0 withObject:a];
-            }
-            else if ([[a.tense uppercaseString]  isEqual: @"PAST IMPERFECT"])
-            {
-                [conjugationArray replaceObjectAtIndex:1 withObject:a];
-            }
-            else if ([[a.tense uppercaseString]  isEqual: @"PAST PRETERITE"])
-            {
-                [conjugationArray replaceObjectAtIndex:2 withObject:a];
-            }
-            else if ([[a.tense uppercaseString]  isEqual: @"FUTURE"])
-            {
-                [conjugationArray replaceObjectAtIndex:3 withObject:a];
-            }
-            else if ([[a.tense uppercaseString]  isEqual: @"CONDITIONAL"])
-            {
-                [conjugationArray replaceObjectAtIndex:4 withObject:a];
-            }
-            else if ([[a.tense uppercaseString]  isEqual: @"IMPERATIVE"])
-            {
-                [conjugationArray replaceObjectAtIndex:5 withObject:a];
-            }
-            else if ([[a.tense uppercaseString]  isEqual: @"PRESENT SUBJUNCTIVE"])
-            {
-                [conjugationArray replaceObjectAtIndex:6 withObject:a];
-            }
-            else if ([[a.tense uppercaseString]  isEqual: @"IMPERFECT SUBJUNCTIVE"])
-            {
-                [conjugationArray replaceObjectAtIndex:7 withObject:a];
-            }
-        }
-        NSLog(@"Array Count: %lu", (unsigned long)[conjugationArray count]);
+        conjugationTable = [[UITableView alloc]init];
     }
     return self;
 }
@@ -70,24 +33,98 @@
 -(void)CreateWordView:(Word*)word
 {
     NSLog(@"Adding Word to Word View");
-    UILabel *pronunciation = [[UILabel alloc]initWithFrame:CGRectMake(5, 55, 150, 25)];
-    [pronunciation setText:[NSString stringWithFormat:@"Pronunciation: %@", word.pronunciation]];
-    [self addSubview:pronunciation];
+    [self setHidden:false];
+    tagArray = [[NSMutableArray alloc]initWithArray:[Database GetInstance].activeWord.tags.allObjects];
+    conjugationArray = [[NSMutableArray alloc]initWithArray:[Database GetInstance].activeWord.conjugations.allObjects];
+    for (Conjugation *a in [[[Database GetInstance] activeWord] conjugations])
+    {
+        NSLog(@"%@", a.tense);
+        if ([[a.tense uppercaseString]  isEqual: @"PRESENT"])
+        {
+            [conjugationArray replaceObjectAtIndex:0 withObject:a];
+        }
+        else if ([[a.tense uppercaseString]  isEqual: @"PAST IMPERFECT"])
+        {
+            [conjugationArray replaceObjectAtIndex:1 withObject:a];
+        }
+        else if ([[a.tense uppercaseString]  isEqual: @"PAST PRETERITE"])
+        {
+            [conjugationArray replaceObjectAtIndex:2 withObject:a];
+        }
+        else if ([[a.tense uppercaseString]  isEqual: @"FUTURE"])
+        {
+            [conjugationArray replaceObjectAtIndex:3 withObject:a];
+        }
+        else if ([[a.tense uppercaseString]  isEqual: @"CONDITIONAL"])
+        {
+            [conjugationArray replaceObjectAtIndex:4 withObject:a];
+        }
+        else if ([[a.tense uppercaseString]  isEqual: @"IMPERATIVE"])
+        {
+            [conjugationArray replaceObjectAtIndex:5 withObject:a];
+        }
+        else if ([[a.tense uppercaseString]  isEqual: @"PRESENT SUBJUNCTIVE"])
+        {
+            [conjugationArray replaceObjectAtIndex:6 withObject:a];
+        }
+        else if ([[a.tense uppercaseString]  isEqual: @"IMPERFECT SUBJUNCTIVE"])
+        {
+            [conjugationArray replaceObjectAtIndex:7 withObject:a];
+        }
+    }
+    NSLog(@"Array Count: %lu", (unsigned long)[conjugationArray count]);
+    int y = 5;
+    Button *closeButton = [[Button alloc]initWithFrame:CGRectMake(self.frame.size.width - 20, y, 10, 10)];
+    [closeButton setTitle:@"^" forState:UIControlStateNormal];
+    [closeButton addTarget:self action:@selector(ButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
+    if (word.pronunciation.length > 0)
+    {
+        UILabel *proLable = [[UILabel alloc]initWithFrame:CGRectMake(5, y, 100, 25)];
+        [proLable setText:@"Pronunciation: "];
+        [proLable setFont:[UIFont systemFontOfSize:14]];
+        [proLable setBackgroundColor:[UIColor grayColor]];
+        [self addSubview:proLable];
+        UILabel *pronunciation = [[UILabel alloc]initWithFrame:CGRectMake(105, y, self.frame.size.width - 110, 25)];
+        [pronunciation setText:[NSString stringWithFormat:@"%@", word.pronunciation]];
+        [pronunciation setBackgroundColor:[UIColor grayColor]];
+        [self addSubview:pronunciation];
+        y = y + 25;
+    }
     
-    TextView *definition = [[TextView alloc]initWithFrame:CGRectMake(5, 35, self.frame.size.width - 10, 50)];
-    [definition setText:[NSString stringWithFormat:@"Definition: %@", word.definition]];
-    [self addSubview:definition];
+    if (word.definition.length > 0)
+    {
+        UILabel *defLable = [[UILabel alloc]initWithFrame:CGRectMake(5, y, 100, 25)];
+        [defLable setText:@"Definition: "];
+        [defLable setFont:[UIFont systemFontOfSize:14]];
+        [defLable setBackgroundColor:[UIColor grayColor]];
+        [self addSubview:defLable];
+        TextView *definition = [[TextView alloc]initWithFrame:CGRectMake(105, y, self.frame.size.width - 110, 50)];
+        [definition setText:[NSString stringWithFormat:@"%@", word.definition]];
+        [definition setBackgroundColor:[UIColor grayColor]];
+        [self addSubview:definition];
+        y = y + 50;
+    }
     
-    
-    UILabel *wordType = [[UILabel alloc]initWithFrame:CGRectMake(5, 85, 150, 25)];
+    UILabel *worLable = [[UILabel alloc]initWithFrame:CGRectMake(5, y, 80, 25)];
+    [worLable setText:@"Word Type: "];
+    [worLable setFont:[UIFont systemFontOfSize:14]];
+    [worLable setBackgroundColor:[UIColor grayColor]];
+    [self addSubview:worLable];
+    UILabel *wordType = [[UILabel alloc]initWithFrame:CGRectMake(80, y, self.frame.size.width - 90, 25)];
     NSArray *wordTypes = [[NSArray alloc]initWithObjects:@"Noun", @"Verb", @"Adjective", @"Adverb", @"Pronoun", @"Conjunction", @"Preposition", @"Number", nil];
     int index = [[word wordType] intValue];
     NSLog(@"%d", index);
     NSLog(@"%@", word.wordType);
-    [wordType setText:[NSString stringWithFormat:@"Word Type: %@", wordTypes[index]]];
+    [wordType setText:[NSString stringWithFormat:@"%@", wordTypes[index]]];
+    [wordType setBackgroundColor:[UIColor grayColor]];
     [self addSubview:wordType];
+    y = y + 25;
     
-    UILabel *wordInfo = [[UILabel alloc]initWithFrame:CGRectMake(155, 85, 150, 25)];
+    UILabel *infoLable = [[UILabel alloc]initWithFrame:CGRectMake(5, y, 80, 25)];
+    [infoLable setFont:[UIFont systemFontOfSize:14]];
+    [infoLable setBackgroundColor:[UIColor grayColor]];
+    [self addSubview:infoLable];
+    UILabel *wordInfo = [[UILabel alloc]initWithFrame:CGRectMake(80, y, self.frame.size.width - 90, 25)];
     if ([[word wordType] isEqualToNumber:[NSNumber numberWithInt:1]])
     {
         NSArray *verbEnding = [[NSArray alloc]initWithObjects:@"AR", @"ER", @"IR", nil];
@@ -100,7 +137,8 @@
         }
         NSLog(@"%d", a);
         NSLog(@"%d", b);
-        [wordInfo setText:[NSString stringWithFormat:@"Verb Type: %@, %@", verbEnding[a], verbReg[b]]];
+        [infoLable setText:@"Verb Type: "];
+        [wordInfo setText:[NSString stringWithFormat:@"%@, %@", verbEnding[a], verbReg[b]]];
     }
     else
     {
@@ -108,34 +146,49 @@
         if ([[word gender] isEqualToNumber:[NSNumber numberWithInt:0]])
         {
             genderString = @"Masculine";
-            [wordInfo setText:[NSString stringWithFormat:@"Gender: %@", genderString]];
+            [wordInfo setText:[NSString stringWithFormat:@"%@", genderString]];
         }
         else if ([[word gender] isEqualToNumber:[NSNumber numberWithInt:1]])
         {
             genderString = @"Feminine";
-            [wordInfo setText:[NSString stringWithFormat:@"Gender: %@", genderString]];
+            [wordInfo setText:[NSString stringWithFormat:@"%@", genderString]];
         }
+        [infoLable setText:@"Gender: "];
     }
+    [wordInfo setBackgroundColor:[UIColor grayColor]];
     [self addSubview:wordInfo];
+    y = y + 25;
     
-    UILabel *tagsLabel = [[UILabel alloc]initWithFrame:CGRectMake(5, 125, self.frame.size.width - 10, 50)];
-    NSString *aString = @"Tags: ";
+    UILabel *tagLable = [[UILabel alloc]initWithFrame:CGRectMake(5, y, 50, 25)];
+    [tagLable setText:@"Tags: "];
+    [tagLable setFont:[UIFont systemFontOfSize:14]];
+    [tagLable setBackgroundColor:[UIColor grayColor]];
+    [self addSubview:tagLable];
+    UILabel *tagsLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, y, self.frame.size.width - 60, 50)];
+    NSString *aString = @"";
     for (Tag *a in [[[Database GetInstance] activeWord] tags])
     {
-        aString = [NSString stringWithFormat:@"%@ %@, ", aString, a.tag];
+        aString = [NSString stringWithFormat:@"%@, %@", aString, a.tag];
     }
     [tagsLabel setText:aString];
+    [tagsLabel setBackgroundColor:[UIColor grayColor]];
     [self addSubview:tagsLabel];
+    y = y + 50;
     
+    [conjugationTable setHidden:true];
     if ([[word wordType] isEqualToNumber:[NSNumber numberWithInt:1]])
     {
-        conjugationTable = [[UITableView alloc]initWithFrame:CGRectMake(5, 180, self.frame.size.width - 10, 75)];
+        [conjugationTable setHidden:false];
+        [conjugationTable setFrame:CGRectMake(5, y, self.frame.size.width - 10, 120)];
         [conjugationTable setTag:1];
-        [conjugationTable setRowHeight:150];
+        [conjugationTable setRowHeight:107];
         [conjugationTable setDelegate:self];
         [conjugationTable setDataSource:self];
         [self addSubview:conjugationTable];
+        y = y + 117;
     }
+    [self addSubview:closeButton];
+    [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, y + 5)];
 }
 
 //Add Items to the Table View
@@ -159,5 +212,16 @@
     cell.vos.text = [conjugationArray[indexPath.row] vosotros];
     cell.ellos.text = [conjugationArray[indexPath.row] ellos];
     return cell;
+}
+
+-(void)ButtonWasPressed:(Button*)button
+{
+    [self setHidden:true];
+    [theDelegate ViewWordDissmiss:self];
+}
+
+-(void)SetDelegate:(id)delegate
+{
+    theDelegate = delegate;
 }
 @end
