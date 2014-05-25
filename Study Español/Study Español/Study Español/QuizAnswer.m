@@ -42,13 +42,13 @@
 
 -(void)CreateGUI
 {
-    layout = [[UICollectionViewFlowLayout alloc]init];
-    [layout setMinimumInteritemSpacing:2.0f];
-    [layout setMinimumLineSpacing:2.0f];
+    flow = [[UICollectionViewFlowLayout alloc]init];
+    [flow setMinimumInteritemSpacing:2.0f];
+    [flow setMinimumLineSpacing:2.0f];
     [self SetCellWidth];
     
     
-    UICollectionView *newView = [[UICollectionView alloc]initWithFrame:CGRectMake(2, 2, contentWidth - 4, contentHeight - 4) collectionViewLayout:layout];
+    UICollectionView *newView = [[UICollectionView alloc]initWithFrame:CGRectMake(2, 2, contentWidth - 4, contentHeight - 4) collectionViewLayout:flow];
     [newView setDelegate:self];
     [newView setDataSource:self];
     [newView setBackgroundColor:[UIColor whiteColor]];
@@ -82,12 +82,12 @@
         if (UIInterfaceOrientationIsPortrait(orientation))
         {
             NSLog(@"iPad Portrait");
-            [layout setItemSize:CGSizeMake((contentWidth - 4) * .498, 40)];
+            [flow setItemSize:CGSizeMake((contentWidth - 4) * .498, 40)];
         }
         else
         {
             NSLog(@"iPad Landscape");
-            [layout setItemSize:CGSizeMake((contentWidth - 4) * .332, 40)];
+            [flow setItemSize:CGSizeMake((contentWidth - 4) * .332, 40)];
         }
     }
     else
@@ -95,12 +95,12 @@
         if (UIInterfaceOrientationIsPortrait(orientation))
         {
             NSLog(@"iPhone Portrait");
-            [layout setItemSize:CGSizeMake(contentWidth - 4, 40)];
+            [flow setItemSize:CGSizeMake(contentWidth - 4, 40)];
         }
         else
         {
             NSLog(@"iPhone Landscape");
-            [layout setItemSize:CGSizeMake((contentWidth - 4) * .497, 40)];
+            [flow setItemSize:CGSizeMake((contentWidth - 4) * .497, 40)];
         }
     }
 }

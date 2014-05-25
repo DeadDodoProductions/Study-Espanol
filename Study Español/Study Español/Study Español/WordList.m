@@ -52,13 +52,13 @@
 
 -(void)CreateGUI
 {
-    layout = [[UICollectionViewFlowLayout alloc]init];
-    [layout setMinimumInteritemSpacing:2.0f];
-    [layout setMinimumLineSpacing:2.0f];
+    flow = [[UICollectionViewFlowLayout alloc]init];
+    [flow setMinimumInteritemSpacing:2.0f];
+    [flow setMinimumLineSpacing:2.0f];
     [self SetCellWidth];
     
 
-    wordCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(2, 2, contentWidth - 4, contentHeight - 4) collectionViewLayout:layout];
+    wordCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(2, 2, contentWidth - 4, contentHeight - 4) collectionViewLayout:flow];
     [wordCollectionView setDelegate:self];
     [wordCollectionView setDataSource:self];
     [wordCollectionView setBackgroundColor:[UIColor whiteColor]];
@@ -89,7 +89,7 @@
     int x = [[collectionView subviews][indexPath.row] frame].origin.x;
     int y = [[collectionView subviews][indexPath.row] frame].origin.y;
     int h = [[collectionView subviews][indexPath.row] frame].size.height;
-    [viewWord setFrame:CGRectMake(x + 2, y + h, layout.itemSize.width, 0)];
+    [viewWord setFrame:CGRectMake(x + 2, y + h, flow.itemSize.width, 0)];
     [viewWord SetDelegate:self];
     [viewWord CreateWordView:word];
     
@@ -132,8 +132,8 @@
             width = roundf((contentWidth - 4) * .497);
         }
     }
-    [layout setItemSize:CGSizeMake(width, 40)];
-    NSLog(@"Cell Width: %f", [layout itemSize].width);
+    [flow setItemSize:CGSizeMake(width, 40)];
+    NSLog(@"Cell Width: %f", [flow itemSize].width);
 }
 
 -(void)ActionButtonPressed:(Button*)button

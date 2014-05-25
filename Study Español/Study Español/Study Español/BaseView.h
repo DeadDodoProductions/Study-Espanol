@@ -25,6 +25,7 @@
     Button *helpButton;
     int contentWidth;
     int contentHeight;
+    int layout;
 }
 -(void)HeaderButtonPressed:(Button*)button;
 -(void)SetActionButton:(int)button Title:(NSString*)title;

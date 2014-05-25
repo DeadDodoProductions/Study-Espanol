@@ -16,8 +16,8 @@
     Button *viewWordButton;
     UILabel *wordLabel;
     UILabel *answerLabel;
-    UITextField *answerTextField;
     ViewWord *viewWord;
+    int currentWord;
 }
 
 @end

@@ -101,6 +101,8 @@ static Database *instance = nil;
 //Edits the Database (hopefully)
 -(void)Edit
 {
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    NSManagedObjectContext *context = appDelegate.managedObjectContext;
     [activeWord setEnglish:english];
     [activeWord setSpanish:spanish];
     [activeWord setPronunciation:pronunciation];
@@ -109,10 +111,39 @@ static Database *instance = nil;
     [activeWord setGender:gender];
     [activeWord setVerbEnding:verbEnding];
     [activeWord setVerbType:verbRegular];
-    [activeWord setTags:[NSSet setWithArray:tags]];
-    [activeWord setConjugations:[NSSet setWithArray:conjugations]];
-    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
-    [appDelegate.managedObjectContext mergeChangesFromContextDidSaveNotification:nil];
+    [activeWord setTags:nil];
+    for (int i = 0; i < tags.count; i++)
+    {
+        Tag *newTag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:context];
+        newTag.tag = tags[i];
+        [activeWord addTagsObject:newTag];
+        NSLog(@"Tag: %@", tags[i]);
+    }
+    [activeWord setConjugations:nil];
+    for (int i = 0; i < 8; i++)
+    {
+        Conjugation *newConjugation = [NSEntityDescription insertNewObjectForEntityForName:@"Conjugation" inManagedObjectContext:context];
+        newConjugation.tense = conjugations[0 + (i * 7)];
+        newConjugation.yo = conjugations[1 + (i * 7)];
+        newConjugation.tu = conjugations[2 + (i * 7)];
+        newConjugation.el = conjugations[3 + (i * 7)];
+        newConjugation.nosotros = conjugations[4 + (i * 7)];
+        newConjugation.vosotros = conjugations[5 + (i * 7)];
+        newConjugation.ellos = conjugations[6 + (i * 7)];
+        NSLog(@"Conjugation: %@, %@, %@, %@, %@, %@, %@", conjugations[0 + (i * 7)], conjugations[1 + (i * 7)], conjugations[2 + (i * 7)], conjugations[3 + (i * 7)], conjugations[4 + (i * 7)], conjugations[5 + (i * 7)], conjugations[6 + (i * 7)]);
+        [activeWord addConjugationsObject:newConjugation];
+    }
+    NSError *error = nil;
+    
+    //save word
+    if (![context save:&error])
+    {
+        NSLog(@"Problem Updating: %@, %@, %@", error, [error localizedDescription], error.userInfo);
+    }
+    else
+    {
+        NSLog(@"Updated");
+    }
 }
 
 //Deletes an item from the database

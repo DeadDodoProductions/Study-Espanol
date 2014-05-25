@@ -12,7 +12,7 @@
 {
     UICollectionView *collectionView;
     NSMutableArray *textFields;
-    UICollectionViewFlowLayout *layout;
+    UICollectionViewFlowLayout *flow;
 }
 
 @end

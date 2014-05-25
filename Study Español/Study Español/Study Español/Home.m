@@ -194,7 +194,10 @@
     {
         NSLog(@"Search(Action1) Button Pressed");
         [[Database GetInstance] Search];
-        [self GoToNewView];
+        if ([[[Database GetInstance] words] count] > 0)
+        {
+            [self GoToNewView];
+        }
     }
     else
     {

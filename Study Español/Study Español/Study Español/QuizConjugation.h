@@ -13,7 +13,6 @@
     NSMutableArray *answers;
     NSMutableArray *words;
     int currentConjugation;
-    int layout;
 }
 
 @end

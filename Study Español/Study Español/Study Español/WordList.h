@@ -13,7 +13,7 @@
 {
     UICollectionView *wordCollectionView;
     ViewWord *viewWord;
-    UICollectionViewFlowLayout *layout;
+    UICollectionViewFlowLayout *flow;
 }
 
 @end

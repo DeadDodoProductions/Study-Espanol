@@ -13,7 +13,7 @@
     UICollectionView *collectionView;
     UILabel *headerLabel;
     ViewWord *viewWord;
-    UICollectionViewFlowLayout *layout;
+    UICollectionViewFlowLayout *flow;
 }
 
 @end

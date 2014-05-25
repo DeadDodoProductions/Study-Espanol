@@ -4,13 +4,6 @@
 //
 //  Created by Evan on 4/1/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
-//
-//  To Do:
-//  Save Word
-//  Edit Word
-//  Clear Form
-//  Add Tag
-//  Remove Tag
 
 #import "AddEditView.h"
 
@@ -64,113 +57,7 @@
     // Dispose of any resources that can be recreated.
 }
 
-
-//Pressed an Action Button
--(void)ActionButtonPressed:(Button*)button
-{
-    if (button.tag == 2)
-    {
-        NSLog(@"Search(Action1) Button Pressed");
-        [self RetrieveInfoAndSave];
-    }
-    NSLog(@"Clear(Action2) Button Pressed");
-    [self ClearAll];
-    [[Database GetInstance] setActiveWord:nil];
-}
-//Saves the Item
--(void)RetrieveInfoAndSave
-{
-    NSLog(@"Sending Word Data to Database.m");
-    [[Database GetInstance] setEnglish:[[[content subviews][0] subviews][1] text]];
-    NSLog(@"English: %@", [Database GetInstance].english);
-    [[Database GetInstance] setSpanish:[[[content subviews][0] subviews][3] text]];
-    NSLog(@"Spanish: %@", [Database GetInstance].spanish);
-    [[Database GetInstance] setPronunciation:[[[content subviews][0] subviews][5] text]];
-    NSLog(@"Pronunciation: %@", [Database GetInstance].pronunciation);
-    [[Database GetInstance] setDefinition:[[[content subviews][0] subviews][7] text]];
-    NSLog(@"Definition: %@", [Database GetInstance].definition);
-    [[Database GetInstance] setTags:tags];
-    NSMutableArray *a = [[NSMutableArray alloc]init];
-    for (int i = 0; i < 8; i++)
-    {
-        ConjugationView *new = [[content subviews][5] subviews][i];
-        [a addObject:[[new labels][0] text]];
-        [a addObject:[[new inputs][0] text]];
-        [a addObject:[[new inputs][1] text]];
-        [a addObject:[[new inputs][2] text]];
-        [a addObject:[[new inputs][3] text]];
-        [a addObject:[[new inputs][4] text]];
-        [a addObject:[[new inputs][5] text]];
-        NSLog(@"%@: %@, %@, %@, %@, %@, %@", [[new labels][0] text], [[new inputs][0] text], [[new inputs][1] text], [[new inputs][2] text], [[new inputs][3] text], [[new inputs][4] text], [[new inputs][5] text]);
-    }
-    [[Database GetInstance] setConjugations:a];
-    if (editingWord)
-    {
-        [[Database GetInstance] Edit];
-    }
-    else
-    {
-        [[Database GetInstance] Save];
-    }
-}
-//Clears the Form
--(void)ClearAll
-{
-    NSLog(@"Clearing Form");
-    [[[content subviews][0] subviews][1] setText:@""];
-    [[[content subviews][0] subviews][3] setText:@""];
-    [[[content subviews][0] subviews][5] setText:@""];
-    [[[content subviews][0] subviews][7] setText:@""];
-    [tags removeAllObjects];
-    [[[content subviews][1] subviews][4] reloadData];
-    for (int i = 0; i < [[[content subviews][2] subviews] count] - 1; i++)
-    {
-        @try {
-            [[[content subviews][2] subviews][i] setOn:false animated:true];
-        }
-        @catch (NSException *exception) {
-            
-        }
-        @finally {
-            
-        }
-    }
-    for (int i = 0; i < [[[content subviews][3] subviews] count] - 1 ; i++)
-    {
-        @try {
-            [[[content subviews][3] subviews][i] setOn:false animated:true];
-        }
-        @catch (NSException *exception) {
-            
-        }
-        @finally {
-            
-        }
-    }
-    for (int i = 0; i < [[[content subviews][4] subviews] count] - 2 ; i++)
-    {
-        @try {
-            [[[content subviews][4] subviews][i] setOn:false animated:true];
-        }
-        @catch (NSException *exception) {
-            
-        }
-        @finally {
-            
-        }
-    }
-    for (int i = 0; i < 8; i++)
-    {
-        [[[[content subviews][5] subviews][i] inputs][0] setText:@""];
-        [[[[content subviews][5] subviews][i] inputs][1] setText:@""];
-        [[[[content subviews][5] subviews][i] inputs][2] setText:@""];
-        [[[[content subviews][5] subviews][i] inputs][3] setText:@""];
-        [[[[content subviews][5] subviews][i] inputs][4] setText:@""];
-        [[[[content subviews][5] subviews][i] inputs][5] setText:@""];
-    }
-}
-
-
+///User Interface Methods
 //Create User Interfaces
 -(void)CreateGUI
 {
@@ -298,6 +185,116 @@
 }
 
 
+
+///Interaction Methods
+//Pressed an Action Button
+-(void)ActionButtonPressed:(Button*)button
+{
+    if (button.tag == 2)
+    {
+        NSLog(@"Search(Action1) Button Pressed");
+        [self RetrieveInfoAndSave];
+    }
+    NSLog(@"Clear(Action2) Button Pressed");
+    [self ClearAll];
+    [[Database GetInstance] setActiveWord:nil];
+}
+//Saves the Item
+-(void)RetrieveInfoAndSave
+{
+    NSLog(@"Sending Word Data to Database.m");
+    [[Database GetInstance] setEnglish:[[[content subviews][0] subviews][1] text]];
+    NSLog(@"English: %@", [Database GetInstance].english);
+    [[Database GetInstance] setSpanish:[[[content subviews][0] subviews][3] text]];
+    NSLog(@"Spanish: %@", [Database GetInstance].spanish);
+    [[Database GetInstance] setPronunciation:[[[content subviews][0] subviews][5] text]];
+    NSLog(@"Pronunciation: %@", [Database GetInstance].pronunciation);
+    [[Database GetInstance] setDefinition:[[[content subviews][0] subviews][7] text]];
+    NSLog(@"Definition: %@", [Database GetInstance].definition);
+    [[Database GetInstance] setTags:tags];
+    NSMutableArray *a = [[NSMutableArray alloc]init];
+    for (int i = 0; i < 8; i++)
+    {
+        ConjugationView *new = [[content subviews][5] subviews][i];
+        [a addObject:[[new labels][0] text]];
+        [a addObject:[[new inputs][0] text]];
+        [a addObject:[[new inputs][1] text]];
+        [a addObject:[[new inputs][2] text]];
+        [a addObject:[[new inputs][3] text]];
+        [a addObject:[[new inputs][4] text]];
+        [a addObject:[[new inputs][5] text]];
+        NSLog(@"%@: %@, %@, %@, %@, %@, %@", [[new labels][0] text], [[new inputs][0] text], [[new inputs][1] text], [[new inputs][2] text], [[new inputs][3] text], [[new inputs][4] text], [[new inputs][5] text]);
+    }
+    [[Database GetInstance] setConjugations:a];
+    if (editingWord)
+    {
+        [[Database GetInstance] Edit];
+    }
+    else
+    {
+        [[Database GetInstance] Save];
+    }
+}
+//Clears the Form
+-(void)ClearAll
+{
+    NSLog(@"Clearing Form");
+    [[[content subviews][0] subviews][1] setText:@""];
+    [[[content subviews][0] subviews][3] setText:@""];
+    [[[content subviews][0] subviews][5] setText:@""];
+    [[[content subviews][0] subviews][7] setText:@""];
+    [tags removeAllObjects];
+    [[[content subviews][1] subviews][4] reloadData];
+    for (int i = 0; i < [[[content subviews][2] subviews] count] - 1; i++)
+    {
+        @try {
+            [[[content subviews][2] subviews][i] setOn:false animated:true];
+        }
+        @catch (NSException *exception) {
+            
+        }
+        @finally {
+            
+        }
+    }
+    for (int i = 0; i < [[[content subviews][3] subviews] count] - 1 ; i++)
+    {
+        @try {
+            [[[content subviews][3] subviews][i] setOn:false animated:true];
+        }
+        @catch (NSException *exception) {
+            
+        }
+        @finally {
+            
+        }
+    }
+    for (int i = 0; i < [[[content subviews][4] subviews] count] - 2 ; i++)
+    {
+        @try {
+            [[[content subviews][4] subviews][i] setOn:false animated:true];
+        }
+        @catch (NSException *exception) {
+            
+        }
+        @finally {
+            
+        }
+    }
+    for (int i = 0; i < 8; i++)
+    {
+        [[[[content subviews][5] subviews][i] inputs][0] setText:@""];
+        [[[[content subviews][5] subviews][i] inputs][1] setText:@""];
+        [[[[content subviews][5] subviews][i] inputs][2] setText:@""];
+        [[[[content subviews][5] subviews][i] inputs][3] setText:@""];
+        [[[[content subviews][5] subviews][i] inputs][4] setText:@""];
+        [[[[content subviews][5] subviews][i] inputs][5] setText:@""];
+    }
+}
+
+
+
+///Table Methods
 //Add Items to the Table View
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -325,6 +322,7 @@
 }
 
 
+///Tag Methods
 //Add and Remove Tags from the List
 -(void)NewTag
 {

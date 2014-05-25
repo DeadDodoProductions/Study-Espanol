@@ -165,11 +165,12 @@
     [tagLable setBackgroundColor:[UIColor grayColor]];
     [self addSubview:tagLable];
     UILabel *tagsLabel = [[UILabel alloc]initWithFrame:CGRectMake(50, y, self.frame.size.width - 60, 50)];
-    NSString *aString = @"";
+    NSMutableString *aString = [NSMutableString stringWithFormat:@""];
     for (Tag *a in [[[Database GetInstance] activeWord] tags])
     {
-        aString = [NSString stringWithFormat:@"%@, %@", aString, a.tag];
+        [aString appendString:[NSString stringWithFormat:@"%@, ", a.tag]];
     }
+    [aString replaceCharactersInRange:NSMakeRange(aString.length - 2, 2) withString:@""];
     [tagsLabel setText:aString];
     [tagsLabel setBackgroundColor:[UIColor grayColor]];
     [self addSubview:tagsLabel];
