@@ -5,20 +5,24 @@
 //  Created by Evan on 4/1/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
+//  Displays and controls the WordList view.
+//  The Word List allows the user to search for words and displays them in a list to be viewed all at once.
+//  The user can then select a word to view the information that has been provided for the word, delete the word, or edit the word's information
 
 #import "WordList.h"
-#import "WordListCell.h"
-#import "ViewWord.h"
+#import "AddEditView.h"
 
-#import "Utilities.h"
-#import "Database.h"
-#import "Button.h"
+#import "WordListCell.h"
+#import "ConjugationWordViewCell.h"
+#import "ViewWord.h"
 
 #import "Word.h"
 #import "Conjugation.h"
 
-#import "AddEditView.h"
-#import "ConjugationWordViewCell.h"
+#import "Button.h"
+
+#import "Utilities.h"
+#import "Database.h"
 
 @interface WordList ()
 
@@ -83,7 +87,6 @@
 }
 
 
-
 ///User Interface
 -(void)CreateGUI
 {
@@ -136,7 +139,6 @@
 }
 
 
-
 ///UICollectionView Delagates
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
@@ -173,7 +175,6 @@
     [actionButton1 setHidden:true];
     [actionButton2 setHidden:true];
 }
-
 
 
 //ViewWord Delagates

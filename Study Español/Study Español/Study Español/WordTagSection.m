@@ -5,12 +5,15 @@
 //  Created by Evan on 4/20/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
+//  This view is used by the AddEditView and SearchView classes.
+//  It creates an interface for adding and deleting tags from words and searches
 
 #import "WordTagSection.h"
-#import "Switch.h"
-#import "TextView.h"
-#import "Button.h"
 #import "SearchView.h"
+#import "TextView.h"
+#import "Switch.h"
+#import "Button.h"
+
 
 @implementation WordTagSection
 -(void)CreateSearchSection:(UIView*)view SuperView:(UIView*)superView Layout:(int)layout

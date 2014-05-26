@@ -12,8 +12,8 @@
 @interface WordList : BaseView <ViewWordDelagate>
 {
     UICollectionView *wordCollectionView;
-    ViewWord *viewWord;
     UICollectionViewFlowLayout *flow;
+    ViewWord *viewWord;
 }
 
 @end

@@ -5,15 +5,12 @@
 //  Created by Evan on 4/6/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
+//  This subview creates and interface to input search criteria for a search of the Database
 
 #import "SearchView.h"
 #import "Home.h"
 
-#import "Button.h"
 #import "TextView.h"
-
-#import "Utilities.h"
-#import "Database.h"
 
 #import "WordTypeSection.h"
 #import "VerbTypeSection.h"
@@ -21,8 +18,13 @@
 #import "ConjugationTypeSection.h"
 #import "MiscSection.h"
 
+#import "Button.h"
+
+#import "Utilities.h"
+#import "Database.h"
+
 @implementation SearchView
-//Initialization
+///Initialization
 - (id)initWithFrame:(CGRect)frame Home:(Home *)home
 {
     if (self = [super initWithFrame:frame])
@@ -34,6 +36,7 @@
 }
 
 
+///User Interface
 //Create Interface
 -(void)CreateGUI
 {
@@ -156,50 +159,7 @@
 }
 
 
-//Add Items to Table
--(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
-{
-    return [tags count];
-}
--(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    UITableViewCell *cell = [[UITableViewCell alloc]init];
-    [[cell textLabel] setText:[NSString stringWithFormat:@"%@", tags[indexPath.row]]];
-    return cell;
-}
--(UITableViewCellEditingStyle)tableView:(UITableView*)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    return UITableViewCellEditingStyleDelete;
-}
--(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete)
-    {
-        UIView *aView;
-        switch (layout)
-        {
-            case 0:
-                aView = self.subviews[1];
-                break;
-                
-            case 1:
-                aView = self.subviews[4];
-                break;
-                
-            case 2:
-                aView = scrollView.subviews[3];
-                break;
-                
-            default:
-                break;
-        }
-        UITableView *tagsTable = aView.subviews[6];
-        [tags removeObjectAtIndex:indexPath.row];
-        [tagsTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:true];
-    }
-}
-
-
+///User Interactions
 //Actions
 -(void)NewTag
 {
@@ -265,7 +225,52 @@
 }
 
 
-//TextView Delegate Functions
+///UITableView Delagates
+//Add Items to Table
+-(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
+{
+    return [tags count];
+}
+-(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    UITableViewCell *cell = [[UITableViewCell alloc]init];
+    [[cell textLabel] setText:[NSString stringWithFormat:@"%@", tags[indexPath.row]]];
+    return cell;
+}
+-(UITableViewCellEditingStyle)tableView:(UITableView*)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return UITableViewCellEditingStyleDelete;
+}
+-(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if (editingStyle == UITableViewCellEditingStyleDelete)
+    {
+        UIView *aView;
+        switch (layout)
+        {
+            case 0:
+                aView = self.subviews[1];
+                break;
+                
+            case 1:
+                aView = self.subviews[4];
+                break;
+                
+            case 2:
+                aView = scrollView.subviews[3];
+                break;
+                
+            default:
+                break;
+        }
+        UITableView *tagsTable = aView.subviews[6];
+        [tags removeObjectAtIndex:indexPath.row];
+        [tagsTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:true];
+    }
+}
+
+
+///TextView Delegate Functions
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     switch (layout)

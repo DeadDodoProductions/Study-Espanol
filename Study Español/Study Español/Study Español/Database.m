@@ -5,17 +5,19 @@
 //  Created by Evan on 4/1/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
+//  This is a singleton that holds all the methods and variables needed in order to manipulate the data within the database
 
 #import "Database.h"
-#import "Word.h"
 #import "AppDelegate.h"
-#import "Conjugation.h"
+
+#import "Word.h"
 #import "Tag.h"
+#import "Conjugation.h"
+
 
 @implementation Database
 @synthesize wordType, wordString, wordMax, words, conjugationType, activeWord, tags, gender, verbRegular, verbEnding, quizType, translate, conjugations, english, spanish, pronunciation, definition;
 static Database *instance = nil;
-
 //Initialization
 +(Database*)GetInstance
 {
@@ -40,6 +42,7 @@ static Database *instance = nil;
 }
 
 
+///Database Manipulation Methods
 //saves a new word to the database
 -(void)Save
 {
@@ -100,7 +103,6 @@ static Database *instance = nil;
     //resets values of static fields
     [self ClearAllData];
 }
-
 //Edits the Database (hopefully)
 -(void)Edit
 {
@@ -151,7 +153,6 @@ static Database *instance = nil;
     //resets values of static fields
     [self ClearAllData];
 }
-
 //Deletes an item from the database
 -(void)Delete
 {
@@ -174,7 +175,6 @@ static Database *instance = nil;
     //resets values of static fields
     [self ClearAllData];
 }
-
 //retrieves words from the database based on criteria
 -(void)Search
 {
@@ -204,6 +204,8 @@ static Database *instance = nil;
     [self ClearAllData];
 }
 
+
+///Database Manipulation Helper Methods
 //randmoizes the order of an array
 -(NSArray*)RandomizeArray:(NSArray*)array
 {
@@ -217,7 +219,6 @@ static Database *instance = nil;
     }
     return [NSArray arrayWithArray:temp];
 }
-
 //Creates a predicate for the Search Criteria
 -(NSPredicate*)CreateSearchPredicate
 {
@@ -265,6 +266,8 @@ static Database *instance = nil;
     return [NSCompoundPredicate andPredicateWithSubpredicates:predicateArray];
 }
 
+
+//Clear All Data
 -(void)ClearAllData
 {
     activeWord = nil;

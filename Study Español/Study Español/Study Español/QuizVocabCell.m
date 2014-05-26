@@ -5,13 +5,14 @@
 //  Created by Evan on 4/29/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
+//  This cell is used in the QuizVocab class to display the word to be answered, and the textbox it need to be answered in
 
 #import "QuizVocabCell.h"
 #import "TextView.h"
 
 @implementation QuizVocabCell
 @synthesize wordField, wordLabel, theDelagate;
-
+///Initalization
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -27,6 +28,7 @@
     return self;
 }
 
+//UITextView Delagate
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
     [theDelagate OnFinishAnsweringWord:textField];

@@ -11,11 +11,11 @@
 
 @interface QuizAnswer : BaseView <ViewWordDelagate>
 {
-    ViewWord *viewWord;
-    UICollectionViewFlowLayout *flow;
     NSArray *words;
     NSArray *answers;
     UICollectionView *wordCollectionView;
+    UICollectionViewFlowLayout *flow;
+    ViewWord *viewWord;
 }
 -(void)SetArrays:(NSArray*)_words Answers:(NSArray*)_answers;
 

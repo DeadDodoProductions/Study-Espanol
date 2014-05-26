@@ -5,12 +5,14 @@
 //  Created by Evan on 4/1/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
+//  This subview displays an interface allowing the user to input the verb's conjugations
 
 #import "ConjugationView.h"
 #import "TextView.h"
 
 @implementation ConjugationView
 @synthesize labels, inputs, background;
+///Initalization
 - (id)initWithFrame:(CGRect)frame Title:(NSString*)title
 {
     self = [super initWithFrame:frame];

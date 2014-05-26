@@ -5,12 +5,13 @@
 //  Created by Evan on 4/29/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
+//  This cell is used by the WordList class to display the word's basic information
 
 #import "WordListCell.h"
 
 @implementation WordListCell
 @synthesize cellLabel;
-
+//Initalization
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -21,14 +22,5 @@
     }
     return self;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

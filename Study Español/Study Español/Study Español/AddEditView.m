@@ -4,12 +4,13 @@
 //
 //  Created by Evan on 4/1/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
+//  Displays and controls the AddEdit view
+//  Allows the user to add new words or edit previous words
 
 #import "AddEditView.h"
 
-#import "Database.h"
-#import "Utilities.h"
-#import "Button.h"
+#import "TextView.h"
+#import "ConjugationView.h"
 
 #import "WordTypeSection.h"
 #import "VerbTypeSection.h"
@@ -17,12 +18,15 @@
 #import "ConjugationTypeSection.h"
 #import "WordSection.h"
 #import "MiscSection.h"
-#import "TextView.h"
-#import "ConjugationView.h"
 
 #import "Word.h"
 #import "Tag.h"
 #import "Conjugation.h"
+
+#import "Button.h"
+
+#import "Database.h"
+#import "Utilities.h"
 
 @interface AddEditView ()
 
@@ -40,7 +44,6 @@
     }
     return self;
 }
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -185,7 +188,6 @@
 }
 
 
-
 ///Interaction Methods
 //Pressed an Action Button
 -(void)ActionButtonPressed:(Button*)button
@@ -291,7 +293,6 @@
         [[[[content subviews][5] subviews][i] inputs][5] setText:@""];
     }
 }
-
 
 
 ///Table Methods

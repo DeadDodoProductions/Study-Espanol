@@ -5,11 +5,14 @@
 //  Created by Evan on 4/22/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
+//  This section is used by the AddEditView class.
+//  Creates an interface for inputing the words english form, spanish form, pronunciation in spanish, and definition in spanish
 
 #import "WordSection.h"
+#import "Word.h"
 #import "TextView.h"
 #import "Database.h"
-#import "Word.h"
+
 
 @implementation WordSection
 -(void)CreateAddEditSection:(UIView*)view SuperView:(UIViewController*)superView Layout:(int)layout

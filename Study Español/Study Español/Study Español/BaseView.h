@@ -13,10 +13,10 @@
 @interface BaseView : UIViewController <UICollectionViewDataSource, UICollectionViewDelegate, UITextViewDelegate>
 {
     @protected
-    UIView *header;
-    UIScrollView *content;
-    UIView *grid;
     UIScreen *screen;
+    UIView *header;
+    UIView *grid;
+    UIScrollView *content;
     UIInterfaceOrientation orientation;
     CGSize screenSize;
     Button *homeButton;

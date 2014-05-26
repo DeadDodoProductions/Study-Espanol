@@ -5,12 +5,13 @@
 //  Created by Evan Combs on 5/22/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
+//  This cell is in the ViewWord class to display the conjugations of a verb
 
 #import "ConjugationWordViewCell.h"
 
 @implementation ConjugationWordViewCell
 @synthesize tense, yo, tu, el, nos, vos, ellos;
-
+///Initilization
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier
 {
     self = [super initWithStyle:style reuseIdentifier:reuseIdentifier];
@@ -59,12 +60,10 @@
     }
     return self;
 }
-
 - (void)awakeFromNib
 {
     // Initialization code
 }
-
 - (void)setSelected:(BOOL)selected animated:(BOOL)animated
 {
     [super setSelected:selected animated:animated];

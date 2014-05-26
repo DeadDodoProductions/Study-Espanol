@@ -5,6 +5,7 @@
 //  Created by Evan on 4/1/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
+//  This is for the misc. methods and variables the program needs
 
 #import "Utilities.h"
 

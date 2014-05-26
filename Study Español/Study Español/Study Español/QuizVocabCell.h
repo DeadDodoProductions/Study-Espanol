@@ -14,13 +14,14 @@
 {
     
 }
+@property (nonatomic, readwrite) id theDelagate;
 @property (nonatomic, readwrite) UILabel *wordLabel;
 @property (nonatomic, readwrite) UITextField *wordField;
-@property (nonatomic, readwrite) id theDelagate;
 -(void)CreateTextView:(TextView*)textView;
 
 @end
 
+//QuizVocabCell's delagate
 @protocol QuizVocabCellDelagate<NSObject>
 -(void)OnFinishAnsweringWord:(UITextField*)textField;
 @end

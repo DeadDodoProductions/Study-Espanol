@@ -10,14 +10,14 @@
 
 @interface FlashCards : BaseView
 {
+    int currentWord;
+    UILabel *wordLabel;
+    UILabel *answerLabel;
     Button *prevButton;
     Button *nextButton;
     Button *answerButton;
     Button *viewWordButton;
-    UILabel *wordLabel;
-    UILabel *answerLabel;
     ViewWord *viewWord;
-    int currentWord;
 }
 
 @end

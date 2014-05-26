@@ -13,11 +13,11 @@
 
 @interface ViewWord : UIView <UITableViewDataSource, UITableViewDelegate>
 {
+    id theDelegate;
     NSMutableArray *conjugationArray;
     NSArray *tagArray;
     UITableView *tagsTable;
     UITableView *conjugationTable;
-    id theDelegate;
 }
 -(void)CreateWordView:(Word*)word;
 -(void)SetDelegate:(id)delegate;

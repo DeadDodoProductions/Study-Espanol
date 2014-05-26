@@ -5,21 +5,26 @@
 //  Created by Evan on 4/1/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
+//  Displays and controls the QuizVocab view.
+//  This class allows the user to create a randomized vocab quiz based on criteria entered.
 
 #import "QuizVocab.h"
+#import "QuizAnswer.h"
+
 #import "QuizVocabCell.h"
+#import "TextView.h"
+
+#import "Word.h"
+
 #import "Utilities.h"
 #import "Database.h"
-#import "Word.h"
-#import "QuizAnswer.h"
-#import "TextView.h"
 
 @interface QuizVocab ()
 
 @end
 
 @implementation QuizVocab
-
+///Initilization
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -44,7 +49,6 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 
 ///Creates the User Interface
@@ -99,7 +103,6 @@
 }
 
 
-
 ///User Interaction
 //compares the answers placing the wrong answers in arrays to be sent to QuizAnswers
 -(void)ActionButtonPressed:(Button*)button
@@ -123,14 +126,12 @@
 }
 
 
-
 ///Delagate Functions
 ///UITableView Methods
 -(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
 {
     return [[[Database GetInstance] words] count];
 }
-
 -(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
 {
     QuizVocabCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"QuizVocabCell" forIndexPath:indexPath];
@@ -149,6 +150,8 @@
     [cell setTheDelagate:self];
     return cell;
 }
+
+
 ///TextField Method
 -(void)OnFinishAnsweringWord:(UITextField*)textField
 {

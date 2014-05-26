@@ -5,13 +5,16 @@
 //  Created by Evan on 4/20/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
+//  This view is used by the AddEditView and SearchView classes
+//  It creates an interface for inputting the conjugations of a verb in the AddEditView class
+//  It creates an interface for choosing which conjugation tenses to used in a conjugation quiz in the SearchView class
 
 #import "ConjugationTypeSection.h"
-#import "Switch.h"
 #import "ConjugationView.h"
-#import "SwitchController.h"
-#import "Conjugation.h"
 #import "Word.h"
+#import "Conjugation.h"
+#import "Switch.h"
+#import "SwitchController.h"
 #import "Database.h"
 
 @implementation ConjugationTypeSection

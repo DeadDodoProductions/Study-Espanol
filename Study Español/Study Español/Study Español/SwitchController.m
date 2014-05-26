@@ -12,12 +12,13 @@
 
 #import "SwitchController.h"
 #import "Switch.h"
+
 #import "Database.h"
 
 @implementation SwitchController
 @synthesize switches, wtSwitches, veSwitches, vrSwitches, ctSwitches, qSwitches, tSwitches, gSwitches;
 static SwitchController *instance = nil;
-
+///Initilization
 +(SwitchController*)GetInstance
 {
     if (instance == nil)
@@ -41,6 +42,7 @@ static SwitchController *instance = nil;
 }
 
 
+//Determines which switches need to be on and off
 -(void)SwitchWasPressed:(Switch*)aSwitch
 {
     NSLog(@"Switch Controller");

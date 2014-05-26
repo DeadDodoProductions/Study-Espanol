@@ -5,15 +5,20 @@
 //  Created by Evan on 4/1/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
+//  Displays and controls the Home view
+//  This is the first view the user sees, and the main hub for navigating to the programs main functions.
 
 #import "Home.h"
-#import "Button.h"
 #import "AddEditView.h"
-#import "SearchView.h"
 #import "WordList.h"
 #import "QuizVocab.h"
 #import "QuizConjugation.h"
 #import "FlashCards.h"
+
+#import "SearchView.h"
+
+#import "Button.h"
+
 #import "Database.h"
 
 @interface Home ()
@@ -21,7 +26,7 @@
 @end
 
 @implementation Home
-
+///Initilization
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -30,7 +35,6 @@
     }
     return self;
 }
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -39,24 +43,18 @@
     searching = false;
     // Do any additional setup after loading the view.
 }
-
 -(void)viewDidAppear:(BOOL)animated
 {
     NSLog(@"Home");
 }
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
-//ran at startup initializes of program
--(void)Startup
-{
-    
-}
 
+///User Interface
 -(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
 {
     [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
@@ -66,7 +64,6 @@
         [self CreateSearch];
     }
 }
-
 -(void)GUIOrientation
 {
     float topPadding;
@@ -111,7 +108,6 @@
     }
     [self CreateGUI:sidePadding TopPadding:topPadding Spacing:spacing Size:size];
 }
-
 //displays GUI
 -(void)CreateGUI:(float)leftPadding TopPadding:(float)topPadding Spacing:(float)spacing Size:(float)size
 {
@@ -135,6 +131,32 @@
     NSLog(@"Subviews: %d", content.subviews.count);
 }
 
+
+///Search View Interface
+//brings up the Search GUI
+-(void)CreateSearch
+{
+    searching = true;
+    //create a view, with Search and Cancel at the bottom, add a scroll view that fits inside the view
+    NSLog(@"Create Search View");
+    searchView = [[SearchView alloc]initWithFrame:CGRectMake(contentWidth * .05, contentHeight * .05, contentWidth * .9, contentHeight * .9) Home:self];
+    NSLog(@"start: %f height: %f totalH: %d", searchView.frame.origin.y, searchView.frame.size.height, contentHeight);
+    [searchView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:.2]];
+    
+    [super SetActionButton:1 Title:@"Search"];
+    [super SetActionButton:2 Title:@"Cancel"];
+    
+    [content addSubview:searchView];
+}
+//exits the search
+-(void)ExitSearch
+{
+    searching = false;
+    [background setFrame:CGRectMake(0, 0, 0, 0)];
+}
+
+
+///User Interaction
 //called when a button is pressed
 -(void)ButtonPressed:(Button*)button
 {
@@ -159,30 +181,6 @@
         [self CreateSearch];
     }
 }
-
-//brings up the Search GUI
--(void)CreateSearch
-{
-    searching = true;
-    //create a view, with Search and Cancel at the bottom, add a scroll view that fits inside the view
-    NSLog(@"Create Search View");
-    searchView = [[SearchView alloc]initWithFrame:CGRectMake(contentWidth * .05, contentHeight * .05, contentWidth * .9, contentHeight * .9) Home:self];
-    NSLog(@"start: %f height: %f totalH: %d", searchView.frame.origin.y, searchView.frame.size.height, contentHeight);
-    [searchView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:.2]];
-    
-    [super SetActionButton:1 Title:@"Search"];
-    [super SetActionButton:2 Title:@"Cancel"];
-    
-    [content addSubview:searchView];
-}
-
-//exits the search
--(void)ExitSearch
-{
-    searching = false;
-    [background setFrame:CGRectMake(0, 0, 0, 0)];
-}
-
 -(void)ActionButtonPressed:(Button*)button
 {
     [searchView setHidden:true];
@@ -204,7 +202,6 @@
         NSLog(@"Cancel(Action2) Button Pressed");
     }
 }
-
 -(void)GoToNewView
 {
     WordList *wordList;
@@ -238,5 +235,4 @@
             break;
     }
 }
-
 @end

@@ -5,19 +5,22 @@
 //  Created by Evan on 4/1/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
-//  This needs to be a singleton
+//  This subview displays the Active Word's information within the view that creates it
 
 #import "ViewWord.h"
+#import "TextView.h"
+#import "ConjugationWordViewCell.h"
+
 #import "Word.h"
 #import "Conjugation.h"
 #import "Tag.h"
-#import "TextView.h"
-#import "ConjugationWordViewCell.h"
+
+#import "Button.h"
+
 #import "Database.h"
-#import "Button.h";
 
 @implementation ViewWord
-
+///Initalization
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -29,7 +32,13 @@
     }
     return self;
 }
+-(void)SetDelegate:(id)delegate
+{
+    theDelegate = delegate;
+}
 
+
+///User Interface
 -(void)CreateWordView:(Word*)word
 {
     NSLog(@"Adding Word to Word View");
@@ -195,6 +204,16 @@
     [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, y + 5)];
 }
 
+
+///User Interaction
+-(void)ButtonWasPressed:(Button*)button
+{
+    [self setHidden:true];
+    [theDelegate ViewWordDissmiss:self];
+}
+
+
+///UITableView Delagates
 //Add Items to the Table View
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
@@ -216,16 +235,5 @@
     cell.vos.text = [conjugationArray[indexPath.row] vosotros];
     cell.ellos.text = [conjugationArray[indexPath.row] ellos];
     return cell;
-}
-
--(void)ButtonWasPressed:(Button*)button
-{
-    [self setHidden:true];
-    [theDelegate ViewWordDissmiss:self];
-}
-
--(void)SetDelegate:(id)delegate
-{
-    theDelegate = delegate;
 }
 @end

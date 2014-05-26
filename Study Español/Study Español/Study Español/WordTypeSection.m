@@ -5,13 +5,15 @@
 //  Created by Evan on 4/20/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
+//  This section is used by the AddEditView and SearchView
+//  It creates an interface for selecting the type of word you are adding/editing or searching for
 
 #import "WordTypeSection.h"
+#import "AddEditView.h"
+#import "Word.h"
 #import "Switch.h"
 #import "SwitchController.h"
-#import "AddEditView.h"
 #import "Database.h"
-#import "Word.h"
 
 @implementation WordTypeSection
 -(void)CreateSearchSection:(UIView*)view SuperView:(UIView*)superView Layout:(int)layout

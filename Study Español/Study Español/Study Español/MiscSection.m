@@ -5,12 +5,16 @@
 //  Created by Evan on 4/20/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
+//  This section used by the AddEditView and SearchView classes
+//  Creates an interface for the translation, quiz type, and total number of words to be found for SearchView
+//  Creates an interface for Gender in AddEditView
 
 #import "MiscSection.h"
-#import "Switch.h"
-#import "Database.h"
-#import "SwitchController.h"
 #import "Word.h"
+#import "Switch.h"
+#import "SwitchController.h"
+#import "Database.h"
+
 
 @implementation MiscSection
 -(void)CreateSearchSection:(UIView*)view SuperView:(UIView*)superView Layout:(int)layout

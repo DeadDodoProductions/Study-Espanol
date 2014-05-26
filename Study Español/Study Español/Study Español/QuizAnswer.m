@@ -5,14 +5,19 @@
 //  Created by Evan on 4/1/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
+//  Displays and controls the QuizAnswers view
+//  This class allows the user to see how well they performed on the Vocab or Conjugation quiz they completed
 
 #import "QuizAnswer.h"
-#import "QuizAnswerCell.h"
-#import "Utilities.h"
-#import "Word.h"
-#import "Database.h"
 #import "AddEditView.h"
+
+#import "QuizAnswerCell.h"
+
+#import "Word.h"
 #import "Button.h"
+#import "Database.h"
+
+#import "Utilities.h"
 
 @interface QuizAnswer ()
 
@@ -114,7 +119,6 @@
 }
 
 
-
 ///User Interactions
 -(void)ActionButtonPressed:(Button*)button
 {
@@ -191,7 +195,6 @@
     [actionButton1 setHidden:true];
     [actionButton2 setHidden:true];
 }
-
 
 
 //ViewWord Delagates

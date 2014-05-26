@@ -10,9 +10,9 @@
 
 @interface QuizConjugation : BaseView
 {
+    int currentConjugation;
     NSMutableArray *answers;
     NSMutableArray *words;
-    int currentConjugation;
 }
 
 @end

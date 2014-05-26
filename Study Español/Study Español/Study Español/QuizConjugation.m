@@ -5,22 +5,28 @@
 //  Created by Evan on 4/1/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
+//  Displays and controls the QuizConjugation view.
+//  This class allows the user to create a randomized conjugation quiz based on criteria entered.
 
 #import "QuizConjugation.h"
+#import "QuizAnswer.h"
+
 #import "ConjugationView.h"
+
 #import "Conjugation.h"
 #import "Word.h"
+
 #import "Button.h"
+
 #import "Database.h"
 #import "Utilities.h"
-#import "QuizAnswer.h"
 
 @interface QuizConjugation ()
 
 @end
 
 @implementation QuizConjugation
-
+///Initialization
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -42,9 +48,6 @@
 {
     [super didReceiveMemoryWarning];
 }
-
-
-
 -(void)CreateConjugationLists
 {
     answers = [[NSMutableArray alloc]init];
@@ -72,6 +75,9 @@
         }
     }
 }
+
+
+///User Interface
 -(void)CreateGUI
 {
     NSLog(@"Creating ConjugationQuiz");
@@ -155,23 +161,7 @@
 }
 
 
--(void)CompareAnswers
-{
-    
-}
-
--(void)ButtonPressed:(Button*)button
-{
-    if (button.tag == 0)
-    {
-        
-    }
-    else
-    {
-        
-    }
-}
-
+///User Interactions
 -(void)ActionButtonPressed:(Button*)button
 {
     QuizAnswer *quizAnswer;

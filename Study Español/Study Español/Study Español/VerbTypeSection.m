@@ -5,12 +5,15 @@
 //  Created by Evan on 4/20/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
+//  This section is used by the AddEditView and SearchView classes
+//  Creates an interface to select the type of verb you are either adding/editing or searching for
 
 #import "VerbTypeSection.h"
+#import "Word.h"
 #import "Switch.h"
 #import "SwitchController.h"
 #import "Database.h"
-#import "Word.h"
+
 
 @implementation VerbTypeSection
 -(void)CreateSearchSection:(UIView*)view SuperView:(UIView*)superView Layout:(int)layout

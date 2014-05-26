@@ -14,10 +14,10 @@
 {
     int rows;
     int columns;
+    int layout;
     NSMutableArray *tags;
     UIScrollView *scrollView;
     CGRect startRect;
-    int layout;
     Home *superHome;
 }
 -(void)NewTag:(NSString*)tag TagTable:(UITableView*)tagTable;

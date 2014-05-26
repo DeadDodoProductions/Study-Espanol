@@ -5,12 +5,13 @@
 //  Created by Evan on 4/29/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
+//  This cell is used in the QuizAnswers class to display the words answered incorrectly
 
 #import "QuizAnswerCell.h"
 
 @implementation QuizAnswerCell
 @synthesize word, wordTitle, answer, answerTitle, correction, correctionTitle;
-
+///Initalization
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
@@ -42,14 +43,5 @@
     }
     return self;
 }
-
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
-{
-    // Drawing code
-}
-*/
 
 @end

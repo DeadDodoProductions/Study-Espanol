@@ -5,18 +5,24 @@
 //  Created by Evan on 4/1/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
+//  All View Controllers inherite from this class.
+//  It sets the basic foundation that all the View Controllers are based on.
+//  Creates the Header-Content View structure as well as defines methods to be used by the Header buttons.
 
 #import "BaseView.h"
-#import "Button.h"
-#import "Switch.h"
-#import "TextView.h"
+#import "Home.h"
+
+#import "ViewWord.h"
+#import "ConjugationView.h"
+
 #import "Word.h"
 #import "Conjugation.h"
 #import "Tag.h"
-#import "ViewWord.h"
-#import "ConjugationView.h"
-#import "ViewWord.h"
-#import "Home.h"
+
+#import "Button.h"
+#import "Switch.h"
+#import "TextView.h"
+
 #import "Database.h"
 
 @interface BaseView ()
@@ -24,7 +30,7 @@
 @end
 
 @implementation BaseView
-
+///Initialization
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -33,7 +39,6 @@
     }
     return self;
 }
-
 - (void)viewDidLoad
 {
     NSLog(@"New View");
@@ -50,13 +55,14 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(KeyboardOffView:) name:UIKeyboardDidHideNotification object:nil];
     // Do any additional setup after loading the view.
 }
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
 
+
+///Orientaion Methods
 //finds the screens orientation
 -(UIInterfaceOrientation)FindOrientation
 {
@@ -64,25 +70,24 @@
     //change return type to return orientation
     return [UIApplication sharedApplication].statusBarOrientation;
 }
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    orientation = [self FindOrientation];
+    [self SetContentViews];
+}
+-(BOOL)shouldAutorotate
+{
+    return true;
+}
 
+
+///Screen Size and Partitioning Methods
 //finds the size of the screen
 -(CGSize)FindScreenSize
 {
     //find the size of the screen here
     return CGSizeMake(screen.bounds.size.width, screen.bounds.size.height);
 }
-
--(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
-{
-    orientation = [self FindOrientation];
-    [self SetContentViews];
-}
-
--(BOOL)shouldAutorotate
-{
-    return true;
-}
-
 -(void)SetContentViews
 {
     if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
@@ -133,6 +138,9 @@
     [self.view addSubview:content];
 }
 
+
+
+///Button Methods
 -(void)ActionButtonPressed:(Button*)button{}
 -(void)HeaderButtonPressed:(Button*)button
 {
@@ -156,7 +164,6 @@
             break;
     }
 }
-
 -(void)SetActionButton:(int)button Title:(NSString*)title
 {
     if (button == 1)
@@ -175,6 +182,9 @@
     }
 }
 
+
+
+///Keyboard Methods
 -(void)KeyboardInView:(NSNotification*)aNote
 {
     NSLog(@"Keyboard in View");
@@ -192,13 +202,14 @@
         [content setContentOffset:scrollPoint animated:true];
     }
 }
-
 -(void)KeyboardOffView:(NSNotification*)aNote
 {
     NSLog(@"Keyboard Off View");
     [content setContentOffset:CGPointZero animated:true];
 }
 
+
+///Debug Methods -- To be deleted prior to publishing
 -(void)SetGrid
 {
     grid = [[UIView alloc]initWithFrame:content.frame];

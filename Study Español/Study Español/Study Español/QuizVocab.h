@@ -11,8 +11,8 @@
 
 @interface QuizVocab : BaseView <QuizVocabCellDelagate>
 {
-    UICollectionView *collectionView;
     NSMutableArray *textFields;
+    UICollectionView *collectionView;
     UICollectionViewFlowLayout *flow;
 }
 

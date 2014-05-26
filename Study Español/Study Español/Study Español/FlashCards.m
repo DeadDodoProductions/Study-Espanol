@@ -5,19 +5,24 @@
 //  Created by Evan on 4/1/14.
 //  Copyright (c) 2014 Evan Combs. All rights reserved.
 //
+//  Displays and Controls the FlashCard view
+//  This view lets the user to study in a flashcard like format
 
 #import "FlashCards.h"
-#import "Utilities.h"
-#import "Button.h"
-#import "Database.h"
+
 #import "Word.h"
+
+#import "Button.h"
+
+#import "Utilities.h"
+#import "Database.h"
 
 @interface FlashCards ()
 
 @end
 
 @implementation FlashCards
-
+///Initialization
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -26,7 +31,6 @@
     }
     return self;
 }
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
@@ -43,13 +47,11 @@
         [wordLabel setText:[NSString stringWithFormat:@"%@", [word english]]];
     }
 }
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 
 
 ///User Interface Methods
@@ -116,6 +118,8 @@
 }
 
 
+///User Interaction
+//goes to the next word
 -(void)NextWord:(Button*)button
 {
     currentWord++;
@@ -134,6 +138,7 @@
         [wordLabel setText:[NSString stringWithFormat:@"%@", [word english]]];
     }
 }
+//goes to the previous word
 -(void)PrevWord:(Button*)button
 {
     currentWord--;
@@ -152,6 +157,7 @@
         [wordLabel setText:[NSString stringWithFormat:@"%@", [word english]]];
     }
 }
+//shows the answer
 -(void)Answer:(Button*)button
 {
     Word *word = [[Database GetInstance] words][currentWord];

@@ -12,9 +12,9 @@
 
 @interface WordTagSection : NSObject <UITableViewDelegate, UITableViewDataSource>
 {
+    UITableView *tagTable;
     SearchView *aView;
     TextView *tagInput;
-    UITableView *tagTable;
 }
 -(void)CreateSearchSection:(UIView*)view SuperView:(UIView*)superView Layout:(int)layout;
 -(void)CreateAddEditSection:(UIView*)view SuperView:(UIViewController*)superView Layout:(int)layout;
