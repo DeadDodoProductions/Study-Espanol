@@ -33,6 +33,15 @@
     // Do any additional setup after loading the view.
     currentWord = 0;
     [self CreateGUI];
+    Word *word = [[Database GetInstance] words][currentWord];
+    if ([[[Database GetInstance] translate] isEqualToNumber:[NSNumber numberWithInt:0]])
+    {
+        [wordLabel setText:[NSString stringWithFormat:@"%@", [word spanish]]];
+    }
+    else
+    {
+        [wordLabel setText:[NSString stringWithFormat:@"%@", [word english]]];
+    }
 }
 
 - (void)didReceiveMemoryWarning
@@ -74,10 +83,14 @@
     
     wordLabel = [[UILabel alloc]init];
     [wordLabel setBackgroundColor:[UIColor grayColor]];
+    [wordLabel setFont:[UIFont boldSystemFontOfSize:45]];
+    [wordLabel setTextAlignment:NSTextAlignmentCenter];
     [content addSubview:wordLabel];
     
     answerLabel = [[UILabel alloc]init];
     [answerLabel setBackgroundColor:[UIColor grayColor]];
+    [answerLabel setFont:[UIFont boldSystemFontOfSize:45]];
+    [answerLabel setTextAlignment:NSTextAlignmentCenter];
     [content addSubview:answerLabel];
     
     int buttonheight = contentHeight * .062;
@@ -112,7 +125,14 @@
     }
     [answerLabel setText:[NSString stringWithFormat:@""]];
     Word *word = [[Database GetInstance] words][currentWord];
-    [wordLabel setText:[NSString stringWithFormat:@"%@", [word spanish]]];
+    if ([[[Database GetInstance] translate] isEqualToNumber:[NSNumber numberWithInt:0]])
+    {
+        [wordLabel setText:[NSString stringWithFormat:@"%@", [word spanish]]];
+    }
+    else
+    {
+        [wordLabel setText:[NSString stringWithFormat:@"%@", [word english]]];
+    }
 }
 -(void)PrevWord:(Button*)button
 {
@@ -121,12 +141,28 @@
     {
         currentWord = (int)[[[Database GetInstance] words] count] - 1;
     }
+    [answerLabel setText:[NSString stringWithFormat:@""]];
     Word *word = [[Database GetInstance] words][currentWord];
-    [wordLabel setText:[NSString stringWithFormat:@"%@", [word spanish]]];
+    if ([[[Database GetInstance] translate] isEqualToNumber:[NSNumber numberWithInt:0]])
+    {
+        [wordLabel setText:[NSString stringWithFormat:@"%@", [word spanish]]];
+    }
+    else
+    {
+        [wordLabel setText:[NSString stringWithFormat:@"%@", [word english]]];
+    }
 }
 -(void)Answer:(Button*)button
 {
-    
+    Word *word = [[Database GetInstance] words][currentWord];
+    if ([[[Database GetInstance] translate] isEqualToNumber:[NSNumber numberWithInt:0]])
+    {
+        [answerLabel setText:[NSString stringWithFormat:@"%@", [word english]]];
+    }
+    else
+    {
+        [answerLabel setText:[NSString stringWithFormat:@"%@", [word spanish]]];
+    }
 }
 
 @end

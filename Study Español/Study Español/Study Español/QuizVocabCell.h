@@ -10,11 +10,17 @@
 
 @class TextView;
 
-@interface QuizVocabCell : UICollectionViewCell
+@interface QuizVocabCell : UICollectionViewCell <UITextViewDelegate>
 {
     
 }
 @property (nonatomic, readwrite) UILabel *wordLabel;
-@property (nonatomic, readwrite) TextView *wordField;
+@property (nonatomic, readwrite) UITextField *wordField;
+@property (nonatomic, readwrite) id theDelagate;
+-(void)CreateTextView:(TextView*)textView;
 
+@end
+
+@protocol QuizVocabCellDelagate<NSObject>
+-(void)OnFinishAnsweringWord:(UITextField*)textField;
 @end

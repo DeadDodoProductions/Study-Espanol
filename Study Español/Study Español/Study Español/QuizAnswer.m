@@ -9,6 +9,10 @@
 #import "QuizAnswer.h"
 #import "QuizAnswerCell.h"
 #import "Utilities.h"
+#import "Word.h"
+#import "Database.h"
+#import "AddEditView.h"
+#import "Button.h"
 
 @interface QuizAnswer ()
 
@@ -16,6 +20,7 @@
 
 @implementation QuizAnswer
 
+///Initialization
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -24,70 +29,40 @@
     }
     return self;
 }
-
 - (void)viewDidLoad
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self CreateGUI];
+    viewWord = [[ViewWord alloc]init];
+    [content addSubview:viewWord];
 }
-
 - (void)didReceiveMemoryWarning
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
-
-
--(void)CreateGUI
+-(void)SetArrays:(NSArray*)_words Answers:(NSArray*)_answers
 {
-    flow = [[UICollectionViewFlowLayout alloc]init];
-    [flow setMinimumInteritemSpacing:2.0f];
-    [flow setMinimumLineSpacing:2.0f];
-    [self SetCellWidth];
-    
-    
-    UICollectionView *newView = [[UICollectionView alloc]initWithFrame:CGRectMake(2, 2, contentWidth - 4, contentHeight - 4) collectionViewLayout:flow];
-    [newView setDelegate:self];
-    [newView setDataSource:self];
-    [newView setBackgroundColor:[UIColor whiteColor]];
-    [newView registerClass:[QuizAnswerCell class] forCellWithReuseIdentifier:@"QuizAnswerCell"];
-    [content addSubview:newView];
+    words = [[NSArray alloc]initWithArray:_words];
+    answers = [[NSArray alloc]initWithArray:_answers];
 }
-
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return 40;
-}
-
--(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    QuizAnswerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"QuizAnswerCell" forIndexPath:indexPath];
-    [cell setBackgroundColor:[UIColor grayColor]];
-    return cell;
-}
-
--(void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-}
-
 -(void)SetCellWidth
 {
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
     NSString *string = [Utilities GetDevice];
+    float width;
     if ([string isEqualToString:@"iPad"])
     {
         if (UIInterfaceOrientationIsPortrait(orientation))
         {
             NSLog(@"iPad Portrait");
-            [flow setItemSize:CGSizeMake((contentWidth - 4) * .498, 40)];
+            width = roundf((contentWidth - 4) * .498);
         }
         else
         {
             NSLog(@"iPad Landscape");
-            [flow setItemSize:CGSizeMake((contentWidth - 4) * .332, 40)];
+            width = roundf((contentWidth - 4) * .331);
         }
     }
     else
@@ -95,14 +70,134 @@
         if (UIInterfaceOrientationIsPortrait(orientation))
         {
             NSLog(@"iPhone Portrait");
-            [flow setItemSize:CGSizeMake(contentWidth - 4, 40)];
+            width = roundf((contentWidth - 4));
         }
         else
         {
             NSLog(@"iPhone Landscape");
-            [flow setItemSize:CGSizeMake((contentWidth - 4) * .497, 40)];
+            width = roundf((contentWidth - 4) * .497);
         }
+    }
+    [flow setItemSize:CGSizeMake(width, 40)];
+    NSLog(@"Cell Width: %f", [flow itemSize].width);
+}
+
+
+///User Interface
+-(void)CreateGUI
+{
+    int correct = [[[Database GetInstance] words] count] - [answers count];
+    int percentage = (int)(100 * (correct / [[[Database GetInstance] words] count]));
+    int headerHeight = contentHeight * .05;
+    
+    UILabel *headerLabel1 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, (contentWidth * .5) - 5, headerHeight)];
+    [headerLabel1 setText:[NSString stringWithFormat:@"%d / %lu", correct, (unsigned long)[[[Database GetInstance] words] count]]];
+    [headerLabel1 setTextAlignment:NSTextAlignmentRight];
+    [content addSubview:headerLabel1];
+    
+    UILabel *headerLabel2 = [[UILabel alloc]initWithFrame:CGRectMake((contentWidth * .5) + 5, 0, contentWidth * .5, headerHeight)];
+    [headerLabel2 setText:[NSString stringWithFormat:@"%d%%", percentage]];
+    [headerLabel2 setTextAlignment:NSTextAlignmentLeft];
+    [content addSubview:headerLabel2];
+    
+    flow = [[UICollectionViewFlowLayout alloc]init];
+    [flow setMinimumInteritemSpacing:2.0f];
+    [flow setMinimumLineSpacing:2.0f];
+    [self SetCellWidth];
+    
+    wordCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(2, headerHeight + 2, contentWidth - 4, contentHeight - (headerHeight + 4)) collectionViewLayout:flow];
+    [wordCollectionView setDelegate:self];
+    [wordCollectionView setDataSource:self];
+    [wordCollectionView setBackgroundColor:[UIColor whiteColor]];
+    [wordCollectionView registerClass:[QuizAnswerCell class] forCellWithReuseIdentifier:@"QuizAnswerCell"];
+    [content addSubview:wordCollectionView];
+}
+
+
+
+///User Interactions
+-(void)ActionButtonPressed:(Button*)button
+{
+    [viewWord setHidden:true];
+    [actionButton1 setHidden:true];
+    [actionButton2 setHidden:true];
+    if (button.tag == 2)
+    {
+        NSLog(@"Edit(Action1) Button Pressed");
+        AddEditView *addEditView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddEditView"];
+        [addEditView setEditingWord:true];
+        [self presentViewController:addEditView animated:false completion:nil];
+    }
+    else
+    {
+        NSLog(@"Delete(Action2) Button Pressed");
+        //This should delete the word from the database and the table datasource then refresh the table
+        NSLog(@"Word Count Before Deletion: %lu", (unsigned long)[[[Database GetInstance] words] count]);
+        for (Word *a in [[Database GetInstance] words])
+        {
+            if ([a isEqual:[Database GetInstance].activeWord])
+            {
+                NSMutableArray *array = [[NSMutableArray alloc]initWithArray:[Database GetInstance].words];
+                [array removeObject:a];
+                [[Database GetInstance] setWords:array];
+            }
+        }
+        [[Database GetInstance] Delete];
+        NSLog(@"Word Count After Deletion: %lu", (unsigned long)[[[Database GetInstance] words] count]);
+        [wordCollectionView reloadData];
     }
 }
 
+
+///UICollectionView Delagates
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return [answers count];
+}
+-(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    QuizAnswerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"QuizAnswerCell" forIndexPath:indexPath];
+    [cell setBackgroundColor:[UIColor grayColor]];
+    if ([[[Database GetInstance] translate] isEqualToNumber:[NSNumber numberWithInt:0]])
+    {
+        [[cell word] setText:[words[indexPath.row] spanish]];
+        [[cell correction] setText:[words[indexPath.row] english]];
+    }
+    else
+    {
+        [[cell word] setText:[words[indexPath.row] english]];
+        [[cell correction] setText:[words[indexPath.row] spanish]];
+    }
+    [[cell answer] setText:answers[indexPath.row]];
+    return cell;
+}
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"Did Select Cell");
+    Word *word = words[indexPath.row];
+    [[Database GetInstance] setActiveWord:word];
+    int x = [[collectionView subviews][indexPath.row] frame].origin.x;
+    int y = [[collectionView subviews][indexPath.row] frame].origin.y;
+    int h = [[collectionView subviews][indexPath.row] frame].size.height;
+    [viewWord setFrame:CGRectMake(x + 2, y + h + [collectionView frame].origin.y, flow.itemSize.width, 0)];
+    [viewWord SetDelegate:self];
+    [viewWord CreateWordView:word];
+    
+    [super SetActionButton:1 Title:@"Edit"];
+    [super SetActionButton:2 Title:@"Delete"];
+}
+-(void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [actionButton1 setHidden:true];
+    [actionButton2 setHidden:true];
+}
+
+
+
+//ViewWord Delagates
+-(void)ViewWordDissmiss:(ViewWord *)wordView
+{
+    [actionButton1 setHidden:true];
+    [actionButton2 setHidden:true];
+}
 @end

@@ -10,7 +10,7 @@
 #import "TextView.h"
 
 @implementation QuizVocabCell
-@synthesize wordField, wordLabel;
+@synthesize wordField, wordLabel, theDelagate;
 
 - (id)initWithFrame:(CGRect)frame
 {
@@ -18,20 +18,17 @@
     if (self) {
         // Initialization code
         wordLabel = [[UILabel alloc]initWithFrame:CGRectMake(2, 2, (frame.size.width * .5) - 2, frame.size.height - 4)];
-        wordField = [[TextView alloc]initWithFrame:CGRectMake(frame.size.width * .5, (frame.size.height * .5) - 15, (frame.size.width * .5) - 3, 30)];
+        wordField = [[UITextField alloc]initWithFrame:CGRectMake(frame.size.width * .5, (frame.size.height * .5) - 15, (frame.size.width * .5) - 3, 30)];
+        [wordField setBackgroundColor:[UIColor whiteColor]];
+        [wordField setDelegate:self];
         [self addSubview:wordLabel];
         [self addSubview:wordField];
     }
     return self;
 }
 
-/*
-// Only override drawRect: if you perform custom drawing.
-// An empty implementation adversely affects performance during animation.
-- (void)drawRect:(CGRect)rect
+-(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    // Drawing code
+    [theDelagate OnFinishAnsweringWord:textField];
 }
-*/
-
 @end

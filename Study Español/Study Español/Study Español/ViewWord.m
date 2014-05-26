@@ -170,7 +170,10 @@
     {
         [aString appendString:[NSString stringWithFormat:@"%@, ", a.tag]];
     }
-    [aString replaceCharactersInRange:NSMakeRange(aString.length - 2, 2) withString:@""];
+    if (aString.length > 0)
+    {
+        [aString replaceCharactersInRange:NSMakeRange(aString.length - 2, 2) withString:@""];
+    }
     [tagsLabel setText:aString];
     [tagsLabel setBackgroundColor:[UIColor grayColor]];
     [self addSubview:tagsLabel];

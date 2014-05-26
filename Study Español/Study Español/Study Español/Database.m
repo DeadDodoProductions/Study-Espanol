@@ -34,7 +34,7 @@ static Database *instance = nil;
 {
     if (self = [super init])
     {
-        
+        translate = [NSNumber numberWithInt:0];
     }
     return self;
 }
@@ -96,6 +96,9 @@ static Database *instance = nil;
     {
         NSLog(@"Saved");
     }
+    
+    //resets values of static fields
+    [self ClearAllData];
 }
 
 //Edits the Database (hopefully)
@@ -144,6 +147,9 @@ static Database *instance = nil;
     {
         NSLog(@"Updated");
     }
+    
+    //resets values of static fields
+    [self ClearAllData];
 }
 
 //Deletes an item from the database
@@ -164,6 +170,9 @@ static Database *instance = nil;
     {
         NSLog(@"Deleted");
     }
+    
+    //resets values of static fields
+    [self ClearAllData];
 }
 
 //retrieves words from the database based on criteria
@@ -191,6 +200,8 @@ static Database *instance = nil;
         UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"0 Words Found" message:@"Unable to find any words matching search criteria." delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil, nil];
         [alert show];
     }
+    //resets values of static fields
+    [self ClearAllData];
 }
 
 //randmoizes the order of an array
@@ -251,21 +262,27 @@ static Database *instance = nil;
         }
     }
     
-    //resets values of static fields
-    for (int i = 0; i < 5; i++)
-    {
-        wordMax = 0;
-        wordType = nil;
-        wordString = @"";
-        quizType = nil;
-        translate = nil;
-        verbEnding = nil;
-        verbRegular = nil;
-        conjugationType.removeAllObjects;
-        tags = [[NSArray alloc]init];
-    }
-    
     return [NSCompoundPredicate andPredicateWithSubpredicates:predicateArray];
+}
+
+-(void)ClearAllData
+{
+    activeWord = nil;
+    wordMax = 0;
+    wordType = nil;
+    wordString = @"";
+    quizType = nil;
+    translate = [NSNumber numberWithInt:0];
+    verbEnding = nil;
+    verbRegular = nil;
+    conjugations = nil;
+    gender = nil;
+    english = nil;
+    spanish = nil;
+    pronunciation = nil;
+    definition = nil;
+    conjugationType.removeAllObjects;
+    tags = [[NSArray alloc]init];
 }
 
 @end

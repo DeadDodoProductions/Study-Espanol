@@ -12,6 +12,7 @@
 #import "Database.h"
 #import "Word.h"
 #import "QuizAnswer.h"
+#import "TextView.h"
 
 @interface QuizVocab ()
 
@@ -32,6 +33,11 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self CreateGUI];
+    textFields = [[NSMutableArray alloc]init];
+    for (int i = 0; i < [[[Database GetInstance] words] count]; i++)
+    {
+        [textFields addObject:@""];
+    }
 }
 - (void)didReceiveMemoryWarning
 {
@@ -41,6 +47,7 @@
 
 
 
+///Creates the User Interface
 -(void)CreateGUI
 {
     NSLog(@"Creating Vocab Quiz");
@@ -59,34 +66,6 @@
     [newView registerClass:[QuizVocabCell class] forCellWithReuseIdentifier:@"QuizVocabCell"];
     [content addSubview:newView];
 }
-
--(void)CompareAnswers
-{
-    
-}
-
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return [[[Database GetInstance] words] count];
-}
-
--(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    QuizVocabCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"QuizVocabCell" forIndexPath:indexPath];
-    [cell setBackgroundColor:[UIColor grayColor]];
-    Word *aWord = [[Database GetInstance] words][indexPath.row];
-    int a = (int)[[Database GetInstance] translate];
-    if (a == 0)
-    {
-        [[cell wordLabel] setText:[aWord spanish]];
-    }
-    else
-    {
-        [[cell wordLabel] setText:[aWord english]];
-    }
-    return cell;
-}
-
 -(void)SetCellWidth
 {
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
@@ -119,11 +98,63 @@
     }
 }
 
+
+
+///User Interaction
+//compares the answers placing the wrong answers in arrays to be sent to QuizAnswers
 -(void)ActionButtonPressed:(Button*)button
 {
+    NSMutableArray *words = [[NSMutableArray alloc]init];
+    NSMutableArray *answers = [[NSMutableArray alloc]init];
+    for (int i = 0; i < [[[Database GetInstance] words] count]; i++)
+    {
+        Word *word = [[Database GetInstance] words][i];
+        NSLog(@"%@ -- %@ -- %@", [word english], [word spanish], textFields[i]);
+        if (![[[word english] uppercaseString] isEqualToString:[textFields[i] uppercaseString]] && ![[[word spanish] uppercaseString] isEqualToString:[textFields[i] uppercaseString]])
+        {
+            [words addObject:word];
+            [answers addObject:textFields[i]];
+        }
+    }
     QuizAnswer *quizAnswer;
     quizAnswer = [self.storyboard instantiateViewControllerWithIdentifier:@"QuizAnswer"];
+    [quizAnswer SetArrays:words Answers:answers];
     [self presentViewController:quizAnswer animated:false completion:nil];
 }
 
+
+
+///Delagate Functions
+///UITableView Methods
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return [[[Database GetInstance] words] count];
+}
+
+-(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    QuizVocabCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"QuizVocabCell" forIndexPath:indexPath];
+    [cell setBackgroundColor:[UIColor grayColor]];
+    Word *aWord = [[Database GetInstance] words][indexPath.row];
+    if ([[[Database GetInstance] translate] isEqualToNumber:[NSNumber numberWithInt:0]])
+    {
+        [[cell wordLabel] setText:[aWord spanish]];
+    }
+    else
+    {
+        [[cell wordLabel] setText:[aWord english]];
+    }
+    [[cell wordField] setText:textFields[indexPath.row]];
+    [[cell wordField] setTag:indexPath.row];
+    [cell setTheDelagate:self];
+    return cell;
+}
+///TextField Method
+-(void)OnFinishAnsweringWord:(UITextField*)textField
+{
+    NSLog(@"Tag: %ld", (long)textField.tag);
+    NSLog(@"Text: %@", textField.text);
+    textFields[textField.tag] = textField.text;
+    NSLog(@"TextFields: %@", textFields[textField.tag]);
+}
 @end

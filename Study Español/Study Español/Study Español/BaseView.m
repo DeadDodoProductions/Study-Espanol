@@ -44,6 +44,7 @@
     NSLog(@"Screen Size: width: %.0f height: %.0f", screenSize.width, screenSize.height);
     orientation = [self FindOrientation];
     [self SetContentViews];
+    NSLog(@"Translation: %@", [[Database GetInstance] translate]);
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(KeyboardInView:) name:UIKeyboardDidShowNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(KeyboardOffView:) name:UIKeyboardDidHideNotification object:nil];

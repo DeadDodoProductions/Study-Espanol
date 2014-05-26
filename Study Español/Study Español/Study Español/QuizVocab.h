@@ -7,8 +7,9 @@
 //
 
 #import "BaseView.h"
+#import "QuizVocabCell.h"
 
-@interface QuizVocab : BaseView
+@interface QuizVocab : BaseView <QuizVocabCellDelagate>
 {
     UICollectionView *collectionView;
     NSMutableArray *textFields;

@@ -25,7 +25,7 @@
 @end
 
 @implementation WordList
-
+///Initialization
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -46,60 +46,6 @@
 {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
-}
-
-
-
--(void)CreateGUI
-{
-    flow = [[UICollectionViewFlowLayout alloc]init];
-    [flow setMinimumInteritemSpacing:2.0f];
-    [flow setMinimumLineSpacing:2.0f];
-    [self SetCellWidth];
-    
-
-    wordCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(2, 2, contentWidth - 4, contentHeight - 4) collectionViewLayout:flow];
-    [wordCollectionView setDelegate:self];
-    [wordCollectionView setDataSource:self];
-    [wordCollectionView setBackgroundColor:[UIColor whiteColor]];
-    [wordCollectionView registerClass:[WordListCell class] forCellWithReuseIdentifier:@"WordListCell"];
-    [content addSubview:wordCollectionView];
-}
-
--(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
-{
-    return [[[Database GetInstance] words] count];
-}
--(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    WordListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"WordListCell" forIndexPath:indexPath];
-    [cell setBackgroundColor:[UIColor grayColor]];
-    //English and Espanol will come from the List of Words located in a Singleton/Static class
-    Word *aWord = [[Database GetInstance] words][indexPath.row];
-    NSLog(@"%ld: %@ - %@", (long)indexPath.row, [aWord english], [aWord spanish]);
-    [[cell cellLabel] setText:[NSString stringWithFormat:@"%@ -- %@", [aWord english], [aWord spanish]]];
-    [[cell cellLabel] setTextAlignment:NSTextAlignmentCenter];
-    return cell;
-}
--(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    NSLog(@"Hello World");
-    Word *word = [Database GetInstance].words[indexPath.row];
-    [[Database GetInstance] setActiveWord:word];
-    int x = [[collectionView subviews][indexPath.row] frame].origin.x;
-    int y = [[collectionView subviews][indexPath.row] frame].origin.y;
-    int h = [[collectionView subviews][indexPath.row] frame].size.height;
-    [viewWord setFrame:CGRectMake(x + 2, y + h, flow.itemSize.width, 0)];
-    [viewWord SetDelegate:self];
-    [viewWord CreateWordView:word];
-    
-    [super SetActionButton:1 Title:@"Edit"];
-    [super SetActionButton:2 Title:@"Delete"];
-}
--(void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    [actionButton1 setHidden:true];
-    [actionButton2 setHidden:true];
 }
 -(void)SetCellWidth
 {
@@ -136,6 +82,27 @@
     NSLog(@"Cell Width: %f", [flow itemSize].width);
 }
 
+
+
+///User Interface
+-(void)CreateGUI
+{
+    flow = [[UICollectionViewFlowLayout alloc]init];
+    [flow setMinimumInteritemSpacing:2.0f];
+    [flow setMinimumLineSpacing:2.0f];
+    [self SetCellWidth];
+    
+
+    wordCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(2, 2, contentWidth - 4, contentHeight - 4) collectionViewLayout:flow];
+    [wordCollectionView setDelegate:self];
+    [wordCollectionView setDataSource:self];
+    [wordCollectionView setBackgroundColor:[UIColor whiteColor]];
+    [wordCollectionView registerClass:[WordListCell class] forCellWithReuseIdentifier:@"WordListCell"];
+    [content addSubview:wordCollectionView];
+}
+
+
+///User Interactions
 -(void)ActionButtonPressed:(Button*)button
 {
     [viewWord setHidden:true];
@@ -168,6 +135,48 @@
     }
 }
 
+
+
+///UICollectionView Delagates
+-(NSInteger)collectionView:(UICollectionView *)collectionView numberOfItemsInSection:(NSInteger)section
+{
+    return [[[Database GetInstance] words] count];
+}
+-(UICollectionViewCell*)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    WordListCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"WordListCell" forIndexPath:indexPath];
+    [cell setBackgroundColor:[UIColor grayColor]];
+    //English and Espanol will come from the List of Words located in a Singleton/Static class
+    Word *aWord = [[Database GetInstance] words][indexPath.row];
+    NSLog(@"%ld: %@ - %@", (long)indexPath.row, [aWord english], [aWord spanish]);
+    [[cell cellLabel] setText:[NSString stringWithFormat:@"%@ -- %@", [aWord english], [aWord spanish]]];
+    [[cell cellLabel] setTextAlignment:NSTextAlignmentCenter];
+    return cell;
+}
+-(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"Hello World");
+    Word *word = [Database GetInstance].words[indexPath.row];
+    [[Database GetInstance] setActiveWord:word];
+    int x = [[collectionView subviews][indexPath.row] frame].origin.x;
+    int y = [[collectionView subviews][indexPath.row] frame].origin.y;
+    int h = [[collectionView subviews][indexPath.row] frame].size.height;
+    [viewWord setFrame:CGRectMake(x + 2, y + h, flow.itemSize.width, 0)];
+    [viewWord SetDelegate:self];
+    [viewWord CreateWordView:word];
+    
+    [super SetActionButton:1 Title:@"Edit"];
+    [super SetActionButton:2 Title:@"Delete"];
+}
+-(void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
+{
+    [actionButton1 setHidden:true];
+    [actionButton2 setHidden:true];
+}
+
+
+
+//ViewWord Delagates
 -(void)ViewWordDissmiss:(ViewWord *)wordView
 {
     [actionButton1 setHidden:true];

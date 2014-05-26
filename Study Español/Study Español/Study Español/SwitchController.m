@@ -136,19 +136,6 @@ static SwitchController *instance = nil;
                     [gSwitches[0] setOn:false animated:true];
                 }
             }
-            else
-            {
-                if ([aSwitch.value isEqualToNumber:[NSNumber numberWithInt:0]])
-                {
-                    [[Database GetInstance] setGender:[NSNumber numberWithInt:1]];
-                    [gSwitches[1] setOn:true animated:true];
-                }
-                else
-                {
-                    [[Database GetInstance] setGender:[NSNumber numberWithInt:0]];
-                    [gSwitches[0] setOn:true animated:true];
-                }
-            }
             NSLog(@"Set Value: %@", [[Database GetInstance] gender]);
             break;
             

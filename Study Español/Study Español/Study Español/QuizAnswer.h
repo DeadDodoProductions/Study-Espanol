@@ -7,13 +7,16 @@
 //
 
 #import "BaseView.h"
+#import "ViewWord.h"
 
-@interface QuizAnswer : BaseView
+@interface QuizAnswer : BaseView <ViewWordDelagate>
 {
-    UICollectionView *collectionView;
-    UILabel *headerLabel;
     ViewWord *viewWord;
     UICollectionViewFlowLayout *flow;
+    NSArray *words;
+    NSArray *answers;
+    UICollectionView *wordCollectionView;
 }
+-(void)SetArrays:(NSArray*)_words Answers:(NSArray*)_answers;
 
 @end
