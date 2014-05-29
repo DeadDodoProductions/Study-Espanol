@@ -62,7 +62,7 @@
     for (NSNumber *type in [[Database GetInstance]conjugationType])
     {
         int a = [type intValue];
-        NSLog(@"%d: %@ %d", [type intValue], titles[a], a);
+        NSLog(@"Type: %d: %@ %d", [type intValue], titles[a], a);
         for (Word *word in [[Database GetInstance] words])
         {
             NSLog(@"Word: %@ -- %@", word.english, word.spanish);
@@ -71,6 +71,7 @@
                 NSLog(@"Tense: %@", conjugation.tense);
                 if ([titles[a] isEqualToString:conjugation.tense])
                 {
+                    NSLog(@"Adding Conjugation");
                     //gets context from AppDelagate in order to properly create the Conjugation
                     AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
                     NSManagedObjectContext *context = appDelegate.managedObjectContext;
@@ -114,6 +115,7 @@
     //sets the fields based on device and orientation
     if ([string isEqualToString:@"iPad"])
     {
+        NSLog(@"Device: iPad");
         conjugationWidth = 500;
         conjugationHeight = 200;
         conjugationX = (contentWidth * .5) - (conjugationWidth * .5);
@@ -123,7 +125,7 @@
     {
         if (UIInterfaceOrientationIsPortrait(orientation))
         {
-            NSLog(@"iPhone Portraite");
+            NSLog(@"Device: iPhone Portraite");
             layout = 3;
             conjugationWidth = contentWidth - 2;
             conjugationHeight = 150;
@@ -132,7 +134,7 @@
         }
         else
         {
-            NSLog(@"iPhone Landscape");
+            NSLog(@"Device: iPhone Landscape");
             layout = 4;
             buttonheight = contentHeight * .124;
             conjugationWidth = 400;
@@ -149,6 +151,7 @@
     [nextButton setTag:0];
     [nextButton addTarget:self action:@selector(ButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [content addSubview:nextButton];
+    NSLog(@"Next Button Created");
     
     //Creates the Previous Button used to transfer the user to the previous word
     //located at the bottom left of the device
@@ -157,6 +160,7 @@
     [prevButton setTag:1];
     [prevButton addTarget:self action:@selector(ButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [content addSubview:prevButton];
+    NSLog(@"Previous Button Created");
     
     //Creates the ConjugationView displaying the input fields
     //located at the center of the device
@@ -171,6 +175,7 @@
     [wordLabel setTextAlignment:NSTextAlignmentCenter];
     [wordLabel setBackgroundColor:[UIColor grayColor]];
     [content addSubview:wordLabel];
+    NSLog(@"Conjugation View Created");
     
     //Creates the Done button used to tell the app to grade the test
     [self SetActionButton:1 Title:@"Done"];
@@ -181,6 +186,7 @@
 //Called when the user is done with the test and pressed the 'Done' action button
 -(void)ActionButtonPressed:(Button*)button
 {
+    NSLog(@"Action Button 'Done' was pressed");
     //Saves any entries that were not already saved
     [self SaveAnswers];
     
@@ -255,6 +261,7 @@
     //increments and decrements wordNumber, and wraps the number if it goes beyond the possible range
     if (button.tag == 0)
     {
+        NSLog(@"Next Button Pressed");
         wordNumber++;
         if (wordNumber > [words count] - 1)
         {
@@ -263,6 +270,7 @@
     }
     else
     {
+        NSLog(@"Previous Button Pressed");
         wordNumber--;
         if (wordNumber < 0)
         {
@@ -290,5 +298,6 @@
     [answers[wordNumber] setNosotros:[[conjugationView inputs][3] text]];
     [answers[wordNumber] setVosotros:[[conjugationView inputs][4] text]];
     [answers[wordNumber] setEllos:[[conjugationView inputs][5] text]];
+    NSLog(@"Saved: wordNumber:%d yo:%@ tu:%@ el:%@ nos:%@ vos:%@ ellos:%@", wordNumber, [answers[wordNumber] yo], [answers[wordNumber] tu],[answers[wordNumber] el],[answers[wordNumber] nosotros],[answers[wordNumber] vosotros],[answers[wordNumber] ellos]);
 }
 @end
