@@ -10,7 +10,7 @@
 
 @interface ConjugationView : UIView
 {
-    UILabel *title;
+    
 }
 @property (nonatomic, readwrite) NSMutableArray *inputs;
 @property (nonatomic, readwrite) NSMutableArray *labels;

@@ -13,7 +13,7 @@
 
 @interface ViewWord : UIView <UITableViewDataSource, UITableViewDelegate>
 {
-    id theDelegate;
+    id theDelegate; //???turn this into a property and remove SetDelegate???
     NSMutableArray *conjugationArray;
     NSArray *tagArray;
     UITableView *tagsTable;
@@ -24,6 +24,8 @@
 
 @end
 
+//Delagate is used to perform action when the hide button is pressed
+//???Refactor Mispelled ViewWordDelagate to ViewWordDelegate
 @protocol ViewWordDelagate<NSObject>
 @optional
 -(void)ViewWordDissmiss:(ViewWord*)wordView;

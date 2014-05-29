@@ -20,7 +20,7 @@
     CGRect startRect;
     Home *superHome;
 }
+-(id)initWithFrame:(CGRect)frame Home:(Home*)home;
 -(void)NewTag:(NSString*)tag TagTable:(UITableView*)tagTable;
-- (id)initWithFrame:(CGRect)frame Home:(Home*)home;
 
 @end

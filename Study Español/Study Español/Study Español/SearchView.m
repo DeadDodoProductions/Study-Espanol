@@ -40,9 +40,10 @@
 //Create Interface
 -(void)CreateGUI
 {
+    //Getting Device and Orientation Information
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
     NSString *string = [Utilities GetDevice];
-    NSArray *sectionsArray;
+    NSArray *sectionsArray; //used to define the order each section is created and where it is located on screen
     
     WordTypeSection *wordTypeSection = [[WordTypeSection alloc]init];
     VerbTypeSection *verbTypeSection = [[VerbTypeSection alloc]init];
@@ -56,7 +57,7 @@
     {
         if (UIInterfaceOrientationIsPortrait(orientation))
         {
-            NSLog(@"iPad Portrait");
+            NSLog(@"Device: iPad Portrait");
             layout = 0;
             sectionsArray = [[NSArray alloc]initWithObjects:wordTypeSection, wordTagSection, conjugationTypeSection, verbTypeSection, miscSection, nil];
             [self setFrame:CGRectMake(startRect.origin.x, startRect.origin.y + 39, startRect.size.width, startRect.size.height - 87)];
@@ -64,7 +65,7 @@
         }
         else
         {
-            NSLog(@"iPad Landscape");
+            NSLog(@"Device: iPad Landscape");
             layout = 1;
             sectionsArray = [[NSArray alloc]initWithObjects:wordTypeSection, verbTypeSection, conjugationTypeSection, miscSection, wordTagSection, nil];
             [self setFrame:CGRectMake(startRect.origin.x, startRect.origin.y + 44, startRect.size.width, startRect.size.height - 90)];
@@ -73,7 +74,7 @@
     }
     else
     {
-        NSLog(@"iPhone");
+        NSLog(@"Device: iPhone");
         layout = 2;
         sectionsArray = [[NSArray alloc]initWithObjects:wordTypeSection, verbTypeSection, conjugationTypeSection, wordTagSection, miscSection, nil];
         [self GUIforiPhone:sectionsArray];
@@ -82,12 +83,15 @@
 }
 -(void)GUIforiPadPortrait:(NSArray*)sectionArray
 {
+    NSLog(@"Creating User Interface for iPad Portrait");
     int a = 0;
     for (int i = 0; i < 2; i++)
     {
+        NSLog(@"i: %d", i);
         float startPoint = 1;
         for (int j = 0; j < 3; j++)
         {
+            NSLog(@"j: %d", j);
             if (i == 0 && j == 2)
             {
                 break;
@@ -110,6 +114,7 @@
 }
 -(void)GUIforiPadLandscape:(NSArray*)sectionArray
 {
+    NSLog(@"Creating User Interface for iPad Landscape");
     int a = 0;
     for (int i = 0; i < 3; i++)
     {
@@ -136,6 +141,7 @@
 }
 -(void)GUIforiPhone:(NSArray*)sectionArray
 {
+    NSLog(@"Creating User Interface for iPhone/iPod");
     scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
     NSLog(@"ScrollView Height: %f", scrollView.frame.size.height);
     float startPoint = 0;
@@ -161,9 +167,13 @@
 
 ///User Interactions
 //Actions
+//Section objects inherit from NSObject not UIView they cannot be used to find the desired subview more easily
+//???I am not sure NewTag and RemoveTag are still needed???
 -(void)NewTag
 {
+    NSLog(@"Adding New Tag");
     UIView *aView;
+    //depending on the device and orientation the wanted section could be locatd at 3 different positions within its super view
     switch (layout)
     {
         case 0:
@@ -185,11 +195,14 @@
     [aView.subviews[6] reloadData];
     NSLog(@"New Tag: %@ -- %@", [[aView subviews][3] text], tags[tags.count - 1]);
     [[aView subviews][3] setText:@""];
+    //syncs master tags list with tags
     [Database GetInstance].tags = tags;
 }
 -(void)RemoveTag
 {
+    NSLog(@"Removing Tag");
     UIView *aView;
+    //depending on the device and orientation the wanted section could be locatd at 3 different positions within its super view
     switch (layout)
     {
         case 0:
@@ -209,11 +222,14 @@
     }
     UITableView *tagsTable = aView.subviews[6];
     [tagsTable setEditing:!tagsTable.editing];
+    //syncs master tags list with tags
     [Database GetInstance].tags = tags;
 }
 -(void)StepperPressed:(UIStepper*)stepper
 {
+    NSLog(@"Stepper Pressed: %f", stepper.value);
     [Database GetInstance].wordMax = (int)stepper.value;
+    //displays value in a the UILabel next to the stepper
     if (layout == 1)
     {
         [[[self subviews][3] subviews][8] setText:[NSString stringWithFormat:@"Number of Words: %d", [Database GetInstance].wordMax]];
@@ -229,10 +245,12 @@
 //Add Items to Table
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    //returns the amount of objects to be in the table
     return [tags count];
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"Creating Cell for Object: %ld", (long)indexPath.row);
     UITableViewCell *cell = [[UITableViewCell alloc]init];
     [[cell textLabel] setText:[NSString stringWithFormat:@"%@", tags[indexPath.row]]];
     return cell;
@@ -271,8 +289,10 @@
 
 
 ///TextView Delegate Functions
+//When a TextView loses focus this is called, and saves the inputted data
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
+    NSLog(@"TextView %@ Lost Focus", textView);
     switch (layout)
     {
         case 0:
