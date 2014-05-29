@@ -121,7 +121,7 @@
     }
     QuizAnswer *quizAnswer;
     quizAnswer = [self.storyboard instantiateViewControllerWithIdentifier:@"QuizAnswer"];
-    [quizAnswer SetArrays:words Answers:answers];
+    [quizAnswer SetArraysForVocab:words Answers:answers];
     [self presentViewController:quizAnswer animated:false completion:nil];
 }
 

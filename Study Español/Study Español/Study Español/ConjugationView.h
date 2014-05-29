@@ -15,6 +15,7 @@
 @property (nonatomic, readwrite) NSMutableArray *inputs;
 @property (nonatomic, readwrite) NSMutableArray *labels;
 @property (nonatomic, readwrite) UILabel *background;
+@property (nonatomic, readwrite) UILabel *titleLabel;
 - (id)initWithFrame:(CGRect)frame Title:(NSString*)title;
 
 @end

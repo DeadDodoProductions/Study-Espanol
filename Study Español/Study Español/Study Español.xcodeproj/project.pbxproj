@@ -15,7 +15,6 @@
 		204AA958190F74A0000A0D1F /* WordListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 204AA957190F74A0000A0D1F /* WordListCell.m */; };
 		204AA95B190F74B6000A0D1F /* QuizVocabCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 204AA95A190F74B6000A0D1F /* QuizVocabCell.m */; };
 		204AA95E190F74CA000A0D1F /* QuizAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 204AA95D190F74CA000A0D1F /* QuizAnswerCell.m */; };
-		20937AD7191F21D800260F82 /* Development Notes in Resources */ = {isa = PBXBuildFile; fileRef = 20937AD6191F21D800260F82 /* Development Notes */; };
 		209C38F618F1D13400DA6F78 /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 209C38F518F1D13400DA6F78 /* SearchView.m */; };
 		209C7A88192E9C1000C06E21 /* ConjugationWordViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 209C7A87192E9C1000C06E21 /* ConjugationWordViewCell.m */; };
 		209D625218EE661C00CA5EF0 /* Storyboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 209D625018EE661C00CA5EF0 /* Storyboard_iPad.storyboard */; };
@@ -84,7 +83,6 @@
 		204AA95A190F74B6000A0D1F /* QuizVocabCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuizVocabCell.m; sourceTree = "<group>"; };
 		204AA95C190F74CA000A0D1F /* QuizAnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuizAnswerCell.h; sourceTree = "<group>"; };
 		204AA95D190F74CA000A0D1F /* QuizAnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuizAnswerCell.m; sourceTree = "<group>"; };
-		20937AD6191F21D800260F82 /* Development Notes */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "Development Notes"; sourceTree = "<group>"; };
 		209C38F418F1D13400DA6F78 /* SearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
 		209C38F518F1D13400DA6F78 /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		209C7A86192E9C1000C06E21 /* ConjugationWordViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConjugationWordViewCell.h; sourceTree = "<group>"; };
@@ -254,7 +252,6 @@
 				20D9E25E18EA705500127FBA /* AppDelegate.m */,
 				20D9E26318EA705500127FBA /* Images.xcassets */,
 				20D9E25518EA705500127FBA /* Supporting Files */,
-				20937AD6191F21D800260F82 /* Development Notes */,
 			);
 			path = "Study Español";
 			sourceTree = "<group>";
@@ -443,7 +440,6 @@
 				20D9E26418EA705500127FBA /* Images.xcassets in Resources */,
 				209D625318EE661C00CA5EF0 /* Storyboard_iPhone.storyboard in Resources */,
 				209D625218EE661C00CA5EF0 /* Storyboard_iPad.storyboard in Resources */,
-				20937AD7191F21D800260F82 /* Development Notes in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

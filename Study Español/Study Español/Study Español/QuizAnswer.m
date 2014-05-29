@@ -47,27 +47,40 @@
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
--(void)SetArrays:(NSArray*)_words Answers:(NSArray*)_answers
+-(void)SetArraysForVocab:(NSArray*)_words Answers:(NSArray*)_answers
 {
     words = [[NSArray alloc]initWithArray:_words];
     answers = [[NSArray alloc]initWithArray:_answers];
+    total = [[[Database GetInstance] words] count];
 }
--(void)SetCellWidth
+-(void)SetArraysForConjugation:(NSArray*)_words Tense:(NSArray*)_tense Correct:(NSArray*)_correct Answers:(NSArray*)_answers Total:(int)_total
+{
+    words = [[NSArray alloc]initWithArray:_words];
+    answers = [[NSArray alloc]initWithArray:_answers];
+    tenses = [[NSArray alloc]initWithArray:_tense];
+    corrections = [[NSArray alloc]initWithArray:_correct];
+    total = _total;
+}
+-(void)SetCellSize
 {
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
     NSString *string = [Utilities GetDevice];
-    float width;
+    int height = 40;
+    if (tenses != 0)
+    {
+        height = 60;
+    }
     if ([string isEqualToString:@"iPad"])
     {
         if (UIInterfaceOrientationIsPortrait(orientation))
         {
             NSLog(@"iPad Portrait");
-            width = roundf((contentWidth - 4) * .498);
+            [flow setItemSize:CGSizeMake((contentWidth - 4) * .498, height)];
         }
         else
         {
             NSLog(@"iPad Landscape");
-            width = roundf((contentWidth - 4) * .331);
+            [flow setItemSize:CGSizeMake((contentWidth - 4) * .332, height)];
         }
     }
     else
@@ -75,28 +88,26 @@
         if (UIInterfaceOrientationIsPortrait(orientation))
         {
             NSLog(@"iPhone Portrait");
-            width = roundf((contentWidth - 4));
+            [flow setItemSize:CGSizeMake(contentWidth - 4, height)];
         }
         else
         {
             NSLog(@"iPhone Landscape");
-            width = roundf((contentWidth - 4) * .497);
+            [flow setItemSize:CGSizeMake((contentWidth - 4) * .497, height)];
         }
     }
-    [flow setItemSize:CGSizeMake(width, 40)];
-    NSLog(@"Cell Width: %f", [flow itemSize].width);
 }
 
 
 ///User Interface
 -(void)CreateGUI
 {
-    int correct = [[[Database GetInstance] words] count] - [answers count];
-    int percentage = (int)(100 * (correct / [[[Database GetInstance] words] count]));
+    int correct = total - [answers count];
+    int percentage = (int)(100 * (correct / total));
     int headerHeight = contentHeight * .05;
     
     UILabel *headerLabel1 = [[UILabel alloc]initWithFrame:CGRectMake(0, 0, (contentWidth * .5) - 5, headerHeight)];
-    [headerLabel1 setText:[NSString stringWithFormat:@"%d / %lu", correct, (unsigned long)[[[Database GetInstance] words] count]]];
+    [headerLabel1 setText:[NSString stringWithFormat:@"%d / %d", correct, total]];
     [headerLabel1 setTextAlignment:NSTextAlignmentRight];
     [content addSubview:headerLabel1];
     
@@ -108,7 +119,7 @@
     flow = [[UICollectionViewFlowLayout alloc]init];
     [flow setMinimumInteritemSpacing:2.0f];
     [flow setMinimumLineSpacing:2.0f];
-    [self SetCellWidth];
+    [self SetCellSize];
     
     wordCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(2, headerHeight + 2, contentWidth - 4, contentHeight - (headerHeight + 4)) collectionViewLayout:flow];
     [wordCollectionView setDelegate:self];
@@ -162,17 +173,21 @@
 {
     QuizAnswerCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:@"QuizAnswerCell" forIndexPath:indexPath];
     [cell setBackgroundColor:[UIColor grayColor]];
-    if ([[[Database GetInstance] translate] isEqualToNumber:[NSNumber numberWithInt:0]])
+    if ([tenses count] == 0)
     {
-        [[cell word] setText:[words[indexPath.row] spanish]];
-        [[cell correction] setText:[words[indexPath.row] english]];
+        if ([[[Database GetInstance] translate] isEqualToNumber:[NSNumber numberWithInt:0]])
+        {
+            [cell CreateCell:[words[indexPath.row] spanish] Answer:answers[indexPath.row] Correction:[words[indexPath.row] english]];
+        }
+        else
+        {
+            [cell CreateCell:[words[indexPath.row] english] Answer:answers[indexPath.row] Correction:[words[indexPath.row] spanish]];
+        }
     }
     else
     {
-        [[cell word] setText:[words[indexPath.row] english]];
-        [[cell correction] setText:[words[indexPath.row] spanish]];
+        [cell CreateCell:words[indexPath.row] Tense:tenses[indexPath.row] Answer:answers[indexPath.row] Correction:corrections[indexPath.row]];
     }
-    [[cell answer] setText:answers[indexPath.row]];
     return cell;
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath

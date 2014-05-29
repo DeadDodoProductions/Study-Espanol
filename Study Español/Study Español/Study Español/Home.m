@@ -212,7 +212,7 @@
     {
         case 1:
             NSLog(@"%@", [Database GetInstance].quizType);
-            if ([[Database GetInstance].quizType isEqualToNumber:[NSNumber numberWithInt:1]])
+            if ([[[Database GetInstance] quizType] isEqualToNumber:[NSNumber numberWithInt:1]])
             {
                 quizCon = [self.storyboard instantiateViewControllerWithIdentifier:@"QuizConjugation"];
                 [self presentViewController:quizCon animated:false completion:nil];

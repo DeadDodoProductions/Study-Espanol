@@ -274,7 +274,6 @@ static Database *instance = nil;
     wordMax = 0;
     wordType = nil;
     wordString = @"";
-    quizType = nil;
     translate = [NSNumber numberWithInt:0];
     verbEnding = nil;
     verbRegular = nil;
@@ -284,7 +283,6 @@ static Database *instance = nil;
     spanish = nil;
     pronunciation = nil;
     definition = nil;
-    conjugationType.removeAllObjects;
     tags = [[NSArray alloc]init];
 }
 

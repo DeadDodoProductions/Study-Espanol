@@ -11,12 +11,16 @@
 
 @interface QuizAnswer : BaseView <ViewWordDelagate>
 {
+    int total;
     NSArray *words;
     NSArray *answers;
+    NSArray *tenses;
+    NSArray *corrections;
     UICollectionView *wordCollectionView;
     UICollectionViewFlowLayout *flow;
     ViewWord *viewWord;
 }
--(void)SetArrays:(NSArray*)_words Answers:(NSArray*)_answers;
+-(void)SetArraysForVocab:(NSArray*)_words Answers:(NSArray*)_answers;
+-(void)SetArraysForConjugation:(NSArray*)_words Tense:(NSArray*)_tense Correct:(NSArray*)_correct Answers:(NSArray*)_answers Total:(int)_total;
 
 @end

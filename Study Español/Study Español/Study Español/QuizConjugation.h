@@ -8,11 +8,15 @@
 
 #import "BaseView.h"
 
-@interface QuizConjugation : BaseView
+@interface QuizConjugation : BaseView <UITextViewDelegate>
 {
-    int currentConjugation;
-    NSMutableArray *answers;
-    NSMutableArray *words;
+    int wordNumber; //used to determine the currently active word
+    int total; //holds the total amount of possible answers
+    NSMutableArray *answers; //holds the data entered by the user
+    NSMutableArray *words; //holds the correct answers
+    NSMutableArray *tenses; //holds strings of each possible conjugation tense
+    UILabel *wordLabel; //signifies the word being conjugated
+    ConjugationView *conjugationView; //subview displaying the input fields
 }
 
 @end

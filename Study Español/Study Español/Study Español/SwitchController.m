@@ -143,6 +143,11 @@ static SwitchController *instance = nil;
             
         case 4:
             NSLog(@"Section: ConjugationType");
+            if ([[Database GetInstance] conjugationType] == nil)
+            {
+                NSLog(@"Nil");
+                [Database GetInstance].conjugationType = [[NSMutableArray alloc]init];
+            }
             if ([aSwitch isOn])
             {
                 [[[Database GetInstance] conjugationType] addObject:aSwitch.value];
@@ -157,6 +162,7 @@ static SwitchController *instance = nil;
                     }
                 }
             }
+            NSLog(@"Size: %lu", (unsigned long)[[[Database GetInstance]conjugationType] count]);
             break;
             
         case 5:
