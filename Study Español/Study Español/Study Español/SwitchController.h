@@ -21,5 +21,6 @@
 @property (nonatomic, readwrite) NSMutableArray *tSwitches;
 @property (nonatomic, readwrite) NSMutableArray *gSwitches;
 +(SwitchController*)GetInstance;
+-(void)TurnOffAll;
 
 @end

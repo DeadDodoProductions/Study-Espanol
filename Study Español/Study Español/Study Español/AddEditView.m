@@ -24,6 +24,7 @@
 #import "Conjugation.h"
 
 #import "Button.h"
+#import "SwitchController.h"
 
 #import "Database.h"
 #import "Utilities.h"
@@ -247,42 +248,7 @@
     [[[content subviews][0] subviews][7] setText:@""];
     [tags removeAllObjects];
     [[[content subviews][1] subviews][4] reloadData];
-    for (int i = 0; i < [[[content subviews][2] subviews] count] - 1; i++)
-    {
-        @try {
-            [[[content subviews][2] subviews][i] setOn:false animated:true];
-        }
-        @catch (NSException *exception) {
-            
-        }
-        @finally {
-            
-        }
-    }
-    for (int i = 0; i < [[[content subviews][3] subviews] count] - 1 ; i++)
-    {
-        @try {
-            [[[content subviews][3] subviews][i] setOn:false animated:true];
-        }
-        @catch (NSException *exception) {
-            
-        }
-        @finally {
-            
-        }
-    }
-    for (int i = 0; i < [[[content subviews][4] subviews] count] - 2 ; i++)
-    {
-        @try {
-            [[[content subviews][4] subviews][i] setOn:false animated:true];
-        }
-        @catch (NSException *exception) {
-            
-        }
-        @finally {
-            
-        }
-    }
+    [[SwitchController GetInstance] TurnOffAll];
     for (int i = 0; i < 8; i++)
     {
         [[[[content subviews][5] subviews][i] inputs][0] setText:@""];

@@ -134,6 +134,7 @@
     [infoLable setBackgroundColor:[UIColor grayColor]];
     [self addSubview:infoLable];
     UILabel *wordInfo = [[UILabel alloc]initWithFrame:CGRectMake(80, y, self.frame.size.width - 90, 25)];
+    [wordInfo setBackgroundColor:[UIColor grayColor]];
     if ([[word wordType] isEqualToNumber:[NSNumber numberWithInt:1]])
     {
         NSArray *verbEnding = [[NSArray alloc]initWithObjects:@"AR", @"ER", @"IR", nil];
@@ -148,8 +149,11 @@
         NSLog(@"%d", b);
         [infoLable setText:@"Verb Type: "];
         [wordInfo setText:[NSString stringWithFormat:@"%@, %@", verbEnding[a], verbReg[b]]];
+        [self addSubview:wordInfo];
+        y = y + 25;
     }
-    else
+    //changed to else if in order to avoid creating it for a number
+    else if (![[word wordType] isEqualToNumber:[NSNumber numberWithInt:7]])
     {
         NSString *genderString = [[NSString alloc]init];
         if ([[word gender] isEqualToNumber:[NSNumber numberWithInt:0]])
@@ -163,10 +167,9 @@
             [wordInfo setText:[NSString stringWithFormat:@"%@", genderString]];
         }
         [infoLable setText:@"Gender: "];
+        [self addSubview:wordInfo];
+        y = y + 25;
     }
-    [wordInfo setBackgroundColor:[UIColor grayColor]];
-    [self addSubview:wordInfo];
-    y = y + 25;
     
     UILabel *tagLable = [[UILabel alloc]initWithFrame:CGRectMake(5, y, 50, 25)];
     [tagLable setText:@"Tags: "];

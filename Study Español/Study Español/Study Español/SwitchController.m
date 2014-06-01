@@ -243,4 +243,42 @@ static SwitchController *instance = nil;
     }
 }
 
+-(void)TurnOffAll
+{
+    for (Switch *a in wtSwitches)
+    {
+        [a setOn:false animated:true];
+    }
+    
+    for (Switch *a in veSwitches)
+    {
+        [a setOn:false animated:true];
+    }
+    
+    for (Switch *a in vrSwitches)
+    {
+        [a setOn:false animated:true];
+    }
+    
+    for (Switch *a in ctSwitches)
+    {
+        [a setOn:false animated:true];
+    }
+    
+    for (Switch *a in qSwitches)
+    {
+        [a setOn:false animated:true];
+    }
+    
+    for (Switch *a in tSwitches)
+    {
+        [a setOn:false animated:true];
+    }
+    
+    for (Switch *a in gSwitches)
+    {
+        [a setOn:false animated:true];
+    }
+}
+
 @end

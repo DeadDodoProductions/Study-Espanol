@@ -157,18 +157,21 @@
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
-    NSLog(@"Hello World");
+    NSLog(@"Word Selected: %ld", (long)indexPath.row);
     Word *word = [Database GetInstance].words[indexPath.row];
     [[Database GetInstance] setActiveWord:word];
+    NSLog(@"Active Word: %@", [[[Database GetInstance] activeWord] english]);
     int x = [[collectionView subviews][indexPath.row] frame].origin.x;
     int y = [[collectionView subviews][indexPath.row] frame].origin.y;
     int h = [[collectionView subviews][indexPath.row] frame].size.height;
+    NSLog(@"ViewWord Frame: X: %d Y: %d", x, y);
     [viewWord setFrame:CGRectMake(x + 2, y + h, flow.itemSize.width, 0)];
     [viewWord SetDelegate:self];
     [viewWord CreateWordView:word];
     
     [super SetActionButton:1 Title:@"Edit"];
     [super SetActionButton:2 Title:@"Delete"];
+    NSLog(@"Word View Created");
 }
 -(void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
 {
