@@ -42,11 +42,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Study Espan&#x303;ol/AddEditView.m"
-            timestampString = "423868902.577007"
+            timestampString = "423876081.872482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "263"
-            endingLineNumber = "263"
+            startingLineNumber = "277"
+            endingLineNumber = "277"
             landmarkName = "-RetrieveInfoAndSave"
             landmarkType = "5">
          </BreakpointContent>
@@ -90,11 +90,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Study Espan&#x303;ol/AddEditView.m"
-            timestampString = "423868902.577007"
+            timestampString = "423876081.872482"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "334"
-            endingLineNumber = "334"
+            startingLineNumber = "348"
+            endingLineNumber = "348"
             landmarkName = "-RemoveTag"
             landmarkType = "5">
          </BreakpointContent>
@@ -142,22 +142,6 @@
             startingLineNumber = "174"
             endingLineNumber = "174"
             landmarkName = "-collectionView:cellForItemAtIndexPath:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Study Espan&#x303;ol/AddEditView.m"
-            timestampString = "423867007.242712"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "69"
-            endingLineNumber = "69"
-            landmarkName = "-CreateGUI"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
@@ -366,22 +350,6 @@
             startingLineNumber = "21"
             endingLineNumber = "21"
             landmarkName = "-initAddEditWithFrame:ParentView:Layout:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "No"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "Study Espan&#x303;ol/AddEditView.m"
-            timestampString = "423868902.577007"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "294"
-            endingLineNumber = "294"
-            landmarkName = "-tableView:numberOfRowsInSection:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
