@@ -12,11 +12,11 @@
 
 #import "TextView.h"
 
-#import "WordTypeSection.h"
-#import "VerbTypeSection.h"
-#import "WordTagSection.h"
-#import "ConjugationTypeSection.h"
-#import "MiscSection.h"
+#import "WordTypeSectionView.h"
+#import "VerbTypeSectionView.h"
+#import "WordTagSectionView.h"
+#import "ConjugationTypeSectionView.h"
+#import "MiscSectionView.h"
 
 #import "Button.h"
 
@@ -45,11 +45,11 @@
     NSString *string = [Utilities GetDevice];
     NSArray *sectionsArray; //used to define the order each section is created and where it is located on screen
     
-    WordTypeSection *wordTypeSection = [[WordTypeSection alloc]init];
-    VerbTypeSection *verbTypeSection = [[VerbTypeSection alloc]init];
-    WordTagSection *wordTagSection = [[WordTagSection alloc]init];
-    ConjugationTypeSection *conjugationTypeSection = [[ConjugationTypeSection alloc]init];
-    MiscSection *miscSection = [[MiscSection alloc]init];
+    WordTypeSectionView *wordTypeSection = [[WordTypeSectionView alloc]init];
+    //wordTypeSection *wordTypeSection = [[VerbTypeSectionView alloc]init];
+    //WordTagSection *wordTypeSection = [[WordTagSectionView alloc]init];
+    ConjugationTypeSectionView *conjugationTypeSection = [[ConjugationTypeSectionView alloc]init];
+    //MiscSection *miscSection = [[MiscSection alloc]init];
     tags = [[NSMutableArray alloc]init];
     startRect = self.frame;
     
@@ -59,7 +59,7 @@
         {
             NSLog(@"Device: iPad Portrait");
             layout = 0;
-            sectionsArray = [[NSArray alloc]initWithObjects:wordTypeSection, wordTagSection, conjugationTypeSection, verbTypeSection, miscSection, nil];
+            //sectionsArray = [[NSArray alloc]initWithObjects:wordTypeSection, wordTagSection, conjugationTypeSection, verbTypeSection, miscSection, nil];
             [self setFrame:CGRectMake(startRect.origin.x, startRect.origin.y + 39, startRect.size.width, startRect.size.height - 87)];
             [self GUIforiPadPortrait:sectionsArray];
         }
@@ -67,7 +67,7 @@
         {
             NSLog(@"Device: iPad Landscape");
             layout = 1;
-            sectionsArray = [[NSArray alloc]initWithObjects:wordTypeSection, verbTypeSection, conjugationTypeSection, miscSection, wordTagSection, nil];
+            //sectionsArray = [[NSArray alloc]initWithObjects:wordTypeSection, verbTypeSection, conjugationTypeSection, miscSection, wordTagSection, nil];
             [self setFrame:CGRectMake(startRect.origin.x, startRect.origin.y + 44, startRect.size.width, startRect.size.height - 90)];
             [self GUIforiPadLandscape:sectionsArray];
         }
@@ -76,7 +76,7 @@
     {
         NSLog(@"Device: iPhone");
         layout = 2;
-        sectionsArray = [[NSArray alloc]initWithObjects:wordTypeSection, verbTypeSection, conjugationTypeSection, wordTagSection, miscSection, nil];
+        //sectionsArray = [[NSArray alloc]initWithObjects:wordTypeSection, verbTypeSection, conjugationTypeSection, wordTagSection, miscSection, nil];
         [self GUIforiPhone:sectionsArray];
     }
     NSLog(@"Search View Created");
@@ -98,7 +98,7 @@
             }
             UIView *newView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width * .5 - 2, 0)];
             
-            [sectionArray[a] CreateSearchSection:newView SuperView:self Layout:layout];
+            //[sectionArray[a] CreateSearchSection:newView SuperView:self Layout:layout];
             float viewHeight = [newView.subviews[newView.subviews.count - 1] frame].origin.y + [newView.subviews[newView.subviews.count - 1] frame].size.height + 5;
             
             [newView setFrame:CGRectMake(1 + (i * (self.frame.size.width * .5)), startPoint, self.frame.size.width * .5 - 2, viewHeight)];
@@ -125,7 +125,7 @@
             {
                 UIView *newView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width * .3334 - 2, 0)];
             
-                [sectionArray[a] CreateSearchSection:newView SuperView:self Layout:layout];
+                //[sectionArray[a] CreateSearchSection:newView SuperView:self Layout:layout];
                 float viewHeight = [newView.subviews[newView.subviews.count - 1] frame].origin.y + [newView.subviews[newView.subviews.count - 1] frame].size.height + 5;
             
                 [newView setFrame:CGRectMake(1 + ((self.frame.size.width * .3334) * i), startPoint, self.frame.size.width * .3334 - 2, viewHeight)];
@@ -149,7 +149,7 @@
     {
         UIView *newView = [[UIView alloc] initWithFrame:CGRectMake(0, startPoint, self.frame.size.width, 0)];
         
-        [sectionArray[i] CreateSearchSection:newView SuperView:self Layout:layout];
+        //[sectionArray[i] CreateSearchSection:newView SuperView:self Layout:layout];
         
         float viewHeight = [newView.subviews[newView.subviews.count - 1] frame].origin.y + [newView.subviews[newView.subviews.count - 1] frame].size.height + 5;
         [newView setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:1]];
@@ -293,23 +293,7 @@
 - (void)textViewDidEndEditing:(UITextView *)textView
 {
     NSLog(@"TextView %@ Lost Focus", textView);
-    switch (layout)
-    {
-        case 0:
-            [Database GetInstance].wordString = [[[self subviews][1] subviews][1] text];
-            break;
-            
-        case 1:
-            [Database GetInstance].wordString = [[[self subviews][4] subviews][1] text];
-            break;
-            
-        case 2:
-            [Database GetInstance].wordString = [[[self subviews][3] subviews][1] text];
-            break;
-            
-        default:
-            break;
-    }
+    [Database GetInstance].wordString = textView.text;
     NSLog(@"Word String: %@", [Database GetInstance].wordString);
 }
 

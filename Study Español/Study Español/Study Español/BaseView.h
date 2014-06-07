@@ -26,8 +26,12 @@
     int contentWidth;
     int contentHeight;
     int layout;
+    
+    @public
+    id superID;
 }
 -(void)HeaderButtonPressed:(Button*)button;
 -(void)SetActionButton:(int)button Title:(NSString*)title;
++(void)SetTextViewPosition:(CGPoint)textviewPosition;
 
 @end

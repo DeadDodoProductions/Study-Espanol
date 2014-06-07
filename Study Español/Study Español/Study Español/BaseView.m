@@ -30,12 +30,14 @@
 @end
 
 @implementation BaseView
+static CGPoint position;
 ///Initialization
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
     if (self) {
         // Custom initialization
+        superID = self;
     }
     return self;
 }
@@ -192,7 +194,7 @@
     //keyboard rect does not take into consideration the landscape view
     CGRect keyboardRect = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey]CGRectValue];
     //this is the location of the textfield
-    CGPoint aLocation; //still needs defined
+    CGPoint aLocation = position; //still needs defined
     //this creates an adjusted rect of the content view to take into consideration the position of the keyboard
     CGRect aRect = CGRectMake(0, 0, content.frame.size.width, content.frame.size.height - keyboardRect.size.width);
     //determines if the textfield is hidden by the keyboard then moves the content up
@@ -206,6 +208,10 @@
 {
     NSLog(@"Keyboard Off View");
     [content setContentOffset:CGPointZero animated:true];
+}
++(void)SetTextViewPosition:(CGPoint)textviewPosition
+{
+    position = textviewPosition;
 }
 
 

@@ -8,16 +8,17 @@
 //  Allows the user to add new words or edit previous words
 
 #import "AddEditView.h"
+#import "BaseView.h"
 
 #import "TextView.h"
 #import "ConjugationView.h"
 
-#import "WordTypeSection.h"
-#import "VerbTypeSection.h"
-#import "WordTagSection.h"
-#import "ConjugationTypeSection.h"
-#import "WordSection.h"
-#import "MiscSection.h"
+#import "WordTypeSectionView.h"
+#import "VerbTypeSectionView.h"
+#import "WordTagSectionView.h"
+#import "ConjugationTypeSectionView.h"
+#import "WordSectionView.h"
+#import "MiscSectionView.h"
 
 #import "Word.h"
 #import "Tag.h"
@@ -68,12 +69,6 @@
     NSLog(@"Creating GUI for Add/Edit View");
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
     NSString *string = [Utilities GetDevice];
-    WordTypeSection *wordTypeSection = [[WordTypeSection alloc]init];
-    VerbTypeSection *verbTypeSection = [[VerbTypeSection alloc]init];
-    WordTagSection *tagSection = [[WordTagSection alloc]init];
-    WordSection *wordSection = [[WordSection alloc]init];
-    MiscSection *genderSection = [[MiscSection alloc]init];
-    ConjugationTypeSection *conjugationSection = [[ConjugationTypeSection alloc]init];
     NSArray *sectionsArray;
     
     if ([string isEqualToString:@"iPad"])
@@ -82,14 +77,14 @@
         {
             NSLog(@"iPad Portrait");
             layout = 0;
-            sectionsArray = [[NSArray alloc]initWithObjects:wordSection, tagSection, wordTypeSection, verbTypeSection, genderSection, conjugationSection, nil];
+            //sectionsArray = [[NSArray alloc]initWithObjects:wordSection, tagSection, wordTypeSection, verbTypeSection, genderSection, conjugationSection, nil];
             [self GUIforiPadPortrait:sectionsArray];
         }
         else
         {
             NSLog(@"iPad Landscape");
             layout = 1;
-            sectionsArray = [[NSArray alloc]initWithObjects:wordSection, tagSection, wordTypeSection, verbTypeSection, genderSection, conjugationSection, nil];
+            //sectionsArray = [[NSArray alloc]initWithObjects:wordSection, tagSection, wordTypeSection, verbTypeSection, genderSection, conjugationSection, nil];
             [self GUIforiPadLandscape:sectionsArray];
         }
     }
@@ -97,7 +92,7 @@
     {
         NSLog(@"iPhone");
         layout = 2;
-        sectionsArray = [[NSArray alloc]initWithObjects:wordSection, tagSection, wordTypeSection, verbTypeSection, genderSection, conjugationSection, nil];
+        //sectionsArray = [[NSArray alloc]initWithObjects:wordSection, tagSection, wordTypeSection, verbTypeSection, genderSection, conjugationSection, nil];
         [self GUIforiPhone:sectionsArray];
     }
     
@@ -113,34 +108,41 @@
 //if IPad in Portrait
 -(void)GUIforiPadPortrait:(NSArray*)sectionArray
 {
-    int a = 2;
-    int b = 0;
-    int startingPoint = 2;
-    for (int i = 0; i < 2; i++)
-    {
-        startingPoint = 2;
-        for (int j = 0; j < a; j++)
-        {
-            UIView *newView = [[UIView alloc]initWithFrame:CGRectMake(2, 2, contentWidth * .5, contentHeight)];
-            [newView setBackgroundColor:[UIColor grayColor]];
-            [sectionArray[b] CreateAddEditSection:newView SuperView:self Layout:layout];
-            [newView setFrame:CGRectMake(2 + (((contentWidth - 3) * .5) * i) + (i * 1), startingPoint, ((contentWidth - 3) * .5) - 1 -  + (i * 1), [newView.subviews[newView.subviews.count -1] frame].origin.y + [newView.subviews[newView.subviews.count -1] frame].size.height + 5)];
-            [content addSubview:newView];
-            startingPoint = [content.subviews[content.subviews.count -1] frame].origin.y + [content.subviews[content.subviews.count -1] frame].size.height + 2;
-            b++;
-        }
-        a++;
-    }
-    UIScrollView *newView = [[UIScrollView alloc]initWithFrame:CGRectMake(2, startingPoint, contentWidth - 4, contentHeight - startingPoint - 2)];
-    [newView setBackgroundColor:[UIColor grayColor]];
-    [sectionArray[5] CreateAddEditSection:newView SuperView:self Layout:layout];
-    [newView setContentSize:CGSizeMake(newView.frame.size.width, [newView.subviews[newView.subviews.count - 1] frame].origin.y + [newView.subviews[newView.subviews.count - 1] frame].size.height + 2)];
-    [content addSubview:newView];
+    int startingY = 2;
+    WordSectionView *wordSectionView = [[WordSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self.view Layout:layout];
+    [wordSectionView setBackgroundColor:[UIColor grayColor]];
+    [content addSubview:wordSectionView];
+    startingY = wordSectionView.frame.origin.y + wordSectionView.frame.size.height + 2;
+    
+    WordTagSectionView *wordTagSectionView = [[WordTagSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self Layout:layout];
+    [wordTagSectionView setBackgroundColor:[UIColor grayColor]];
+    [content addSubview:wordTagSectionView];
+    startingY = 2;
+    
+    WordTypeSectionView *wordTypeSectionView = [[WordTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2 + (contentWidth * .5), startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self.view Layout:layout];
+    [wordTypeSectionView setBackgroundColor:[UIColor grayColor]];
+    [content addSubview:wordTypeSectionView];
+    startingY = wordTypeSectionView.frame.origin.y + wordTypeSectionView.frame.size.height + 2;
+    
+    VerbTypeSectionView *verbTypeSectionView = [[VerbTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2 + (contentWidth * .5), startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self.view Layout:layout];
+    [verbTypeSectionView setBackgroundColor:[UIColor grayColor]];
+    [content addSubview:verbTypeSectionView];
+    startingY = verbTypeSectionView.frame.origin.y + verbTypeSectionView.frame.size.height + 2;
+    
+    MiscSectionView *miscSectionView = [[MiscSectionView alloc]initAddEditWithFrame:CGRectMake(2 + (contentWidth * .5), startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self.view Layout:layout];
+    [miscSectionView setBackgroundColor:[UIColor grayColor]];
+    [content addSubview:miscSectionView];
+    startingY = miscSectionView.frame.origin.y + miscSectionView.frame.size.height + 2;
+
+    ConjugationTypeSectionView *conjugationTypeSectionView = [[ConjugationTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, contentWidth - 4, contentHeight * .26) ParentView:self.view Layout:layout];
+    [conjugationTypeSectionView setBackgroundColor:[UIColor grayColor]];
+    [conjugationTypeSectionView setContentSize:CGSizeMake(conjugationTypeSectionView.frame.size.width, [conjugationTypeSectionView.subviews[conjugationTypeSectionView.subviews.count - 1] frame].origin.y + [conjugationTypeSectionView.subviews[conjugationTypeSectionView.subviews.count - 1] frame].size.height + 2)];
+    [content addSubview:conjugationTypeSectionView];
 }
 //if IPad in Landscape
 -(void)GUIforiPadLandscape:(NSArray*)sectionArray
 {
-    int a = 2;
+    /*int a = 2;
     int b = 0;
     for (int i = 0; i < 2; i++)
     {
@@ -162,11 +164,35 @@
     [sectionArray[5] CreateAddEditSection:newView SuperView:self Layout:layout];
     [newView setContentSize:CGSizeMake(newView.frame.size.width, [newView.subviews[newView.subviews.count - 1] frame].origin.y + [newView.subviews[newView.subviews.count - 1] frame].size.height + 2)];
     [content addSubview:newView];
+    
+    WordSectionView *wordSectionView = [[WordSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self Layout:layout];
+    [content addSubview:wordSectionView];
+    startingY = wordSectionView.frame.origin.y - wordSectionView.frame.size.height + 2;
+    
+    WordTagSectionView *wordTagSectionView = [[WordTagSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self Layout:layout];
+    [content addSubview:wordTagSectionView];
+    startingY = wordSectionView.frame.origin.y - wordSectionView.frame.size.height + 2;
+    
+    WordTypeSectionView *wordTypeSectionView = [[WordTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self Layout:layout];
+    [content addSubview:wordTypeSectionView];
+    startingY = wordSectionView.frame.origin.y - wordSectionView.frame.size.height + 2;
+    
+    VerbTypeSectionView *verbTypeSectionView = [[VerbTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self Layout:layout];
+    [content addSubview:verbTypeSectionView];
+    startingY = wordSectionView.frame.origin.y - wordSectionView.frame.size.height + 2;
+    
+    MiscSectionView *miscSectionView = [[MiscSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self Layout:layout];
+    [content addSubview:miscSectionView];
+    startingY = wordSectionView.frame.origin.y - wordSectionView.frame.size.height + 2;
+    
+    ConjugationTypeSectionView *conjugationTypeSectionView = [[ConjugationTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self Layout:layout];
+    [conjugationTypeSectionView setContentSize:CGSizeMake(conjugationTypeSectionView.frame.size.width, [conjugationTypeSectionView.subviews[conjugationTypeSectionView.subviews.count - 1] frame].origin.y + [conjugationTypeSectionView.subviews[conjugationTypeSectionView.subviews.count - 1] frame].size.height + 2)];
+    [content addSubview:conjugationTypeSectionView];*/
 }
 //if IPhone in Portrait
 -(void)GUIforiPhone:(NSArray*)sectionArray
 {
-    UIScrollView *scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, contentWidth, contentHeight)];
+    /*UIScrollView *scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, contentWidth, contentHeight)];
     int startingPoint = 2;
     for (int i = 0; i < 5; i++)
     {
@@ -185,7 +211,7 @@
     startingPoint = [scrollView.subviews[scrollView.subviews.count -1] frame].origin.y + [scrollView.subviews[scrollView.subviews.count -1] frame].size.height + 2;
     [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, startingPoint)];
     NSLog(@"Scroll Content Size: %f", scrollView.contentSize.height);
-    [content addSubview:scrollView];
+    [content addSubview:scrollView];*/
 }
 
 
@@ -265,6 +291,7 @@
 //Add Items to the Table View
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    NSLog(@"AddEditView: TableViewNumberOfRowsInSection: Tags Count: %l", [tags count]);
     return [tags count];
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -309,5 +336,8 @@
     [tagsTable setEditing:!tagsTable.editing];
 }
 
-
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    [BaseView SetTextViewPosition:CGPointMake(textView.frame.origin.x + content.frame.origin.x, textView.frame.origin.y + content.frame.origin.y)];
+}
 @end

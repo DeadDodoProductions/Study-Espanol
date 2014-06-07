@@ -164,7 +164,7 @@
     
     //Creates the ConjugationView displaying the input fields
     //located at the center of the device
-    conjugationView = [[ConjugationView alloc]initWithFrame:CGRectMake(conjugationX, conjugationY, conjugationWidth, conjugationHeight) Title:[words[0] tense]];
+    conjugationView = [[ConjugationView alloc]initWithFrame:CGRectMake(conjugationX, conjugationY, conjugationWidth, conjugationHeight) Title:[words[0] tense] ParentViewFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, 0, 0)];
     [[conjugationView background] setBackgroundColor:[UIColor grayColor]];
     [content addSubview:conjugationView];
     

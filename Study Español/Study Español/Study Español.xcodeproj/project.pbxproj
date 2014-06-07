@@ -7,11 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2031F25519047F6800305A46 /* WordTypeSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2031F25419047F6800305A46 /* WordTypeSection.m */; };
-		2031F25819047F8200305A46 /* VerbTypeSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2031F25719047F8200305A46 /* VerbTypeSection.m */; };
-		2031F25B19047F9200305A46 /* ConjugationTypeSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2031F25A19047F9200305A46 /* ConjugationTypeSection.m */; };
-		2031F25E19047FA100305A46 /* WordTagSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2031F25D19047FA100305A46 /* WordTagSection.m */; };
-		2031F26119047FAE00305A46 /* MiscSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 2031F26019047FAE00305A46 /* MiscSection.m */; };
 		204AA958190F74A0000A0D1F /* WordListCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 204AA957190F74A0000A0D1F /* WordListCell.m */; };
 		204AA95B190F74B6000A0D1F /* QuizVocabCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 204AA95A190F74B6000A0D1F /* QuizVocabCell.m */; };
 		204AA95E190F74CA000A0D1F /* QuizAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 204AA95D190F74CA000A0D1F /* QuizAnswerCell.m */; };
@@ -20,7 +15,6 @@
 		209D625218EE661C00CA5EF0 /* Storyboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 209D625018EE661C00CA5EF0 /* Storyboard_iPad.storyboard */; };
 		209D625318EE661C00CA5EF0 /* Storyboard_iPhone.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 209D625118EE661C00CA5EF0 /* Storyboard_iPhone.storyboard */; };
 		20A2324B19299F01007819F4 /* SwitchController.m in Sources */ = {isa = PBXBuildFile; fileRef = 20A2324A19299F01007819F4 /* SwitchController.m */; };
-		20D1DD57190625F90095E575 /* WordSection.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D1DD56190625F90095E575 /* WordSection.m */; };
 		20D9E24D18EA705500127FBA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20D9E24C18EA705500127FBA /* Foundation.framework */; };
 		20D9E24F18EA705500127FBA /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20D9E24E18EA705500127FBA /* CoreGraphics.framework */; };
 		20D9E25118EA705500127FBA /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 20D9E25018EA705500127FBA /* UIKit.framework */; };
@@ -54,6 +48,12 @@
 		20D9E2DA18EA775E00127FBA /* QuizAnswer.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D9E2D918EA775E00127FBA /* QuizAnswer.m */; };
 		20D9E2DD18EA776A00127FBA /* FlashCards.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D9E2DC18EA776A00127FBA /* FlashCards.m */; };
 		20D9E2E018EA833200127FBA /* TextView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20D9E2DF18EA833200127FBA /* TextView.m */; };
+		20FE9505194291880019F28F /* WordSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FE9504194291880019F28F /* WordSectionView.m */; };
+		20FE950B194293770019F28F /* WordTagSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FE950A194293770019F28F /* WordTagSectionView.m */; };
+		20FE950E194293900019F28F /* ConjugationTypeSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FE950D194293900019F28F /* ConjugationTypeSectionView.m */; };
+		20FE9511194293A20019F28F /* VerbTypeSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FE9510194293A20019F28F /* VerbTypeSectionView.m */; };
+		20FE9514194293B20019F28F /* WordTypeSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FE9513194293B20019F28F /* WordTypeSectionView.m */; };
+		20FE951D1942967B0019F28F /* MiscSectionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 20FE951C1942967B0019F28F /* MiscSectionView.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,16 +67,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2031F25319047F6800305A46 /* WordTypeSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordTypeSection.h; sourceTree = "<group>"; };
-		2031F25419047F6800305A46 /* WordTypeSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordTypeSection.m; sourceTree = "<group>"; };
-		2031F25619047F8200305A46 /* VerbTypeSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerbTypeSection.h; sourceTree = "<group>"; };
-		2031F25719047F8200305A46 /* VerbTypeSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerbTypeSection.m; sourceTree = "<group>"; };
-		2031F25919047F9200305A46 /* ConjugationTypeSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConjugationTypeSection.h; sourceTree = "<group>"; };
-		2031F25A19047F9200305A46 /* ConjugationTypeSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConjugationTypeSection.m; sourceTree = "<group>"; };
-		2031F25C19047FA100305A46 /* WordTagSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordTagSection.h; sourceTree = "<group>"; };
-		2031F25D19047FA100305A46 /* WordTagSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordTagSection.m; sourceTree = "<group>"; };
-		2031F25F19047FAE00305A46 /* MiscSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiscSection.h; sourceTree = "<group>"; };
-		2031F26019047FAE00305A46 /* MiscSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MiscSection.m; sourceTree = "<group>"; };
 		204AA956190F74A0000A0D1F /* WordListCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordListCell.h; sourceTree = "<group>"; };
 		204AA957190F74A0000A0D1F /* WordListCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordListCell.m; sourceTree = "<group>"; };
 		204AA959190F74B6000A0D1F /* QuizVocabCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuizVocabCell.h; sourceTree = "<group>"; };
@@ -91,8 +81,6 @@
 		209D625118EE661C00CA5EF0 /* Storyboard_iPhone.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Storyboard_iPhone.storyboard; sourceTree = "<group>"; };
 		20A2324919299F01007819F4 /* SwitchController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SwitchController.h; sourceTree = "<group>"; };
 		20A2324A19299F01007819F4 /* SwitchController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SwitchController.m; sourceTree = "<group>"; };
-		20D1DD55190625F90095E575 /* WordSection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordSection.h; sourceTree = "<group>"; };
-		20D1DD56190625F90095E575 /* WordSection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordSection.m; sourceTree = "<group>"; };
 		20D9E24918EA705500127FBA /* Study Español.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Study Español.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		20D9E24C18EA705500127FBA /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		20D9E24E18EA705500127FBA /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -147,6 +135,18 @@
 		20D9E2DC18EA776A00127FBA /* FlashCards.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FlashCards.m; sourceTree = "<group>"; };
 		20D9E2DE18EA833200127FBA /* TextView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TextView.h; sourceTree = "<group>"; };
 		20D9E2DF18EA833200127FBA /* TextView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = TextView.m; sourceTree = "<group>"; };
+		20FE9503194291880019F28F /* WordSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordSectionView.h; sourceTree = "<group>"; };
+		20FE9504194291880019F28F /* WordSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordSectionView.m; sourceTree = "<group>"; };
+		20FE9509194293770019F28F /* WordTagSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordTagSectionView.h; sourceTree = "<group>"; };
+		20FE950A194293770019F28F /* WordTagSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordTagSectionView.m; sourceTree = "<group>"; };
+		20FE950C194293900019F28F /* ConjugationTypeSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConjugationTypeSectionView.h; sourceTree = "<group>"; };
+		20FE950D194293900019F28F /* ConjugationTypeSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ConjugationTypeSectionView.m; sourceTree = "<group>"; };
+		20FE950F194293A20019F28F /* VerbTypeSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = VerbTypeSectionView.h; sourceTree = "<group>"; };
+		20FE9510194293A20019F28F /* VerbTypeSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = VerbTypeSectionView.m; sourceTree = "<group>"; };
+		20FE9512194293B20019F28F /* WordTypeSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = WordTypeSectionView.h; sourceTree = "<group>"; };
+		20FE9513194293B20019F28F /* WordTypeSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = WordTypeSectionView.m; sourceTree = "<group>"; };
+		20FE951B1942967B0019F28F /* MiscSectionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MiscSectionView.h; sourceTree = "<group>"; };
+		20FE951C1942967B0019F28F /* MiscSectionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MiscSectionView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -178,18 +178,18 @@
 		2031F25219047F2000305A46 /* Sections */ = {
 			isa = PBXGroup;
 			children = (
-				2031F25319047F6800305A46 /* WordTypeSection.h */,
-				2031F25419047F6800305A46 /* WordTypeSection.m */,
-				2031F25619047F8200305A46 /* VerbTypeSection.h */,
-				2031F25719047F8200305A46 /* VerbTypeSection.m */,
-				2031F25919047F9200305A46 /* ConjugationTypeSection.h */,
-				2031F25A19047F9200305A46 /* ConjugationTypeSection.m */,
-				2031F25C19047FA100305A46 /* WordTagSection.h */,
-				2031F25D19047FA100305A46 /* WordTagSection.m */,
-				2031F25F19047FAE00305A46 /* MiscSection.h */,
-				2031F26019047FAE00305A46 /* MiscSection.m */,
-				20D1DD55190625F90095E575 /* WordSection.h */,
-				20D1DD56190625F90095E575 /* WordSection.m */,
+				20FE9512194293B20019F28F /* WordTypeSectionView.h */,
+				20FE9513194293B20019F28F /* WordTypeSectionView.m */,
+				20FE950F194293A20019F28F /* VerbTypeSectionView.h */,
+				20FE9510194293A20019F28F /* VerbTypeSectionView.m */,
+				20FE950C194293900019F28F /* ConjugationTypeSectionView.h */,
+				20FE950D194293900019F28F /* ConjugationTypeSectionView.m */,
+				20FE9509194293770019F28F /* WordTagSectionView.h */,
+				20FE950A194293770019F28F /* WordTagSectionView.m */,
+				20FE951B1942967B0019F28F /* MiscSectionView.h */,
+				20FE951C1942967B0019F28F /* MiscSectionView.m */,
+				20FE9503194291880019F28F /* WordSectionView.h */,
+				20FE9504194291880019F28F /* WordSectionView.m */,
 			);
 			name = Sections;
 			sourceTree = "<group>";
@@ -460,37 +460,37 @@
 			files = (
 				20D9E2C218EA76EF00127FBA /* Tag.m in Sources */,
 				20D9E2B618EA732100127FBA /* ConjugationView.m in Sources */,
-				2031F25819047F8200305A46 /* VerbTypeSection.m in Sources */,
+				20FE9514194293B20019F28F /* WordTypeSectionView.m in Sources */,
 				20A2324B19299F01007819F4 /* SwitchController.m in Sources */,
 				204AA958190F74A0000A0D1F /* WordListCell.m in Sources */,
 				20D9E2DD18EA776A00127FBA /* FlashCards.m in Sources */,
-				2031F25E19047FA100305A46 /* WordTagSection.m in Sources */,
+				20FE950E194293900019F28F /* ConjugationTypeSectionView.m in Sources */,
 				20D9E25F18EA705500127FBA /* AppDelegate.m in Sources */,
 				20D9E29B18EA729300127FBA /* Switch.m in Sources */,
 				20D9E2C818EA76EF00127FBA /* Word.m in Sources */,
 				20D9E2B918EA733000127FBA /* ViewWord.m in Sources */,
-				2031F25B19047F9200305A46 /* ConjugationTypeSection.m in Sources */,
 				20D9E2CE18EA772F00127FBA /* AddEditView.m in Sources */,
+				20FE9511194293A20019F28F /* VerbTypeSectionView.m in Sources */,
 				20D9E2CB18EA771E00127FBA /* Home.m in Sources */,
-				2031F26119047FAE00305A46 /* MiscSection.m in Sources */,
 				20D9E25B18EA705500127FBA /* main.m in Sources */,
 				204AA95B190F74B6000A0D1F /* QuizVocabCell.m in Sources */,
 				209C38F618F1D13400DA6F78 /* SearchView.m in Sources */,
 				20D9E2BC18EA734C00127FBA /* Words.xcdatamodeld in Sources */,
 				20D9E2A118EA72BB00127FBA /* Button.m in Sources */,
-				2031F25519047F6800305A46 /* WordTypeSection.m in Sources */,
 				20D9E2AA18EA72EA00127FBA /* BaseView.m in Sources */,
 				20D9E2C518EA76EF00127FBA /* Conjugation.m in Sources */,
 				204AA95E190F74CA000A0D1F /* QuizAnswerCell.m in Sources */,
+				20FE9505194291880019F28F /* WordSectionView.m in Sources */,
 				20D9E2D118EA773A00127FBA /* WordList.m in Sources */,
+				20FE950B194293770019F28F /* WordTagSectionView.m in Sources */,
 				20D9E2D718EA775100127FBA /* QuizConjugation.m in Sources */,
+				20FE951D1942967B0019F28F /* MiscSectionView.m in Sources */,
 				20D9E2AD18EA72FC00127FBA /* Utilities.m in Sources */,
 				20D9E2DA18EA775E00127FBA /* QuizAnswer.m in Sources */,
 				20D9E2E018EA833200127FBA /* TextView.m in Sources */,
 				20D9E2B018EA730800127FBA /* Database.m in Sources */,
 				20D9E2D418EA774700127FBA /* QuizVocab.m in Sources */,
 				209C7A88192E9C1000C06E21 /* ConjugationWordViewCell.m in Sources */,
-				20D1DD57190625F90095E575 /* WordSection.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

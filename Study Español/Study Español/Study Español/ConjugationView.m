@@ -9,16 +9,18 @@
 
 #import "ConjugationView.h"
 #import "TextView.h"
+#import "BaseView.h"
 
 @implementation ConjugationView
 @synthesize labels, inputs, background, titleLabel;
 ///Initalization
-- (id)initWithFrame:(CGRect)frame Title:(NSString*)title
+-(id)initWithFrame:(CGRect)frame Title:(NSString*)title ParentViewFrame:(CGRect)parentViewFrame
 {
     self = [super initWithFrame:frame];
     if (self)
     {
         NSLog(@"Creating Conjugation View: %@", title);
+        truePosition = CGPointMake(parentViewFrame.origin.x + frame.origin.x, parentViewFrame.origin.y + frame.origin.y);
         labels = [[NSMutableArray alloc]init];
         inputs = [[NSMutableArray alloc]init];
         
@@ -52,6 +54,7 @@
                 
                 //the words conjugation form is entered here
                 TextView *newTextView = [[TextView alloc]initWithFrame:CGRectMake(45 + (i * (self.frame.size.width * .5)), 35 + (j * spacing), (self.frame.size.width * .35), height)];
+                //[newTextView setDelegate:self];
                 [newTextView setTag:j + (i * 3)];
                 [inputs addObject:newTextView];
                 [self addSubview:newTextView];

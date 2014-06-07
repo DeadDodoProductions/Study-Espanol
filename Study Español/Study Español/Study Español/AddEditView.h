@@ -8,7 +8,7 @@
 
 #import "BaseView.h"
 
-@interface AddEditView : BaseView <UITableViewDataSource, UITableViewDelegate>
+@interface AddEditView : BaseView <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
 {
     CGRect startRect;
     NSMutableArray *tags;

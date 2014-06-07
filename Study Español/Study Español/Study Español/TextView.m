@@ -8,9 +8,10 @@
 //  Overrides UITextView in order to be used as a central place to apply themes to the Textviews.
 
 #import "TextView.h"
+#import "BaseView.h"
 
 @implementation TextView
-@synthesize screenLoc;
+@synthesize screenPosition;
 ///Initialization
 - (id)initWithFrame:(CGRect)frame
 {
@@ -22,5 +23,4 @@
     }
     return self;
 }
-
 @end

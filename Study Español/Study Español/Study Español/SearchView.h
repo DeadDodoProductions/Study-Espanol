@@ -10,7 +10,7 @@
 
 @class Home;
 
-@interface SearchView : UIView <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
+@interface SearchView : UIView <UITableViewDataSource, UITableViewDelegate>
 {
     int rows;
     int columns;
@@ -18,9 +18,10 @@
     NSMutableArray *tags;
     UIScrollView *scrollView;
     CGRect startRect;
+    CGPoint truePosition;
     Home *superHome;
 }
--(id)initWithFrame:(CGRect)frame Home:(Home*)home;
+- (id)initWithFrame:(CGRect)frame Home:(Home *)home;
 -(void)NewTag:(NSString*)tag TagTable:(UITableView*)tagTable;
 
 @end

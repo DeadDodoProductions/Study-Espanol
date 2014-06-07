@@ -8,14 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ConjugationView : UIView
+@interface ConjugationView : UIView <UITextViewDelegate>
 {
-    
+    CGPoint truePosition;
 }
 @property (nonatomic, readwrite) NSMutableArray *inputs;
 @property (nonatomic, readwrite) NSMutableArray *labels;
 @property (nonatomic, readwrite) UILabel *background;
 @property (nonatomic, readwrite) UILabel *titleLabel;
-- (id)initWithFrame:(CGRect)frame Title:(NSString*)title;
+-(id)initWithFrame:(CGRect)frame Title:(NSString*)title ParentViewFrame:(CGRect)parentViewFrame;
 
 @end

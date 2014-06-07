@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface TextView : UITextView
+@interface TextView : UITextView <UITextFieldDelegate>
 {
 }
-@property (nonatomic, readwrite) CGPoint screenLoc;
+@property (nonatomic, readwrite) CGPoint screenPosition;
+-(void)SettingPosition;
 
 @end
