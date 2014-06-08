@@ -193,10 +193,15 @@ static CGPoint position;
     NSDictionary *info = [aNote userInfo];
     //keyboard rect does not take into consideration the landscape view
     CGRect keyboardRect = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey]CGRectValue];
+    int keyboardHeight = keyboardRect.size.height;
+    if (UIInterfaceOrientationIsLandscape(orientation))
+    {
+        keyboardHeight = keyboardRect.size.width;
+    }
     //this is the location of the textfield
     CGPoint aLocation = position;
     //this creates an adjusted rect of the content view to take into consideration the position of the keyboard
-    CGRect aRect = CGRectMake(0, 0, content.frame.size.width, content.frame.size.height - keyboardRect.size.width);
+    CGRect aRect = CGRectMake(0, 0, content.frame.size.width, content.frame.size.height - keyboardHeight);
     //determines if the textfield is hidden by the keyboard then moves the content up
     if (!CGRectContainsPoint(aRect, aLocation))
     {
@@ -208,6 +213,7 @@ static CGPoint position;
 {
     NSLog(@"Keyboard Off View");
     [content setContentOffset:CGPointZero animated:true];
+    position = CGPointMake(0, 0);
 }
 +(void)SetTextViewPosition:(CGPoint)textviewPosition
 {

@@ -11,11 +11,12 @@
 @interface ConjugationView : UIView <UITextViewDelegate>
 {
     CGPoint truePosition;
+    UIView *parent;
 }
 @property (nonatomic, readwrite) NSMutableArray *inputs;
 @property (nonatomic, readwrite) NSMutableArray *labels;
 @property (nonatomic, readwrite) UILabel *background;
 @property (nonatomic, readwrite) UILabel *titleLabel;
--(id)initWithFrame:(CGRect)frame Title:(NSString*)title ParentViewFrame:(CGRect)parentViewFrame;
+-(id)initWithFrame:(CGRect)frame Title:(NSString*)title ParentView:(UIView*)parentView;
 
 @end

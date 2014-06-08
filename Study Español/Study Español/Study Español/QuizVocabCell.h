@@ -14,7 +14,8 @@
 {
     
 }
-@property (nonatomic, readwrite) id theDelagate;
+@property (nonatomic, readwrite) id delegate;
+@property (nonatomic, readwrite) CGPoint truePosition;
 @property (nonatomic, readwrite) UILabel *wordLabel;
 @property (nonatomic, readwrite) UITextField *wordField;
 -(void)CreateTextView:(TextView*)textView;
@@ -23,5 +24,6 @@
 
 //QuizVocabCell's delagate
 @protocol QuizVocabCellDelagate<NSObject>
--(void)OnFinishAnsweringWord:(UITextField*)textField;
+-(void)onFinishAnsweringWord:(UITextField*)textField;
+-(void)updateTruePosition:(QuizVocabCell*)cell;
 @end

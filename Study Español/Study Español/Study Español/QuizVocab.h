@@ -9,10 +9,10 @@
 #import "BaseView.h"
 #import "QuizVocabCell.h"
 
-@interface QuizVocab : BaseView <QuizVocabCellDelagate>
+@interface QuizVocab : BaseView <QuizVocabCellDelagate, UICollectionViewDelegate, UICollectionViewDataSource>
 {
     NSMutableArray *textFields;
-    UICollectionView *collectionView;
+    UICollectionView *vocabCollectionView;
     UICollectionViewFlowLayout *flow;
 }
 

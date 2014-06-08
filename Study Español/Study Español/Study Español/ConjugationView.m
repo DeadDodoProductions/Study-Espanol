@@ -14,13 +14,14 @@
 @implementation ConjugationView
 @synthesize labels, inputs, background, titleLabel;
 ///Initalization
--(id)initWithFrame:(CGRect)frame Title:(NSString*)title ParentViewFrame:(CGRect)parentViewFrame
+-(id)initWithFrame:(CGRect)frame Title:(NSString*)title ParentView:(UIView*)parentView
 {
     self = [super initWithFrame:frame];
     if (self)
     {
         NSLog(@"Creating Conjugation View: %@", title);
-        truePosition = CGPointMake(parentViewFrame.origin.x + frame.origin.x, parentViewFrame.origin.y + frame.origin.y);
+        truePosition = CGPointMake(parentView.frame.origin.x + frame.origin.x, parentView.frame.origin.y + frame.origin.y);
+        parent = parentView;
         labels = [[NSMutableArray alloc]init];
         inputs = [[NSMutableArray alloc]init];
         
@@ -54,7 +55,7 @@
                 
                 //the words conjugation form is entered here
                 TextView *newTextView = [[TextView alloc]initWithFrame:CGRectMake(45 + (i * (self.frame.size.width * .5)), 35 + (j * spacing), (self.frame.size.width * .35), height)];
-                //[newTextView setDelegate:self];
+                [newTextView setDelegate:self];
                 [newTextView setTag:j + (i * 3)];
                 [inputs addObject:newTextView];
                 [self addSubview:newTextView];
@@ -62,5 +63,10 @@
         }
     }
     return self;
+}
+
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    [BaseView SetTextViewPosition:CGPointMake(0, truePosition.y + self.frame.size.height - 10)];
 }
 @end

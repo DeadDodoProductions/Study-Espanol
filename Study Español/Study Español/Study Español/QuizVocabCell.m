@@ -12,13 +12,15 @@
 #import "TextView.h"
 
 @implementation QuizVocabCell
-@synthesize wordField, wordLabel, theDelagate;
+@synthesize wordField, wordLabel, delegate, truePosition;
 ///Initalization
 - (id)initWithFrame:(CGRect)frame
 {
     self = [super initWithFrame:frame];
-    if (self) {
+    if (self)
+    {
         // Initialization code
+        truePosition = CGPointMake(frame.origin.x, frame.origin.y);
         wordLabel = [[UILabel alloc]initWithFrame:CGRectMake(2, 2, (frame.size.width * .5) - 2, frame.size.height - 4)];
         [self addSubview:wordLabel];
         
@@ -33,11 +35,12 @@
 //UITextView Delagate
 -(void)textFieldDidEndEditing:(UITextField *)textField
 {
-    [theDelagate OnFinishAnsweringWord:textField];
+    [delegate onFinishAnsweringWord:textField];
 }
 
--(void)textViewDidBeginEditing:(UITextView *)textView
+-(void)textFieldDidBeginEditing:(UITextView *)textView
 {
-    [BaseView SetTextViewPosition:CGPointMake(textView.frame.origin.x, textView.frame.origin.y)];
+    [delegate updateTruePosition:self];
+    [BaseView SetTextViewPosition:CGPointMake(truePosition.x, truePosition.y)];
 }
 @end

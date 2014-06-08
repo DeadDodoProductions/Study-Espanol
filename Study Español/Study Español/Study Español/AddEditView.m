@@ -131,7 +131,7 @@
     [content addSubview:miscSectionView];
     startingY = miscSectionView.frame.origin.y + miscSectionView.frame.size.height + 2;
 
-    ConjugationTypeSectionView *conjugationTypeSectionView = [[ConjugationTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, contentWidth - 4, contentHeight * .26) ParentView:self.view Layout:layout];
+    ConjugationTypeSectionView *conjugationTypeSectionView = [[ConjugationTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, contentWidth - 4, contentHeight * .26) ParentView:self Layout:layout];
     [conjugationTypeSectionView setBackgroundColor:[UIColor grayColor]];
     [conjugationTypeSectionView setContentSize:CGSizeMake(conjugationTypeSectionView.frame.size.width, [conjugationTypeSectionView.subviews[conjugationTypeSectionView.subviews.count - 1] frame].origin.y + [conjugationTypeSectionView.subviews[conjugationTypeSectionView.subviews.count - 1] frame].size.height + 2)];
     [content addSubview:conjugationTypeSectionView];

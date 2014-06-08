@@ -63,12 +63,12 @@
     [self SetCellWidth];
     
     
-    UICollectionView *newView = [[UICollectionView alloc]initWithFrame:CGRectMake(2, 2, contentWidth - 4, contentHeight - 4) collectionViewLayout:flow];
-    [newView setDelegate:self];
-    [newView setDataSource:self];
-    [newView setBackgroundColor:[UIColor whiteColor]];
-    [newView registerClass:[QuizVocabCell class] forCellWithReuseIdentifier:@"QuizVocabCell"];
-    [content addSubview:newView];
+    vocabCollectionView = [[UICollectionView alloc]initWithFrame:CGRectMake(2, 2, contentWidth - 4, contentHeight - 4) collectionViewLayout:flow];
+    [vocabCollectionView setDelegate:self];
+    [vocabCollectionView setDataSource:self];
+    [vocabCollectionView setBackgroundColor:[UIColor whiteColor]];
+    [vocabCollectionView registerClass:[QuizVocabCell class] forCellWithReuseIdentifier:@"QuizVocabCell"];
+    [content addSubview:vocabCollectionView];
 }
 -(void)SetCellWidth
 {
@@ -147,17 +147,21 @@
     }
     [[cell wordField] setText:textFields[indexPath.row]];
     [[cell wordField] setTag:indexPath.row];
-    [cell setTheDelagate:self];
+    [cell setDelegate:self];
     return cell;
 }
 
 
-///TextField Method
--(void)OnFinishAnsweringWord:(UITextField*)textField
+///QuizVocabCell Delegate Method
+-(void)onFinishAnsweringWord:(UITextField*)textField
 {
     NSLog(@"Tag: %ld", (long)textField.tag);
     NSLog(@"Text: %@", textField.text);
     textFields[textField.tag] = textField.text;
     NSLog(@"TextFields: %@", textFields[textField.tag]);
+}
+-(void)updateTruePosition:(QuizVocabCell *)cell
+{
+    [cell setTruePosition:CGPointMake(cell.truePosition.x, cell.frame.origin.y + cell.frame.size.height - vocabCollectionView.contentOffset.y + 10)];
 }
 @end

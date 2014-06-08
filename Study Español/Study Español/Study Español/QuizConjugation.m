@@ -11,6 +11,7 @@
 #import "QuizConjugation.h"
 #import "QuizAnswer.h"
 #import "AppDelegate.h"
+#import "BaseView.h"
 
 #import "ConjugationView.h"
 
@@ -164,7 +165,7 @@
     
     //Creates the ConjugationView displaying the input fields
     //located at the center of the device
-    conjugationView = [[ConjugationView alloc]initWithFrame:CGRectMake(conjugationX, conjugationY, conjugationWidth, conjugationHeight) Title:[words[0] tense] ParentViewFrame:CGRectMake(self.view.frame.origin.x, self.view.frame.origin.y, 0, 0)];
+    conjugationView = [[ConjugationView alloc]initWithFrame:CGRectMake(conjugationX, conjugationY, conjugationWidth, conjugationHeight) Title:[words[0] tense] ParentView:self.view];
     [[conjugationView background] setBackgroundColor:[UIColor grayColor]];
     [content addSubview:conjugationView];
     
@@ -299,5 +300,12 @@
     [answers[wordNumber] setVosotros:[[conjugationView inputs][4] text]];
     [answers[wordNumber] setEllos:[[conjugationView inputs][5] text]];
     NSLog(@"Saved: wordNumber:%d yo:%@ tu:%@ el:%@ nos:%@ vos:%@ ellos:%@", wordNumber, [answers[wordNumber] yo], [answers[wordNumber] tu],[answers[wordNumber] el],[answers[wordNumber] nosotros],[answers[wordNumber] vosotros],[answers[wordNumber] ellos]);
+}
+
+
+///TextView Delegate Methods
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    [BaseView SetTextViewPosition:CGPointMake(0, contentHeight)];
 }
 @end

@@ -16,7 +16,7 @@
 
 @implementation ConjugationTypeSectionView
 
-- (id)initAddEditWithFrame:(CGRect)frame ParentView:(UIView*)parentView Layout:(int)layout
+- (id)initAddEditWithFrame:(CGRect)frame ParentView:(UIViewController*)parentView Layout:(int)layout
 {
     self = [super initWithFrame:frame];
     if (self)
@@ -35,7 +35,7 @@
                 {
                     for (int j = 0; j < 4; j++)
                     {
-                        ConjugationView *newView = [[ConjugationView alloc]initWithFrame:CGRectMake(2 + ((self.frame.size.width * .5) * i), 2 + (141 * j), (self.frame.size.width * .5) - 3 - (i * 1), 139) Title:titles[j + (i * 4)] ParentViewFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, 0, 0)];
+                        ConjugationView *newView = [[ConjugationView alloc]initWithFrame:CGRectMake(2 + ((self.frame.size.width * .5) * i), 2 + (141 * j), (self.frame.size.width * .5) - 3 - (i * 1), 139) Title:titles[j + (i * 4)] ParentView:self];
                         [newView setBackgroundColor:[UIColor whiteColor]];
                         [self addSubview:newView];
                         if (editingWord)
@@ -62,7 +62,7 @@
             case 2:
                 for (int i = 0; i < 8; i++)
                 {
-                    ConjugationView *newView = [[ConjugationView alloc]initWithFrame:CGRectMake(2, 2 + (141 * i), self.frame.size.width - 4, 139) Title:titles[i] ParentViewFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, 0, 0)];
+                    ConjugationView *newView = [[ConjugationView alloc]initWithFrame:CGRectMake(2, 2 + (141 * i), self.frame.size.width - 4, 139) Title:titles[i] ParentView:self];
                     [newView setBackgroundColor:[UIColor whiteColor]];
                     [self addSubview:newView];
                     if (editingWord)
@@ -120,5 +120,4 @@
     }
     return self;
 }
-
 @end

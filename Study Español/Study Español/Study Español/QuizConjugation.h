@@ -8,7 +8,7 @@
 
 #import "BaseView.h"
 
-@interface QuizConjugation : BaseView //<UITextViewDelegate>
+@interface QuizConjugation : BaseView <UITextViewDelegate>
 {
     int wordNumber; //used to determine the currently active word
     int total; //holds the total amount of possible answers

@@ -32,6 +32,7 @@
 }
 -(void)HeaderButtonPressed:(Button*)button;
 -(void)SetActionButton:(int)button Title:(NSString*)title;
+-(void)AdjustContent;
 +(void)SetTextViewPosition:(CGPoint)textviewPosition;
 
 @end
