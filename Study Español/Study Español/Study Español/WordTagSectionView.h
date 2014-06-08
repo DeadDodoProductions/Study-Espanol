@@ -10,13 +10,13 @@
 
 @class TextView, SearchView;
 
-@interface WordTagSectionView : UIView
+@interface WordTagSectionView : UIView <UITextFieldDelegate>
 {
     UITableView *tagTable;
-    CGPoint truePosition;
     SearchView *aView;
     TextView *tagInput;
 }
+@property (readwrite, nonatomic) CGPoint truePosition;
 - (id)initAddEditWithFrame:(CGRect)frame ParentView:(UIViewController*)parentView Layout:(int)layout;
 - (id)initSearchWithFrame:(CGRect)frame ParentView:(UIView*)parentView Layout:(int)layout;
 

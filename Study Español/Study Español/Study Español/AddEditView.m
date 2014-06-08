@@ -172,7 +172,7 @@
 }
 //if IPhone in Portrait
 -(void)GUIforiPhone:(NSArray*)sectionArray
-{    
+{
     int startingY = 2;
     WordSectionView *wordSectionView = [[WordSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, contentWidth - 4, contentHeight) ParentView:self.view Layout:layout];
     [wordSectionView setBackgroundColor:[UIColor grayColor]];
@@ -327,10 +327,5 @@
     UIView *aView = content.subviews[1];
     UITableView *tagsTable = aView.subviews[4];
     [tagsTable setEditing:!tagsTable.editing];
-}
-
--(void)textViewDidBeginEditing:(UITextView *)textView
-{
-    [BaseView SetTextViewPosition:CGPointMake(textView.frame.origin.x + content.frame.origin.x, textView.frame.origin.y + content.frame.origin.y)];
 }
 @end

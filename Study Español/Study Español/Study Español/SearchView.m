@@ -44,12 +44,7 @@
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
     NSString *string = [Utilities GetDevice];
     NSArray *sectionsArray; //used to define the order each section is created and where it is located on screen
-    
-    WordTypeSectionView *wordTypeSection = [[WordTypeSectionView alloc]init];
-    //wordTypeSection *wordTypeSection = [[VerbTypeSectionView alloc]init];
-    //WordTagSection *wordTypeSection = [[WordTagSectionView alloc]init];
-    ConjugationTypeSectionView *conjugationTypeSection = [[ConjugationTypeSectionView alloc]init];
-    //MiscSection *miscSection = [[MiscSection alloc]init];
+
     tags = [[NSMutableArray alloc]init];
     startRect = self.frame;
     
@@ -59,7 +54,6 @@
         {
             NSLog(@"Device: iPad Portrait");
             layout = 0;
-            //sectionsArray = [[NSArray alloc]initWithObjects:wordTypeSection, wordTagSection, conjugationTypeSection, verbTypeSection, miscSection, nil];
             [self setFrame:CGRectMake(startRect.origin.x, startRect.origin.y + 39, startRect.size.width, startRect.size.height - 87)];
             [self GUIforiPadPortrait:sectionsArray];
         }
@@ -67,7 +61,6 @@
         {
             NSLog(@"Device: iPad Landscape");
             layout = 1;
-            //sectionsArray = [[NSArray alloc]initWithObjects:wordTypeSection, verbTypeSection, conjugationTypeSection, miscSection, wordTagSection, nil];
             [self setFrame:CGRectMake(startRect.origin.x, startRect.origin.y + 44, startRect.size.width, startRect.size.height - 90)];
             [self GUIforiPadLandscape:sectionsArray];
         }
@@ -76,92 +69,105 @@
     {
         NSLog(@"Device: iPhone");
         layout = 2;
-        //sectionsArray = [[NSArray alloc]initWithObjects:wordTypeSection, verbTypeSection, conjugationTypeSection, wordTagSection, miscSection, nil];
         [self GUIforiPhone:sectionsArray];
     }
     NSLog(@"Search View Created");
 }
 -(void)GUIforiPadPortrait:(NSArray*)sectionArray
 {
+    //sectionsArray = [[NSArray alloc]initWithObjects:wordTypeSection, wordTagSection, conjugationTypeSection, verbTypeSection, miscSection, nil];
     NSLog(@"Creating User Interface for iPad Portrait");
-    int a = 0;
-    for (int i = 0; i < 2; i++)
-    {
-        NSLog(@"i: %d", i);
-        float startPoint = 1;
-        for (int j = 0; j < 3; j++)
-        {
-            NSLog(@"j: %d", j);
-            if (i == 0 && j == 2)
-            {
-                break;
-            }
-            UIView *newView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width * .5 - 2, 0)];
-            
-            //[sectionArray[a] CreateSearchSection:newView SuperView:self Layout:layout];
-            float viewHeight = [newView.subviews[newView.subviews.count - 1] frame].origin.y + [newView.subviews[newView.subviews.count - 1] frame].size.height + 5;
-            
-            [newView setFrame:CGRectMake(1 + (i * (self.frame.size.width * .5)), startPoint, self.frame.size.width * .5 - 2, viewHeight)];
-            [newView setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:1]];
-            startPoint = newView.frame.origin.y + newView.frame.size.height + 2;
-            [self addSubview:newView];
-            
-            NSLog(@"x: %f y: %f width: %f height: %f", newView.frame.origin.x, newView.frame.origin.y, newView.frame.size.width, newView.frame.size.height);
-            NSLog(@"New View Created");
-            a++;
-        }
-    }
+    int startingY = 2;
+    
+    WordTypeSectionView *wordTypeSectionView = [[WordTypeSectionView alloc]initSearchWithFrame:CGRectMake(2, startingY, (self.frame.size.width - 4) * .5, 0) ParentView:self Layout:layout];
+    [wordTypeSectionView setBackgroundColor:[UIColor whiteColor]];
+    [self addSubview:wordTypeSectionView];
+    startingY = wordTypeSectionView.frame.origin.y + wordTypeSectionView.frame.size.height + 2;
+    
+    wordTagSectionView = [[WordTagSectionView alloc]initSearchWithFrame:CGRectMake(2, startingY, (self.frame.size.width - 4) * .5, self.frame.size.height - wordTypeSectionView.frame.size.height - 6) ParentView:self Layout:layout];
+    [wordTagSectionView setBackgroundColor:[UIColor whiteColor]];
+    [self addSubview:wordTagSectionView];
+    startingY = 2;
+    
+    ConjugationTypeSectionView *conjugationTypeSectionView = [[ConjugationTypeSectionView alloc]initSearchWithFrame:CGRectMake(2 + (self.frame.size.width * .5), startingY, (self.frame.size.width - 4) * .5, 0) ParentView:self Layout:layout];
+    [conjugationTypeSectionView setBackgroundColor:[UIColor whiteColor]];
+    [self addSubview:conjugationTypeSectionView];
+    startingY = conjugationTypeSectionView.frame.origin.y + conjugationTypeSectionView.frame.size.height + 2;
+    
+    VerbTypeSectionView *verbTypeSectionView = [[VerbTypeSectionView alloc]initSearchWithFrame:CGRectMake(2 + (self.frame.size.width * .5), startingY, (self.frame.size.width - 4) * .5, 0) ParentView:self Layout:layout];
+    [verbTypeSectionView setBackgroundColor:[UIColor whiteColor]];
+    [self addSubview:verbTypeSectionView];
+    startingY = verbTypeSectionView.frame.origin.y + verbTypeSectionView.frame.size.height + 2;
+    
+    MiscSectionView *miscSectionView = [[MiscSectionView alloc]initSearchWithFrame:CGRectMake(2 + (self.frame.size.width * .5), startingY, (self.frame.size.width - 4) * .5, 0) ParentView:self Layout:layout];
+    [miscSectionView setFrame:CGRectMake(miscSectionView.frame.origin.x, miscSectionView.frame.origin.y, miscSectionView.frame.size.width, miscSectionView.frame.size.height + 1)];
+    [miscSectionView setBackgroundColor:[UIColor whiteColor]];
+    [self addSubview:miscSectionView];
 }
 -(void)GUIforiPadLandscape:(NSArray*)sectionArray
 {
     NSLog(@"Creating User Interface for iPad Landscape");
-    int a = 0;
-    for (int i = 0; i < 3; i++)
-    {
-        float startPoint = 1;
-        for (int j = 0; j < 2; j++)
-        {
-            if (a != 5)
-            {
-                UIView *newView = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.frame.size.width * .3334 - 2, 0)];
-            
-                //[sectionArray[a] CreateSearchSection:newView SuperView:self Layout:layout];
-                float viewHeight = [newView.subviews[newView.subviews.count - 1] frame].origin.y + [newView.subviews[newView.subviews.count - 1] frame].size.height + 5;
-            
-                [newView setFrame:CGRectMake(1 + ((self.frame.size.width * .3334) * i), startPoint, self.frame.size.width * .3334 - 2, viewHeight)];
-                [newView setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:1]];
-                startPoint = newView.frame.origin.y + newView.frame.size.height + 2;
-                [self addSubview:newView];
-                NSLog(@"x: %f y: %f width: %f height: %f", newView.frame.origin.x, newView.frame.origin.y, newView.frame.size.width, newView.frame.size.height);
-                NSLog(@"New View Created");
-                a++;
-            }
-        }
-    }
+    int startingY = 2;
+    
+    WordTypeSectionView *wordTypeSectionView = [[WordTypeSectionView alloc]initSearchWithFrame:CGRectMake(2, startingY, (self.frame.size.width - 4) * .334, 0) ParentView:self Layout:layout];
+    [wordTypeSectionView setBackgroundColor:[UIColor whiteColor]];
+    [self addSubview:wordTypeSectionView];
+    startingY = wordTypeSectionView.frame.origin.y + wordTypeSectionView.frame.size.height + 2;
+    
+    VerbTypeSectionView *verbTypeSectionView = [[VerbTypeSectionView alloc]initSearchWithFrame:CGRectMake(2, startingY, (self.frame.size.width - 4) * .334, 0) ParentView:self Layout:layout];
+    [verbTypeSectionView setBackgroundColor:[UIColor whiteColor]];
+    [self addSubview:verbTypeSectionView];
+    startingY = 2;
+    
+    ConjugationTypeSectionView *conjugationTypeSectionView = [[ConjugationTypeSectionView alloc]initSearchWithFrame:CGRectMake(2 + (self.frame.size.width * .334), startingY, (self.frame.size.width - 4) * .334, 0) ParentView:self Layout:layout];
+    [conjugationTypeSectionView setBackgroundColor:[UIColor whiteColor]];
+    [self addSubview:conjugationTypeSectionView];
+    startingY = conjugationTypeSectionView.frame.origin.y + conjugationTypeSectionView.frame.size.height + 2;
+    
+    MiscSectionView *miscSectionView = [[MiscSectionView alloc]initSearchWithFrame:CGRectMake(2 + (self.frame.size.width * .334), startingY, (self.frame.size.width - 4) * .334, 0) ParentView:self Layout:layout];
+    [miscSectionView setBackgroundColor:[UIColor whiteColor]];
+    [self addSubview:miscSectionView];
+    startingY = 2;
+    
+    wordTagSectionView = [[WordTagSectionView alloc]initSearchWithFrame:CGRectMake(2 + (self.frame.size.width * .667), startingY, ((self.frame.size.width - 4) * .334) - 2, self.frame.size.height - 4) ParentView:self Layout:layout];
+    [wordTagSectionView setBackgroundColor:[UIColor whiteColor]];
+    [self addSubview:wordTagSectionView];
 }
 -(void)GUIforiPhone:(NSArray*)sectionArray
 {
     NSLog(@"Creating User Interface for iPhone/iPod");
-    scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
-    NSLog(@"ScrollView Height: %f", scrollView.frame.size.height);
-    float startPoint = 0;
-    for (int i = 0; i < 5; i++)
-    {
-        UIView *newView = [[UIView alloc] initWithFrame:CGRectMake(0, startPoint, self.frame.size.width, 0)];
-        
-        //[sectionArray[i] CreateSearchSection:newView SuperView:self Layout:layout];
-        
-        float viewHeight = [newView.subviews[newView.subviews.count - 1] frame].origin.y + [newView.subviews[newView.subviews.count - 1] frame].size.height + 5;
-        [newView setBackgroundColor:[UIColor colorWithRed:1 green:1 blue:1 alpha:1]];
-        [newView setFrame:CGRectMake(0, startPoint, self.frame.size.width, viewHeight)];
-        startPoint = newView.frame.origin.y + newView.frame.size.height + 2;
-        [scrollView addSubview:newView];
-        NSLog(@"x: %f y: %f width: %f height: %f", newView.frame.origin.x, newView.frame.origin.y, newView.frame.size.width, newView.frame.size.height);
-        NSLog(@"New View Created");
-    }
-    [scrollView setContentSize:CGSizeMake(scrollView.frame.size.width, startPoint)];
-    NSLog(@"Scroll Content Size: %f", scrollView.contentSize.height);
-    [self addSubview:scrollView];
+    //scrollView = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 0, self.frame.size.width, self.frame.size.height)];
+    [self setDelegate:self];
+    NSLog(@"ScrollView Height: %f", self.frame.size.height);
+    int startingY = 2;
+    
+    WordTypeSectionView *wordTypeSectionView = [[WordTypeSectionView alloc]initSearchWithFrame:CGRectMake(2, startingY, self.frame.size.width - 4, 0) ParentView:self Layout:layout];
+    [wordTypeSectionView setBackgroundColor:[UIColor whiteColor]];
+    [self addSubview:wordTypeSectionView];
+    startingY = wordTypeSectionView.frame.origin.y + wordTypeSectionView.frame.size.height + 2;
+    
+    VerbTypeSectionView *verbTypeSectionView = [[VerbTypeSectionView alloc]initSearchWithFrame:CGRectMake(2, startingY, self.frame.size.width - 4, 0) ParentView:self Layout:layout];
+    [verbTypeSectionView setBackgroundColor:[UIColor whiteColor]];
+    [self addSubview:verbTypeSectionView];
+    startingY = verbTypeSectionView.frame.origin.y + verbTypeSectionView.frame.size.height + 2;
+    
+    ConjugationTypeSectionView *conjugationTypeSectionView = [[ConjugationTypeSectionView alloc]initSearchWithFrame:CGRectMake(2, startingY, self.frame.size.width - 4, 0) ParentView:self Layout:layout];
+    [conjugationTypeSectionView setBackgroundColor:[UIColor whiteColor]];
+    [self addSubview:conjugationTypeSectionView];
+    startingY = conjugationTypeSectionView.frame.origin.y + conjugationTypeSectionView.frame.size.height + 2;
+    
+    wordTagSectionView = [[WordTagSectionView alloc]initSearchWithFrame:CGRectMake(2, startingY, self.frame.size.width - 4, 375) ParentView:self Layout:layout];
+    [wordTagSectionView setBackgroundColor:[UIColor whiteColor]];
+    [self addSubview:wordTagSectionView];
+    startingY = wordTagSectionView.frame.origin.y + wordTagSectionView.frame.size.height + 2;
+    
+    MiscSectionView *miscSectionView = [[MiscSectionView alloc]initSearchWithFrame:CGRectMake(2, startingY, self.frame.size.width - 4, 0) ParentView:self Layout:layout];
+    [miscSectionView setBackgroundColor:[UIColor whiteColor]];
+    [self addSubview:miscSectionView];
+    startingY = miscSectionView.frame.origin.y + miscSectionView.frame.size.height + 2;
+    
+    [self setContentSize:CGSizeMake(self.frame.size.width, startingY)];
+    NSLog(@"Scroll Content Size: %f", self.contentSize.height);
 }
 
 
@@ -185,7 +191,7 @@
             break;
             
         case 2:
-            aView = scrollView.subviews[3];
+            aView = self.subviews[3];
             break;
             
         default:
@@ -214,7 +220,7 @@
             break;
             
         case 2:
-            aView = scrollView.subviews[3];
+            aView = self.subviews[3];
             break;
             
         default:
@@ -275,7 +281,7 @@
                 break;
                 
             case 2:
-                aView = scrollView.subviews[3];
+                aView = self.subviews[3];
                 break;
                 
             default:
@@ -297,4 +303,10 @@
     NSLog(@"Word String: %@", [Database GetInstance].wordString);
 }
 
+///UIScrollView Delegate Functions
+//resets the TruePosition of the WordTagSectionView so Content scrolls correctly when the keyboard is on screen
+- (void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    [wordTagSectionView setTruePosition:CGPointMake(wordTagSectionView.frame.origin.x, wordTagSectionView.frame.origin.y - scrollView.contentOffset.y + 10)];
+}
 @end

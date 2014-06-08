@@ -10,8 +10,9 @@
 
 @interface WordSectionView : UIView <UITextViewDelegate>
 {
-    CGPoint truePosition;
+    
 }
+@property (readwrite, nonatomic) CGPoint truePosition;
 - (id)initAddEditWithFrame:(CGRect)frame ParentView:(UIView*)parentView Layout:(int)layout;
 
 @end

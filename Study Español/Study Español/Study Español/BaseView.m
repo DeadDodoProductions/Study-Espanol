@@ -194,7 +194,7 @@ static CGPoint position;
     //keyboard rect does not take into consideration the landscape view
     CGRect keyboardRect = [[info objectForKey:UIKeyboardFrameBeginUserInfoKey]CGRectValue];
     //this is the location of the textfield
-    CGPoint aLocation = position; //still needs defined
+    CGPoint aLocation = position;
     //this creates an adjusted rect of the content view to take into consideration the position of the keyboard
     CGRect aRect = CGRectMake(0, 0, content.frame.size.width, content.frame.size.height - keyboardRect.size.width);
     //determines if the textfield is hidden by the keyboard then moves the content up

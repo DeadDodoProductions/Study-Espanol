@@ -123,6 +123,7 @@
         [amountStepper setStepValue:5];
         [amountStepper addTarget:parentView action:@selector(StepperPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:amountStepper];
+        [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, amount.frame.origin.y + amount.frame.size.height + 3)];
     }
     return self;
 }

@@ -9,8 +9,10 @@
 #import "WordTagSectionView.h"
 #import "TextView.h"
 #import "Button.h"
+#import "BaseView.h"
 
 @implementation WordTagSectionView
+@synthesize truePosition;
 
 - (id)initAddEditWithFrame:(CGRect)frame ParentView:(UIViewController*)parentView Layout:(int)layout
 {
@@ -18,13 +20,13 @@
     if (self)
     {
         NSLog(@"Creating Tag Section");
-        //[self CreateSearchSection:view SuperView:superView Layout:layout];
+        truePosition = CGPointMake(parentView.view.frame.origin.x + self.frame.origin.x, parentView.view.frame.origin.y + self.frame.origin.y);
         NSLog(@"Creating Word and Tag Section");
         UILabel *tag = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, self.frame.size.width * .15, 30)];
         [tag setText:@"Tag"];
         [self addSubview:tag];
         tagInput = [[TextView alloc]initWithFrame:CGRectMake(self.frame.size.width * .15 + 10, 5, self.frame.size.width * .85 - 15, 30)];
-        //[tagInput setDelegate:superView];
+        [tagInput setDelegate:self];
         [self addSubview:tagInput];
         
         Button *removeButton = [[Button alloc]initWithFrame:CGRectMake(5, tag.frame.origin.y + 5 + tag.frame.size.height, self.frame.size.width * .5 - 10, 30)];
@@ -65,7 +67,7 @@
         [self addSubview:word];
         
         TextView *wordInput = [[TextView alloc]initWithFrame:CGRectMake(self.frame.size.width * .15 + 10, 5, self.frame.size.width * .85 - 15, 30)];
-        //[wordInput setDelegate:superView];
+        [wordInput setDelegate:self];
         [self addSubview:wordInput];
         
         
@@ -74,7 +76,7 @@
         [self addSubview:tag];
         
         tagInput = [[TextView alloc]initWithFrame:CGRectMake(self.frame.size.width * .15 + 10, 40, self.frame.size.width * .85 - 15, 30)];
-        //[tagInput setDelegate:superView];
+        [tagInput setDelegate:self];
         [self addSubview:tagInput];
         
         Button *removeButton = [[Button alloc]initWithFrame:CGRectMake(5, tag.frame.origin.y + 5 + tag.frame.size.height, self.frame.size.width * .5 - 10, 30)];
@@ -106,8 +108,8 @@
     return self;
 }
 
--(void)NewTag:(Button*)button
+-(void)textViewDidBeginEditing:(UITextView *)textView
 {
-    //[self NewTag:tagInput.text TagTable:tagTable];
+    [BaseView SetTextViewPosition:CGPointMake(truePosition.x + textView.frame.origin.x, truePosition.y + textView.frame.origin.y + textView.frame.size.height + 10)];
 }
 @end

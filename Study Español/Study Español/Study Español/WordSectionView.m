@@ -10,8 +10,10 @@
 #import "TextView.h"
 #import "Database.h"
 #import "Word.h"
+#import "BaseView.h"
 
 @implementation WordSectionView
+@synthesize truePosition;
 
 - (id)initAddEditWithFrame:(CGRect)frame ParentView:(UIView*)parentView Layout:(int)layout
 {
@@ -62,5 +64,10 @@
         }
     }
     return self;
+}
+
+-(void)textViewDidBeginEditing:(UITextView *)textView
+{
+    [BaseView SetTextViewPosition:CGPointMake(truePosition.x + textView.frame.origin.x, truePosition.y + textView.frame.origin.y + textView.frame.size.height + 10)];
 }
 @end

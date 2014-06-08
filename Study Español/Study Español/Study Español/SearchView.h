@@ -8,18 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
-@class Home;
+@class Home, WordTagSectionView;
 
-@interface SearchView : UIView <UITableViewDataSource, UITableViewDelegate>
+@interface SearchView : UIScrollView <UITableViewDataSource, UITableViewDelegate, UIScrollViewDelegate>
 {
     int rows;
     int columns;
     int layout;
     NSMutableArray *tags;
-    UIScrollView *scrollView;
+    //UIScrollView *scrollView;
     CGRect startRect;
     CGPoint truePosition;
     Home *superHome;
+    WordTagSectionView *wordTagSectionView;
 }
 - (id)initWithFrame:(CGRect)frame Home:(Home *)home;
 -(void)NewTag:(NSString*)tag TagTable:(UITableView*)tagTable;
