@@ -100,6 +100,11 @@
 
 ///User Interface
 //Creates the User Interface
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    [self CreateGUI];
+}
 -(void)CreateGUI
 {
     NSLog(@"Creating ConjugationQuiz");

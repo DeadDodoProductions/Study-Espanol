@@ -88,6 +88,11 @@
 
 
 ///User Interface
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    [self CreateGUI];
+}
 -(void)CreateGUI
 {
     flow = [[UICollectionViewFlowLayout alloc]init];

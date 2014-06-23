@@ -64,6 +64,11 @@
 
 ///User Interface Methods
 //Create User Interfaces
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    [self CreateGUI];
+}
 -(void)CreateGUI
 {
     NSLog(@"Creating GUI for Add/Edit View");

@@ -100,6 +100,11 @@
 
 
 ///User Interface
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    [self CreateGUI];
+}
 -(void)CreateGUI
 {
     int correct = total - [answers count];

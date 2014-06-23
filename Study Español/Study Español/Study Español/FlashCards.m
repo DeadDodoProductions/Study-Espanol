@@ -56,6 +56,11 @@
 
 ///User Interface Methods
 //Creates the GUI
+-(void)didRotateFromInterfaceOrientation:(UIInterfaceOrientation)fromInterfaceOrientation
+{
+    [super didRotateFromInterfaceOrientation:fromInterfaceOrientation];
+    [self CreateGUI];
+}
 -(void)CreateGUI
 {
     NSLog(@"Creating GUI for Flashcards View");
@@ -115,6 +120,11 @@
         [wordLabel setFrame:CGRectMake(contentWidth * .35, ((contentHeight - buttonheight) * .5) - (wordheight + spacing), contentWidth * .3, wordheight)];
         [answerLabel setFrame:CGRectMake(contentWidth * .35, ((contentHeight - buttonheight) * .5) + spacing, contentWidth * .3, wordheight)];
     }
+}
+-(void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    //save data here
+    //delete old interface
 }
 
 
