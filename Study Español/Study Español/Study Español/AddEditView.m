@@ -318,19 +318,19 @@
 //Add and Remove Tags from the List
 -(void)NewTag
 {
-    for (int i = 0; i < content.subviews.count; i++)
+    NSLog(@"%@", content.subviews);
+    if (![[[[content subviews][1] subviews][1] text]  isEqual: @""])
     {
-        NSLog(@"%d: %@", i, [content.subviews[i] description]);
+        [tags addObject:[[[[content subviews][1] subviews][1] text]lowercaseString]];
+        [[[content subviews][1] subviews][4] reloadData];
+        NSLog(@"New Tag: %@ -- %@", [[[content subviews][1] subviews][1] text], tags[tags.count - 1]);
+        [[[content subviews][1] subviews][1] setText:@""];
     }
-    [tags addObject:[[[[content subviews][1] subviews][1] text]lowercaseString]];
-    [[[content subviews][1] subviews][4] reloadData];
-    NSLog(@"New Tag: %@ -- %@", [[[content subviews][1] subviews][1] text], tags[tags.count - 1]);
-    [[[content subviews][1] subviews][1] setText:@""];
 }
 -(void)RemoveTag
 {
     UIView *aView = content.subviews[1];
-    UITableView *tagsTable = aView.subviews[4];
+    UITableView *tagsTable = aView.subviews[5];
     [tagsTable setEditing:!tagsTable.editing];
 }
 @end

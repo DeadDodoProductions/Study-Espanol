@@ -10,7 +10,7 @@
 
 #import <Foundation/Foundation.h>
 
-@class Word;
+@class Word, Tag;
 
 @interface Database : NSObject
 {
@@ -41,4 +41,7 @@
 -(void)Delete;
 -(void)Search;
 -(void)Edit;
+-(NSArray*)SearchForTags;
+-(void)AddWordToTag:(Tag*)tag Word:(Word*)word;
+-(Tag*)SaveNewTag:(NSString*)name;
 @end

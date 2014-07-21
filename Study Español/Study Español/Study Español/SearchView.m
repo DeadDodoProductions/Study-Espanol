@@ -29,6 +29,7 @@
 {
     if (self = [super initWithFrame:frame])
     {
+        allTags = [[Database GetInstance] SearchForTags];
         [self CreateGUI];
         superHome = home;
     }
@@ -197,12 +198,15 @@
         default:
             break;
     }
-    [tags addObject:[[[aView subviews][3] text] lowercaseString]];
-    [aView.subviews[6] reloadData];
-    NSLog(@"New Tag: %@ -- %@", [[aView subviews][3] text], tags[tags.count - 1]);
-    [[aView subviews][3] setText:@""];
-    //syncs master tags list with tags
-    [Database GetInstance].tags = tags;
+    if (![[[aView subviews][3] text]  isEqual: @""])
+    {
+        [tags addObject:[[[aView subviews][3] text] lowercaseString]];
+        [aView.subviews[6] reloadData];
+        NSLog(@"New Tag: %@ -- %@", [[aView subviews][3] text], tags[tags.count - 1]);
+        [[aView subviews][3] setText:@""];
+        //syncs master tags list with tags
+        [Database GetInstance].tags = tags;
+    }
 }
 -(void)RemoveTag
 {
@@ -226,7 +230,7 @@
         default:
             break;
     }
-    UITableView *tagsTable = aView.subviews[6];
+    UITableView *tagsTable = aView.subviews[7];
     [tagsTable setEditing:!tagsTable.editing];
     //syncs master tags list with tags
     [Database GetInstance].tags = tags;

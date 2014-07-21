@@ -42,6 +42,44 @@ static Database *instance = nil;
 }
 
 
+///Tag Manipulation
+//Adding a new tag
+-(Tag*)SaveNewTag:(NSString*)name
+{
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    NSManagedObjectContext *context = appDelegate.managedObjectContext;
+    Tag *tag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:context];
+    [tag setTag:name];
+    NSError *error = nil;
+    if (![context save:&error])
+    {
+        NSLog(@"Problem Saving Tag: %@, %@, %@", error, [error localizedDescription], error.userInfo);
+        return nil;
+    }
+    else
+    {
+        NSLog(@"Saved Tag");
+        return tag;
+    }
+}
+//adding a word to a tag
+-(void)AddWordToTag:(Tag*)tag Word:(Word*)word
+{
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    NSManagedObjectContext *context = appDelegate.managedObjectContext;
+    [tag addWordObject:word];
+    NSError *error = nil;
+    if (![context save:&error])
+    {
+        NSLog(@"Problem Saving Tag: %@, %@, %@", error, [error localizedDescription], error.userInfo);
+    }
+    else
+    {
+        NSLog(@"Saved Tag");
+    }
+}
+
+
 ///Database Manipulation Methods
 //saves a new word to the database
 -(void)Save
@@ -62,11 +100,30 @@ static Database *instance = nil;
     NSLog(@"Definition: %@", definition);
     word.wordType = wordType;
     NSLog(@"WordType: %@", wordType);
+    NSArray *activeTags = [self SearchForTags];
     for (int i = 0; i < tags.count; i++)
     {
-        Tag *newTag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:context];
-        newTag.tag = tags[i];
-        [word addTagsObject:newTag];
+        bool newTag = true;
+        for (int j = 0; j < activeTags.count; j++)
+        {
+            Tag *tag = activeTags[j];
+            if ([[tag tag] isEqualToString:tags[i]])
+            {
+                [self AddWordToTag:tag Word:word];
+                [word addTagsObject:tag];
+                newTag = false;
+                break;
+            }
+        }
+        if (newTag)
+        {
+            Tag *tag = [self SaveNewTag:tags[i]];
+            if (tag != nil)
+            {
+                [word addTagsObject:tag];
+                [tag addWordObject:word];
+            }
+        }
         NSLog(@"Tag: %@", tags[i]);
     }
     word.verbEnding = verbEnding;
@@ -117,11 +174,30 @@ static Database *instance = nil;
     [activeWord setVerbEnding:verbEnding];
     [activeWord setVerbType:verbRegular];
     [activeWord setTags:nil];
+    NSArray *activeTags = [self SearchForTags];
     for (int i = 0; i < tags.count; i++)
     {
-        Tag *newTag = [NSEntityDescription insertNewObjectForEntityForName:@"Tag" inManagedObjectContext:context];
-        newTag.tag = tags[i];
-        [activeWord addTagsObject:newTag];
+        bool newTag = true;
+        for (int j = 0; j < activeTags.count; j++)
+        {
+            Tag *tag = activeTags[j];
+            if ([[tag tag] isEqualToString:tags[i]])
+            {
+                [self AddWordToTag:tag Word:activeWord];
+                [activeWord addTagsObject:tag];
+                newTag = false;
+                break;
+            }
+        }
+        if (newTag)
+        {
+            Tag *tag = [self SaveNewTag:tags[i]];
+            if (tag != nil)
+            {
+                [activeWord addTagsObject:tag];
+                [tag addWordObject:activeWord];
+            }
+        }
         NSLog(@"Tag: %@", tags[i]);
     }
     [activeWord setConjugations:nil];
@@ -202,6 +278,25 @@ static Database *instance = nil;
     }
     //resets values of static fields
     [self ClearAllData];
+}
+
+
+///Tag Searcg
+//Searches for all tags used
+-(NSArray*)SearchForTags
+{
+    AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc]init];
+    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Tag" inManagedObjectContext:[appDelegate managedObjectContext]];
+    [fetchRequest setEntity:entity];
+    
+    NSError *error;
+    NSArray *fetchedTags = [[appDelegate managedObjectContext] executeFetchRequest:fetchRequest error:&error];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"tag" ascending:false];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    NSArray *sortedArray = [fetchedTags sortedArrayUsingDescriptors:sortDescriptors];
+    NSLog(@"%@", sortedArray);
+    return sortedArray;
 }
 
 

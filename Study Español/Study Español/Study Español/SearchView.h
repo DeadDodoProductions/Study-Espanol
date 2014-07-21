@@ -16,6 +16,7 @@
     int columns;
     int layout;
     NSMutableArray *tags;
+    NSArray *allTags;
     //UIScrollView *scrollView;
     CGRect startRect;
     CGPoint truePosition;
