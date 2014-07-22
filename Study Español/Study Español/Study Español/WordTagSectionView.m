@@ -21,6 +21,7 @@
     self = [super initWithFrame:frame];
     if (self)
     {
+        tableViewDelegate = parentView;
         NSLog(@"Creating Tag Section");
         truePosition = CGPointMake(parentView.view.frame.origin.x + self.frame.origin.x, parentView.view.frame.origin.y + self.frame.origin.y);
         NSLog(@"Creating Word and Tag Section");
@@ -38,12 +39,12 @@
         [clearButton addTarget:self action:@selector(ClearTag) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:clearButton];
         
-        Button *removeButton = [[Button alloc]initWithFrame:CGRectMake(5, tag.frame.origin.y + 5 + tag.frame.size.height, self.frame.size.width * .5 - 10, 30)];
+        removeButton = [[Button alloc]initWithFrame:CGRectMake(5, tag.frame.origin.y + 5 + tag.frame.size.height, self.frame.size.width * .5 - 10, 30)];
         [removeButton setTitle:@"Remove" forState:UIControlStateNormal];
         [removeButton addTarget:parentView action:@selector(RemoveTag) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:removeButton];
         
-        Button *addButton = [[Button alloc]initWithFrame:CGRectMake(removeButton.frame.size.width + 10, removeButton.frame.origin.y, self.frame.size.width * .5 - 10, 30)];
+        addButton = [[Button alloc]initWithFrame:CGRectMake(removeButton.frame.size.width + 10, removeButton.frame.origin.y, self.frame.size.width * .5 - 10, 30)];
         [addButton setTitle:@"Add" forState:UIControlStateNormal];
         [addButton addTarget:parentView action:@selector(NewTag) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:addButton];
@@ -94,12 +95,12 @@
         [clearButton addTarget:self action:@selector(ClearTag) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:clearButton];
         
-        Button *removeButton = [[Button alloc]initWithFrame:CGRectMake(5, tag.frame.origin.y + 5 + tag.frame.size.height, self.frame.size.width * .5 - 10, 30)];
+        removeButton = [[Button alloc]initWithFrame:CGRectMake(5, tag.frame.origin.y + 5 + tag.frame.size.height, self.frame.size.width * .5 - 10, 30)];
         [removeButton setTitle:@"Remove" forState:UIControlStateNormal];
         [removeButton addTarget:parentView action:@selector(RemoveTag) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:removeButton];
         
-        Button *addButton = [[Button alloc]initWithFrame:CGRectMake(removeButton.frame.size.width + 10, removeButton.frame.origin.y, self.frame.size.width * .5 - 10, 30)];
+        addButton = [[Button alloc]initWithFrame:CGRectMake(removeButton.frame.size.width + 10, removeButton.frame.origin.y, self.frame.size.width * .5 - 10, 30)];
         [addButton setTitle:@"Add" forState:UIControlStateNormal];
         [addButton addTarget:parentView action:@selector(NewTag) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:addButton];
@@ -125,17 +126,30 @@
 
 -(void)textViewDidBeginEditing:(UITextView *)textView
 {
+    NSLog(@"WordTagSectionView: TextViewDidBeginEditing");
     [BaseView SetTextViewPosition:CGPointMake(truePosition.x + textView.frame.origin.x, truePosition.y + textView.frame.origin.y + textView.frame.size.height + 10)];
     
     if([textView tag] == 1)
     {
         if (tagSearchTable == nil)
         {
+            //turn this into a horizontal table
             tagSearchTable = [[UITableView alloc]init];
+            CGAffineTransform rotateTable = CGAffineTransformMakeRotation(-M_PI_2);
+            tagSearchTable.transform = rotateTable;
             [tagSearchTable setFrame:CGRectMake(textView.frame.origin.x, textView.frame.origin.y, textView.frame.size.width, 0)];
+            [tagSearchTable setRowHeight:textView.frame.size.width * 0.3334];
+            [tagSearchTable setTag:1];
             [tagSearchTable setDelegate:self];
             [tagSearchTable setDataSource:self];
             [self addSubview:tagSearchTable];
+            [self ChangeLayoutPositions:30];
+        }
+        [removeButton addTarget:self action:@selector(HideTableView) forControlEvents:UIControlEventTouchUpInside];
+        [addButton addTarget:self action:@selector(HideTableView) forControlEvents:UIControlEventTouchUpInside];
+        if ([tagSearchTable isHidden])
+        {
+            [self ChangeLayoutPositions:30];
         }
         [tagSearchTable setHidden:false];
         
@@ -145,6 +159,7 @@
 
 -(void)textViewDidChange:(UITextView *)textView
 {
+    NSLog(@"WordTagSectionView: TextViewDidChange");
     if([textView tag] == 1)
     {
         NSString* text = [textView text];
@@ -158,28 +173,17 @@
                 [tagOptions addObject:name];
             }
         }
-        
-        int height = tagOptions.count;
-        if (height > 3)
-        {
-            height = 3;
-        }
-        [tagSearchTable setFrame:CGRectMake(textView.frame.origin.x + 1, textView.frame.origin.y, textView.frame.size.width - 2, -44 * height)];
+        [tagSearchTable setFrame:CGRectMake(textView.frame.origin.x + 1, textView.frame.origin.y + textView.frame.size.height, textView.frame.size.width - 2, 30)];
         [tagSearchTable reloadData];
-        int size = tagOptions.count - 1;
-        if (size >= 0)
-        {
-            [tagSearchTable scrollToRowAtIndexPath:[NSIndexPath indexPathForRow:size inSection:0] atScrollPosition:UITableViewScrollPositionBottom animated:false];
-        }
     }
 }
 
 -(bool)CompareStrings:(NSString*)stringA StringB:(NSString*)stringB
 {
+    NSLog(@"WordTagSectionView: CompareStrings");
     NSRange range = [stringB rangeOfString:stringA options:NSCaseInsensitiveSearch];
     if (range.length != 0)
     {
-        NSLog(@"%lu, %lu", (unsigned long)range.location, (unsigned long)range.length);
         return true;
     }
     return false;
@@ -187,27 +191,58 @@
 
 -(void)ClearTag
 {
-    [tagOptions removeAllObjects];
-    [tagSearchTable setHidden:true];
+    NSLog(@"WordTagSectionView: ClearTag");
+    [self HideTableView];
     [tagInput setText:@""];
-}
-
--(void)textViewDidEndEditing:(UITextView *)textView
-{
-
 }
 
 
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //returns the amount of objects to be in the table
+    NSLog(@"WordTagSectionView: TableView NumberOfRowsInSection");
     return [tagOptions count];
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"WordTagSectionView: TableView CellForRowAtIndexPath");
     UITableViewCell *cell = [[UITableViewCell alloc]init];
-    //int a = tagOptions.count - indexPath.row - 1;
-    [[cell textLabel] setText:[NSString stringWithFormat:@"%@", tagOptions[indexPath.row]]];
+    CGAffineTransform rotate = CGAffineTransformMakeRotation(M_PI * 0.5);
+    UILabel *label = [[UILabel alloc]init];
+    [label setTransform:rotate];
+    [label setFrame:CGRectMake(0, 0, 30, [tableView rowHeight])];
+    [label setText:[NSString stringWithFormat:@"%@", tagOptions[indexPath.row]]];
+    [label setTextAlignment:NSTextAlignmentCenter];
+    [label setFont:[UIFont fontWithName:@"Arial" size:12]];
+    [label setBackgroundColor:[UIColor whiteColor]];
+    [cell addSubview:label];
     return cell;
+}
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    NSLog(@"WordTagSectionView: TableView DidSelectRowAtIndexPath");
+    NSLog(@"Cell Pressed %ul", indexPath.row);
+    NSLog(@"%@", tagOptions);
+    //got an error at this point, wasn't able to duplicate!
+    [tagInput setText:tagOptions[indexPath.row]];
+    [self HideTableView];
+}
+
+-(void)HideTableView
+{
+    NSLog(@"WordTagSectionView: HideTableView");
+    if (![tagSearchTable isHidden])
+    {
+        [tagOptions removeAllObjects];
+        [tagSearchTable setHidden:true];
+        [self ChangeLayoutPositions:-30];
+    }
+}
+
+-(void)ChangeLayoutPositions:(int)a
+{
+    NSLog(@"WordTagSectionView: ChangeLayoutPositions");
+    [removeButton setFrame:CGRectMake(removeButton.frame.origin.x, removeButton.frame.origin.y + a, removeButton.frame.size.width, removeButton.frame.size.height)];
+    [addButton setFrame:CGRectMake(addButton.frame.origin.x, addButton.frame.origin.y + a, addButton.frame.size.width, addButton.frame.size.height)];
+    [tagTable setFrame:CGRectMake(tagTable.frame.origin.x, tagTable.frame.origin.y + a, tagTable.frame.size.width, tagTable.frame.size.height - a)];
 }
 @end

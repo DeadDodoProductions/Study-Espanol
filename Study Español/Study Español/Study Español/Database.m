@@ -292,7 +292,7 @@ static Database *instance = nil;
     
     NSError *error;
     NSArray *fetchedTags = [[appDelegate managedObjectContext] executeFetchRequest:fetchRequest error:&error];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"tag" ascending:false];
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"tag" ascending:true];
     NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
     NSArray *sortedArray = [fetchedTags sortedArrayUsingDescriptors:sortDescriptors];
     NSLog(@"%@", sortedArray);

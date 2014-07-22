@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@class TextView, SearchView;
+@class TextView, SearchView, Button;
 
 @interface WordTagSectionView : UIView <UITextFieldDelegate, UITextViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
@@ -16,8 +16,11 @@
     NSMutableArray *tagOptions;
     UITableView *tagTable;
     UITableView *tagSearchTable;
+    id<UITableViewDelegate, UITableViewDataSource> tableViewDelegate;
     SearchView *aView;
     TextView *tagInput;
+    Button *removeButton;
+    Button *addButton;
 }
 @property (readwrite, nonatomic) CGPoint truePosition;
 - (id)initAddEditWithFrame:(CGRect)frame ParentView:(UIViewController*)parentView Layout:(int)layout;

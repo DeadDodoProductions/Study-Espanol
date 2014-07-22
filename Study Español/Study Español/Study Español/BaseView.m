@@ -95,14 +95,14 @@ static CGPoint position;
     if (orientation == UIInterfaceOrientationLandscapeRight || orientation == UIInterfaceOrientationLandscapeLeft)
     {
         NSLog(@"Landscape");
-        header = [[UIView alloc]initWithFrame:CGRectMake(0, 20, screenSize.height, 30)];
-        content = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 50, screenSize.height, screenSize.width - 50)];
+        header = [[UIView alloc]initWithFrame:CGRectMake(0, 20, screenSize.height, 40)];
+        content = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 50, screenSize.height, screenSize.width - 47)];
     }
     else
     {
         NSLog(@"Portrait");
-        header = [[UIView alloc]initWithFrame:CGRectMake(0, 20, screenSize.width, 30)];
-        content = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 50, screenSize.width, screenSize.height - 50)];
+        header = [[UIView alloc]initWithFrame:CGRectMake(0, 20, screenSize.width, 40)];
+        content = [[UIScrollView alloc]initWithFrame:CGRectMake(0, 50, screenSize.width, screenSize.height - 47)];
     }
     NSLog(@"Header Size: x: %.0f y:%.0f width: %.0f height: %.0f", header.frame.origin.x, header.frame.origin.y, header.frame.size.width, header.frame.size.height);
     NSLog(@"Content Size: x: %.0f y:%.0f width: %.0f height: %.0f", content.frame.origin.x, content.frame.origin.y, content.frame.size.width, content.frame.size.height);

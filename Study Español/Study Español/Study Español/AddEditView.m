@@ -271,7 +271,7 @@
     [[[content subviews][0] subviews][5] setText:@""];
     [[[content subviews][0] subviews][7] setText:@""];
     [tags removeAllObjects];
-    [[[content subviews][1] subviews][4] reloadData];
+    [[[content subviews][1] subviews][5] reloadData];
     [[SwitchController GetInstance] TurnOffAll];
     for (int i = 0; i < 8; i++)
     {
@@ -307,7 +307,7 @@
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         UIView *aView = content.subviews[1];
-        UITableView *tagsTable = aView.subviews[4];
+        UITableView *tagsTable = aView.subviews[5];
         [tags removeObjectAtIndex:indexPath.row];
         [tagsTable deleteRowsAtIndexPaths:[NSArray arrayWithObject:indexPath] withRowAnimation:true];
     }
@@ -322,7 +322,7 @@
     if (![[[[content subviews][1] subviews][1] text]  isEqual: @""])
     {
         [tags addObject:[[[[content subviews][1] subviews][1] text]lowercaseString]];
-        [[[content subviews][1] subviews][4] reloadData];
+        [[[content subviews][1] subviews][5] reloadData];
         NSLog(@"New Tag: %@ -- %@", [[[content subviews][1] subviews][1] text], tags[tags.count - 1]);
         [[[content subviews][1] subviews][1] setText:@""];
     }
