@@ -139,7 +139,7 @@
     searching = true;
     //create a view, with Search and Cancel at the bottom, add a scroll view that fits inside the view
     NSLog(@"Create Search View");
-    searchView = [[SearchView alloc]initWithFrame:CGRectMake(contentWidth * .05, contentHeight * .05, contentWidth * .9, contentHeight * .9) Home:self];
+    searchView = [[SearchView alloc]initWithFrame:CGRectMake(contentWidth * .05, contentHeight * .05, contentWidth * .9, contentHeight * .9 - 1) Home:self];
     NSLog(@"start: %f height: %f totalH: %d", searchView.frame.origin.y, searchView.frame.size.height, contentHeight);
     [searchView setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:.2]];
     

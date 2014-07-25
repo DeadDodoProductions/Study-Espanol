@@ -43,7 +43,7 @@
     NSLog(@"Creating Word Type Section");
     [SwitchController GetInstance].wtSwitches = [[NSMutableArray alloc]init];
     UILabel *title = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, self.frame.size.width * .5, 30)];
-    title.text = @"Word Type";
+    [title setText:@"Word Type"];
     [self addSubview:title];
     
     NSArray *array = [[NSArray alloc]initWithObjects:@"Noun", @"Verb", @"Adjective", @"Adverb", @"Pronoun", @"Conjunction", @"Preposition", @"Number", nil];
@@ -70,7 +70,7 @@
                 [newSwitch setOn:true animated:true];
             }
         }
-        [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, newLabel.frame.origin.y + newLabel.frame.size.height + 5)];
+        [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, newLabel.frame.origin.y + newLabel.frame.size.height + 6)];
     }
 }
 @end

@@ -118,7 +118,8 @@ static CGPoint position;
     
     helpButton = [[Button alloc]initWithFrame:CGRectMake(header.frame.size.width - 25, 5, 20, 20)];
     //Set ? image here for help Button
-    //[helpButton setImage:<#(UIImage *)#> forState:UIControlStateNormal];
+    [helpButton setImage:[UIImage imageNamed:@"helpButton.png"] forState:UIControlStateNormal];
+    [helpButton setBackgroundColor:[UIColor clearColor]];
     [helpButton setTag:1];
     [header addSubview:helpButton];
     

@@ -8,6 +8,9 @@
 //  This is for the misc. methods and variables the program needs
 
 #import "Utilities.h"
+#import "Database.h"
+#import "Tag.h"
+#import "AppDelegate.h"
 
 @implementation Utilities
 @synthesize curView, curWord;
@@ -32,6 +35,32 @@ static NSString *device;
         {
             NSLog(@"iPhone480");
             return @"iPhone480";
+        }
+    }
+}
+
++(void)DeleteUnusedTags
+{
+    NSArray *tags = [[Database GetInstance] SearchForTags];
+    for (int i = tags.count - 1; i >= 0; i--)
+    {
+        Tag *tag = tags[i];
+        if (tag.word.count <= 0)
+        {
+            NSLog(@"Deleting Tags");
+            AppDelegate *appDelegate = [[UIApplication sharedApplication]delegate];
+            
+            [appDelegate.managedObjectContext deleteObject:tag];
+            NSError *error;
+            if (![appDelegate.managedObjectContext save:&error])
+            {
+                NSLog(@"Did Not Delete Tags");
+            }
+            else
+            {
+                NSLog(@"Deleted Unused Tags");
+            }
+
         }
     }
 }

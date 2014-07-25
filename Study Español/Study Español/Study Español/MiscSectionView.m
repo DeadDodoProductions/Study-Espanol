@@ -47,7 +47,7 @@
                     [newSwitch setOn:true animated:true];
                 }
             }
-            [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, newLabel.frame.origin.y + newLabel.frame.size.height + 5)];
+            [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, newLabel.frame.origin.y + newLabel.frame.size.height + 6)];
         }
     }
     return self;
@@ -123,7 +123,7 @@
         [amountStepper setStepValue:5];
         [amountStepper addTarget:parentView action:@selector(StepperPressed:) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:amountStepper];
-        [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, amount.frame.origin.y + amount.frame.size.height + 3)];
+        [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, amount.frame.origin.y + amount.frame.size.height + 4)];
     }
     return self;
 }

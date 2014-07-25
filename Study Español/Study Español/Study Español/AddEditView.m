@@ -71,7 +71,7 @@
 }
 -(void)CreateGUI
 {
-    NSLog(@"Creating GUI for Add/Edit View");
+    NSLog(@"AddEditView: CreateGUI");
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
     NSString *string = [Utilities GetDevice];
     NSArray *sectionsArray;
@@ -81,20 +81,20 @@
         if (UIInterfaceOrientationIsPortrait(orientation))
         {
             NSLog(@"iPad Portrait");
-            layout = 0;
+            layout = iPadPortrait;
             [self GUIforiPadPortrait:sectionsArray];
         }
         else
         {
             NSLog(@"iPad Landscape");
-            layout = 1;
+            layout = iPadLandscape;
             [self GUIforiPadLandscape:sectionsArray];
         }
     }
     else
     {
         NSLog(@"iPhone");
-        layout = 2;
+        layout = iPhone;
         [self GUIforiPhone:sectionsArray];
     }
     
@@ -110,33 +110,34 @@
 //if IPad in Portrait
 -(void)GUIforiPadPortrait:(NSArray*)sectionArray
 {
+    NSLog(@"AddEditView: GUIforiPadPortrait");
     int startingY = 2;
-    WordSectionView *wordSectionView = [[WordSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self.view Layout:layout];
+    wordSectionView = [[WordSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self.view Layout:layout];
     [wordSectionView setBackgroundColor:[UIColor grayColor]];
     [content addSubview:wordSectionView];
     startingY = wordSectionView.frame.origin.y + wordSectionView.frame.size.height + 2;
     
-    WordTagSectionView *wordTagSectionView = [[WordTagSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self Layout:layout];
+    wordTagSectionView = [[WordTagSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self Layout:layout];
     [wordTagSectionView setBackgroundColor:[UIColor grayColor]];
     [content addSubview:wordTagSectionView];
     startingY = 2;
     
-    WordTypeSectionView *wordTypeSectionView = [[WordTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2 + (contentWidth * .5), startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self.view Layout:layout];
+    wordTypeSectionView = [[WordTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2 + (contentWidth * .5), startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self.view Layout:layout];
     [wordTypeSectionView setBackgroundColor:[UIColor grayColor]];
     [content addSubview:wordTypeSectionView];
     startingY = wordTypeSectionView.frame.origin.y + wordTypeSectionView.frame.size.height + 2;
     
-    VerbTypeSectionView *verbTypeSectionView = [[VerbTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2 + (contentWidth * .5), startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self.view Layout:layout];
+    verbTypeSectionView = [[VerbTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2 + (contentWidth * .5), startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self.view Layout:layout];
     [verbTypeSectionView setBackgroundColor:[UIColor grayColor]];
     [content addSubview:verbTypeSectionView];
     startingY = verbTypeSectionView.frame.origin.y + verbTypeSectionView.frame.size.height + 2;
     
-    MiscSectionView *miscSectionView = [[MiscSectionView alloc]initAddEditWithFrame:CGRectMake(2 + (contentWidth * .5), startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self.view Layout:layout];
+    miscSectionView = [[MiscSectionView alloc]initAddEditWithFrame:CGRectMake(2 + (contentWidth * .5), startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self.view Layout:layout];
     [miscSectionView setBackgroundColor:[UIColor grayColor]];
     [content addSubview:miscSectionView];
     startingY = miscSectionView.frame.origin.y + miscSectionView.frame.size.height + 2;
 
-    ConjugationTypeSectionView *conjugationTypeSectionView = [[ConjugationTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, contentWidth - 4, contentHeight * .26) ParentView:self Layout:layout];
+    conjugationTypeSectionView = [[ConjugationTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, contentWidth - 4, contentHeight * .26) ParentView:self Layout:layout];
     [conjugationTypeSectionView setBackgroundColor:[UIColor grayColor]];
     [conjugationTypeSectionView setContentSize:CGSizeMake(conjugationTypeSectionView.frame.size.width, [conjugationTypeSectionView.subviews[conjugationTypeSectionView.subviews.count - 1] frame].origin.y + [conjugationTypeSectionView.subviews[conjugationTypeSectionView.subviews.count - 1] frame].size.height + 2)];
     [content addSubview:conjugationTypeSectionView];
@@ -144,33 +145,34 @@
 //if IPad in Landscape
 -(void)GUIforiPadLandscape:(NSArray*)sectionArray
 {
+    NSLog(@"AddEditView: GUIforiPadLandscape");
      int startingY = 2;
-     WordSectionView *wordSectionView = [[WordSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, ((contentWidth - 3) * .332) - 1, contentHeight) ParentView:self.view Layout:layout];
+     wordSectionView = [[WordSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, ((contentWidth - 3) * .332) - 1, contentHeight) ParentView:self.view Layout:layout];
      [wordSectionView setBackgroundColor:[UIColor grayColor]];
      [content addSubview:wordSectionView];
      startingY = wordSectionView.frame.origin.y + wordSectionView.frame.size.height + 2;
      
-     WordTagSectionView *wordTagSectionView = [[WordTagSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, ((contentWidth - 3) * .332) - 1, contentHeight) ParentView:self Layout:layout];
+     wordTagSectionView = [[WordTagSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, ((contentWidth - 3) * .332) - 1, contentHeight) ParentView:self Layout:layout];
      [wordTagSectionView setBackgroundColor:[UIColor grayColor]];
      [content addSubview:wordTagSectionView];
      startingY = 2;
      
-     WordTypeSectionView *wordTypeSectionView = [[WordTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2 + (contentWidth * .332), startingY, ((contentWidth - 3) * .332) - 1, contentHeight) ParentView:self.view Layout:layout];
+     wordTypeSectionView = [[WordTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2 + (contentWidth * .332), startingY, ((contentWidth - 3) * .332) - 1, contentHeight) ParentView:self.view Layout:layout];
      [wordTypeSectionView setBackgroundColor:[UIColor grayColor]];
      [content addSubview:wordTypeSectionView];
      startingY = wordTypeSectionView.frame.origin.y + wordTypeSectionView.frame.size.height + 2;
      
-     VerbTypeSectionView *verbTypeSectionView = [[VerbTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2 + (contentWidth * .332), startingY, ((contentWidth - 3) * .332) - 1, contentHeight) ParentView:self.view Layout:layout];
+     verbTypeSectionView = [[VerbTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2 + (contentWidth * .332), startingY, ((contentWidth - 3) * .332) - 1, contentHeight) ParentView:self.view Layout:layout];
      [verbTypeSectionView setBackgroundColor:[UIColor grayColor]];
      [content addSubview:verbTypeSectionView];
      startingY = verbTypeSectionView.frame.origin.y + verbTypeSectionView.frame.size.height + 2;
      
-     MiscSectionView *miscSectionView = [[MiscSectionView alloc]initAddEditWithFrame:CGRectMake(2 + (contentWidth * .332), startingY, ((contentWidth - 3) * .332) - 1, contentHeight) ParentView:self.view Layout:layout];
+     miscSectionView = [[MiscSectionView alloc]initAddEditWithFrame:CGRectMake(2 + (contentWidth * .332), startingY, ((contentWidth - 3) * .332) - 1, contentHeight) ParentView:self.view Layout:layout];
      [miscSectionView setBackgroundColor:[UIColor grayColor]];
      [content addSubview:miscSectionView];
      startingY = 2;
      
-     ConjugationTypeSectionView *conjugationTypeSectionView = [[ConjugationTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2 + (contentWidth * .664), startingY, contentWidth * .332, contentHeight - 7) ParentView:self.view Layout:layout];
+     conjugationTypeSectionView = [[ConjugationTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2 + (contentWidth * .664), startingY, contentWidth * .332, contentHeight - 7) ParentView:self.view Layout:layout];
      [conjugationTypeSectionView setBackgroundColor:[UIColor grayColor]];
      [conjugationTypeSectionView setContentSize:CGSizeMake(conjugationTypeSectionView.frame.size.width, [conjugationTypeSectionView.subviews[conjugationTypeSectionView.subviews.count - 1] frame].origin.y + [conjugationTypeSectionView.subviews[conjugationTypeSectionView.subviews.count - 1] frame].size.height + 2)];
      [content addSubview:conjugationTypeSectionView];
@@ -178,33 +180,34 @@
 //if IPhone in Portrait
 -(void)GUIforiPhone:(NSArray*)sectionArray
 {
+    NSLog(@"AddEditView: GUIforiPhone");
     int startingY = 2;
-    WordSectionView *wordSectionView = [[WordSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, contentWidth - 4, contentHeight) ParentView:self.view Layout:layout];
+    wordSectionView = [[WordSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, contentWidth - 4, contentHeight) ParentView:self.view Layout:layout];
     [wordSectionView setBackgroundColor:[UIColor grayColor]];
     [content addSubview:wordSectionView];
     startingY = wordSectionView.frame.origin.y + wordSectionView.frame.size.height + 2;
     
-    WordTagSectionView *wordTagSectionView = [[WordTagSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, contentWidth - 4, contentHeight) ParentView:self Layout:layout];
+    wordTagSectionView = [[WordTagSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, contentWidth - 4, contentHeight) ParentView:self Layout:layout];
     [wordTagSectionView setBackgroundColor:[UIColor grayColor]];
     [content addSubview:wordTagSectionView];
     startingY = wordTagSectionView.frame.origin.y + wordTagSectionView.frame.size.height + 2;
     
-    WordTypeSectionView *wordTypeSectionView = [[WordTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, contentWidth - 4, contentHeight) ParentView:self.view Layout:layout];
+    wordTypeSectionView = [[WordTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, contentWidth - 4, contentHeight) ParentView:self.view Layout:layout];
     [wordTypeSectionView setBackgroundColor:[UIColor grayColor]];
     [content addSubview:wordTypeSectionView];
     startingY = wordTypeSectionView.frame.origin.y + wordTypeSectionView.frame.size.height + 2;
     
-    VerbTypeSectionView *verbTypeSectionView = [[VerbTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, contentWidth - 4, contentHeight) ParentView:self.view Layout:layout];
+    verbTypeSectionView = [[VerbTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, contentWidth - 4, contentHeight) ParentView:self.view Layout:layout];
     [verbTypeSectionView setBackgroundColor:[UIColor grayColor]];
     [content addSubview:verbTypeSectionView];
     startingY = verbTypeSectionView.frame.origin.y + verbTypeSectionView.frame.size.height + 2;
     
-    MiscSectionView *miscSectionView = [[MiscSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, contentWidth - 4, contentHeight) ParentView:self.view Layout:layout];
+    miscSectionView = [[MiscSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, contentWidth - 4, contentHeight) ParentView:self.view Layout:layout];
     [miscSectionView setBackgroundColor:[UIColor grayColor]];
     [content addSubview:miscSectionView];
     startingY = miscSectionView.frame.origin.y + miscSectionView.frame.size.height + 2;
     
-    ConjugationTypeSectionView *conjugationTypeSectionView = [[ConjugationTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, contentWidth - 4, contentHeight * .667) ParentView:self.view Layout:layout];
+    conjugationTypeSectionView = [[ConjugationTypeSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, contentWidth - 4, contentHeight * .667) ParentView:self.view Layout:layout];
     [conjugationTypeSectionView setBackgroundColor:[UIColor grayColor]];
     [conjugationTypeSectionView setContentSize:CGSizeMake(conjugationTypeSectionView.frame.size.width, [conjugationTypeSectionView.subviews[conjugationTypeSectionView.subviews.count - 1] frame].origin.y + [conjugationTypeSectionView.subviews[conjugationTypeSectionView.subviews.count - 1] frame].size.height + 2)];
     [content addSubview:conjugationTypeSectionView];
@@ -217,6 +220,7 @@
 //Pressed an Action Button
 -(void)ActionButtonPressed:(Button*)button
 {
+    NSLog(@"AddEditView: ActionButtonPressed");
     if (button.tag == 2)
     {
         NSLog(@"Search(Action1) Button Pressed");
@@ -229,7 +233,7 @@
 //Saves the Item
 -(void)RetrieveInfoAndSave
 {
-    NSLog(@"Sending Word Data to Database.m");
+    NSLog(@"AdEditView: RetrieveInfoAndSave");
     [[Database GetInstance] setEnglish:[[[content subviews][0] subviews][1] text]];
     NSLog(@"English: %@", [Database GetInstance].english);
     [[Database GetInstance] setSpanish:[[[content subviews][0] subviews][3] text]];
@@ -253,34 +257,46 @@
         NSLog(@"%@: %@, %@, %@, %@, %@, %@", [[new labels][0] text], [[new inputs][0] text], [[new inputs][1] text], [[new inputs][2] text], [[new inputs][3] text], [[new inputs][4] text], [[new inputs][5] text]);
     }
     [[Database GetInstance] setConjugations:a];
-    if (editingWord)
+    if (![[[Database GetInstance] english]  isEqual: @""] && ![[[Database GetInstance] spanish]  isEqual: @""])
     {
-        [[Database GetInstance] Edit];
+        if (editingWord)
+        {
+            [[Database GetInstance] Edit];
+        }
+        else
+        {
+            [[Database GetInstance] Save];
+        }
     }
     else
     {
-        [[Database GetInstance] Save];
+        //display alert about unable to save because of unanswered defaults
+        UIAlertView *alertView = [[UIAlertView alloc]initWithTitle:@"Unable to Save" message:@"Not all required fields filled out." delegate:self cancelButtonTitle:@"Ok" otherButtonTitles:nil, nil];
+        [alertView show];
+        //set the required fields to red
+        [[wordSectionView subviews][0] setTextColor:[UIColor redColor]];
+        [[wordSectionView subviews][2] setTextColor:[UIColor redColor]];
     }
 }
 //Clears the Form
 -(void)ClearAll
 {
-    NSLog(@"Clearing Form");
-    [[[content subviews][0] subviews][1] setText:@""];
-    [[[content subviews][0] subviews][3] setText:@""];
-    [[[content subviews][0] subviews][5] setText:@""];
-    [[[content subviews][0] subviews][7] setText:@""];
+    NSLog(@"AdEditView: ClearAll");
+    [[wordSectionView subviews][1] setText:@""];
+    [[wordSectionView subviews][3] setText:@""];
+    [[wordSectionView subviews][5] setText:@""];
+    [[wordSectionView subviews][7] setText:@""];
     [tags removeAllObjects];
-    [[[content subviews][1] subviews][5] reloadData];
+    [[wordTagSectionView subviews][5] reloadData];
     [[SwitchController GetInstance] TurnOffAll];
     for (int i = 0; i < 8; i++)
     {
-        [[[[content subviews][5] subviews][i] inputs][0] setText:@""];
-        [[[[content subviews][5] subviews][i] inputs][1] setText:@""];
-        [[[[content subviews][5] subviews][i] inputs][2] setText:@""];
-        [[[[content subviews][5] subviews][i] inputs][3] setText:@""];
-        [[[[content subviews][5] subviews][i] inputs][4] setText:@""];
-        [[[[content subviews][5] subviews][i] inputs][5] setText:@""];
+        [[[conjugationTypeSectionView subviews][i] inputs][0] setText:@""];
+        [[[conjugationTypeSectionView subviews][i] inputs][1] setText:@""];
+        [[[conjugationTypeSectionView subviews][i] inputs][2] setText:@""];
+        [[[conjugationTypeSectionView subviews][i] inputs][3] setText:@""];
+        [[[conjugationTypeSectionView subviews][i] inputs][4] setText:@""];
+        [[[conjugationTypeSectionView subviews][i] inputs][5] setText:@""];
     }
 }
 
@@ -289,21 +305,24 @@
 //Add Items to the Table View
 -(NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    NSLog(@"AddEditView: TableViewNumberOfRowsInSection: Tags Count: %lu", (unsigned long)[tags count]);
+    NSLog(@"AddEditView: TableViewNumberOfRowsInSection");
     return [tags count];
 }
 -(UITableViewCell*)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"AdEditView: tableView cellForRowAtIndexPath");
     UITableViewCell *cell = [[UITableViewCell alloc]init];
     [[cell textLabel] setText:[NSString stringWithFormat:@"%@", tags[indexPath.row]]];
     return cell;
 }
 -(UITableViewCellEditingStyle)tableView:(UITableView*)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath
 {
+    NSLog(@"AdEditView: tableView editingStyleForRowAtIndexPath");
     return UITableViewCellEditingStyleDelete;
 }
 -(void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
 {
+     NSLog(@"AdEditView: tableView commitEditingStyle");
     if (editingStyle == UITableViewCellEditingStyleDelete)
     {
         UIView *aView = content.subviews[1];
@@ -318,7 +337,7 @@
 //Add and Remove Tags from the List
 -(void)NewTag
 {
-    NSLog(@"%@", content.subviews);
+    NSLog(@"AdEditView: NewTag");
     if (![[[[content subviews][1] subviews][1] text]  isEqual: @""])
     {
         [tags addObject:[[[[content subviews][1] subviews][1] text]lowercaseString]];
@@ -329,6 +348,7 @@
 }
 -(void)RemoveTag
 {
+    NSLog(@"AdEditView: RemoveTag");
     UIView *aView = content.subviews[1];
     UITableView *tagsTable = aView.subviews[5];
     [tagsTable setEditing:!tagsTable.editing];

@@ -146,7 +146,6 @@ static Database *instance = nil;
         [word addConjugationsObject:newConjugation];
     }
     NSError *error = nil;
-    
     //save word
     if (![context save:&error])
     {
@@ -216,14 +215,21 @@ static Database *instance = nil;
     }
     NSError *error = nil;
     
-    //save word
-    if (![context save:&error])
+    if (activeWord.english != nil || activeWord.spanish != nil || activeWord.wordType != nil)
     {
-        NSLog(@"Problem Updating: %@, %@, %@", error, [error localizedDescription], error.userInfo);
+        //save word
+        if (![context save:&error])
+        {
+            NSLog(@"Problem Saving: %@, %@, %@", error, [error localizedDescription], error.userInfo);
+        }
+        else
+        {
+            NSLog(@"Saved");
+        }
     }
     else
     {
-        NSLog(@"Updated");
+        //Error pop-up saying cannot save because no all required fields are filled out
     }
     
     //resets values of static fields

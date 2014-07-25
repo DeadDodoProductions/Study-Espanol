@@ -115,7 +115,7 @@
             [newSwitch setValue:[NSNumber numberWithInt:i]];
             [[[SwitchController GetInstance] ctSwitches] addObject:newSwitch];
             [self addSubview:newSwitch];
-            [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, newLabel.frame.origin.y + newLabel.frame.size.height + 5)];
+            [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, newLabel.frame.origin.y + newLabel.frame.size.height + 6)];
         }
     }
     return self;

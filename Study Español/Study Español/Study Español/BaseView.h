@@ -26,6 +26,8 @@
     int contentWidth;
     int contentHeight;
     int layout;
+    enum layout {iPadPortrait, iPadLandscape, iPhone};
+    enum layout currentLayout;
     
     @public
     id superID;

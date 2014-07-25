@@ -49,13 +49,13 @@
         [addButton addTarget:parentView action:@selector(NewTag) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:addButton];
         
-        if (layout == 2)
+        if (layout == iPhone)
         {
             tagTable = [[UITableView alloc]initWithFrame:CGRectMake(5, addButton.frame.origin.y + addButton.frame.size.height + 5, self.frame.size.width - 10, 250)];
         }
         else
         {
-            tagTable = [[UITableView alloc]initWithFrame:CGRectMake(5, addButton.frame.origin.y + addButton.frame.size.height + 5, self.frame.size.width - 10, 318)];
+            tagTable = [[UITableView alloc]initWithFrame:CGRectMake(5, addButton.frame.origin.y + addButton.frame.size.height + 5, self.frame.size.width - 10, 321)];
         }
         [tagTable setDelegate:parentView];
         [tagTable setDataSource:parentView];
@@ -90,7 +90,7 @@
         [tagInput setDelegate:self];
         [self addSubview:tagInput];
         
-        Button *clearButton = [[Button alloc]initWithFrame:CGRectMake(tagInput.frame.size.width + tagInput.frame.origin.x + 5, 40, 25, 30)];
+        Button *clearButton = [[Button alloc]initWithFrame:CGRectMake(tagInput.frame.size.width + tagInput.frame.origin.x + 3, 40, 25, 30)];
         [clearButton setTitle:@"X" forState:UIControlStateNormal];
         [clearButton addTarget:self action:@selector(ClearTag) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:clearButton];
@@ -105,11 +105,11 @@
         [addButton addTarget:parentView action:@selector(NewTag) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:addButton];
         
-        if (layout == 2)
+        if (layout == iPhone)
         {
             tagTable = [[UITableView alloc]initWithFrame:CGRectMake(5, addButton.frame.origin.y + addButton.frame.size.height + 5, self.frame.size.width - 10, 250)];
         }
-        else if (layout == 0)
+        else if (layout == iPadPortrait)
         {
             tagTable = [[UITableView alloc]initWithFrame:CGRectMake(5, addButton.frame.origin.y + addButton.frame.size.height + 5, self.frame.size.width - 10, 349)];
         }
