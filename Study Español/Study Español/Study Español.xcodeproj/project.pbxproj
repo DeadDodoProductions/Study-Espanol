@@ -11,6 +11,8 @@
 		204AA95B190F74B6000A0D1F /* QuizVocabCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 204AA95A190F74B6000A0D1F /* QuizVocabCell.m */; };
 		204AA95E190F74CA000A0D1F /* QuizAnswerCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 204AA95D190F74CA000A0D1F /* QuizAnswerCell.m */; };
 		208222D71981E3D800FE13FC /* helpButton.png in Resources */ = {isa = PBXBuildFile; fileRef = 208222D61981E3D800FE13FC /* helpButton.png */; };
+		208222DA19828D5400FE13FC /* Launch.m in Sources */ = {isa = PBXBuildFile; fileRef = 208222D919828D5400FE13FC /* Launch.m */; };
+		208222DC1982923B00FE13FC /* Launch.png in Resources */ = {isa = PBXBuildFile; fileRef = 208222DB1982923B00FE13FC /* Launch.png */; };
 		209C38F618F1D13400DA6F78 /* SearchView.m in Sources */ = {isa = PBXBuildFile; fileRef = 209C38F518F1D13400DA6F78 /* SearchView.m */; };
 		209C7A88192E9C1000C06E21 /* ConjugationWordViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 209C7A87192E9C1000C06E21 /* ConjugationWordViewCell.m */; };
 		209D625218EE661C00CA5EF0 /* Storyboard_iPad.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 209D625018EE661C00CA5EF0 /* Storyboard_iPad.storyboard */; };
@@ -75,6 +77,9 @@
 		204AA95C190F74CA000A0D1F /* QuizAnswerCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = QuizAnswerCell.h; sourceTree = "<group>"; };
 		204AA95D190F74CA000A0D1F /* QuizAnswerCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = QuizAnswerCell.m; sourceTree = "<group>"; };
 		208222D61981E3D800FE13FC /* helpButton.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = helpButton.png; path = ../../Content/helpButton.png; sourceTree = "<group>"; };
+		208222D819828D5400FE13FC /* Launch.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Launch.h; sourceTree = "<group>"; };
+		208222D919828D5400FE13FC /* Launch.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Launch.m; sourceTree = "<group>"; };
+		208222DB1982923B00FE13FC /* Launch.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = Launch.png; path = ../../Content/Launch.png; sourceTree = "<group>"; };
 		209C38F418F1D13400DA6F78 /* SearchView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SearchView.h; sourceTree = "<group>"; };
 		209C38F518F1D13400DA6F78 /* SearchView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SearchView.m; sourceTree = "<group>"; };
 		209C7A86192E9C1000C06E21 /* ConjugationWordViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ConjugationWordViewCell.h; sourceTree = "<group>"; };
@@ -214,6 +219,7 @@
 		208222D51981E3C400FE13FC /* Images */ = {
 			isa = PBXGroup;
 			children = (
+				208222DB1982923B00FE13FC /* Launch.png */,
 				208222D61981E3D800FE13FC /* helpButton.png */,
 			);
 			name = Images;
@@ -337,6 +343,8 @@
 				20FBAB861912FE9800BB297B /* SubViews */,
 				2031F25219047F2000305A46 /* Sections */,
 				204AA955190F7467000A0D1F /* Cells */,
+				208222D819828D5400FE13FC /* Launch.h */,
+				208222D919828D5400FE13FC /* Launch.m */,
 				20D9E2C918EA771E00127FBA /* Home.h */,
 				20D9E2CA18EA771E00127FBA /* Home.m */,
 				20D9E2CC18EA772F00127FBA /* AddEditView.h */,
@@ -447,6 +455,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				208222DC1982923B00FE13FC /* Launch.png in Resources */,
 				20D9E25918EA705500127FBA /* InfoPlist.strings in Resources */,
 				20D9E26418EA705500127FBA /* Images.xcassets in Resources */,
 				209D625318EE661C00CA5EF0 /* Storyboard_iPhone.storyboard in Resources */,
@@ -490,6 +499,7 @@
 				20D9E2BC18EA734C00127FBA /* Words.xcdatamodeld in Sources */,
 				20D9E2A118EA72BB00127FBA /* Button.m in Sources */,
 				20D9E2AA18EA72EA00127FBA /* BaseView.m in Sources */,
+				208222DA19828D5400FE13FC /* Launch.m in Sources */,
 				20D9E2C518EA76EF00127FBA /* Conjugation.m in Sources */,
 				204AA95E190F74CA000A0D1F /* QuizAnswerCell.m in Sources */,
 				20FE9505194291880019F28F /* WordSectionView.m in Sources */,

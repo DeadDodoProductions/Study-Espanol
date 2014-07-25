@@ -18,8 +18,9 @@
     NSArray *tagArray;
     UITableView *tagsTable;
     UITableView *conjugationTable;
-    CGPoint truePosition;
+    //CGPoint truePosition;
 }
+@property (readwrite, nonatomic) CGRect startFrame;
 -(void)CreateWordView:(Word*)word;
 -(void)SetDelegate:(id)delegate;
 

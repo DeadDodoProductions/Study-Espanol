@@ -20,6 +20,7 @@
 #import "Database.h"
 
 @implementation ViewWord
+@synthesize startFrame;
 ///Initalization
 - (id)initWithFrame:(CGRect)frame
 {

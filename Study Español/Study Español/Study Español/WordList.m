@@ -106,6 +106,7 @@
     [wordCollectionView setDataSource:self];
     [wordCollectionView setBackgroundColor:[UIColor whiteColor]];
     [wordCollectionView registerClass:[WordListCell class] forCellWithReuseIdentifier:@"WordListCell"];
+    [wordCollectionView setTag:1];
     [content addSubview:wordCollectionView];
 }
 
@@ -166,13 +167,28 @@
     Word *word = [Database GetInstance].words[indexPath.row];
     [[Database GetInstance] setActiveWord:word];
     NSLog(@"Active Word: %@", [[[Database GetInstance] activeWord] english]);
-    int x = [[collectionView subviews][indexPath.row] frame].origin.x;
-    int y = [[collectionView subviews][indexPath.row] frame].origin.y;
-    int h = [[collectionView subviews][indexPath.row] frame].size.height;
+    int index = indexPath.row;
+    if (index >= 50)
+    {
+        int a = index / 50;
+        index = index - (50 * a);
+    }
+    //use a math equation to determine if the word is in the first row, second row, or third row
+    int x = [[collectionView subviews][index] frame].origin.x;
+    int y = [[collectionView subviews][index] frame].origin.y;
+    int h = [[collectionView subviews][index] frame].size.height;
     NSLog(@"ViewWord Frame: X: %d Y: %d", x, y);
-    [viewWord setFrame:CGRectMake(x + 2, y + h, flow.itemSize.width, 0)];
+    [viewWord setFrame:CGRectMake(x + 2, y + h  - collectionView.contentOffset.y, flow.itemSize.width, 0)];
+    [viewWord setStartFrame:CGRectMake(x, y, viewWord.frame.size.width, viewWord.frame.size.height)];
     [viewWord SetDelegate:self];
     [viewWord CreateWordView:word];
+    
+    NSLog(@"%f", y + h - collectionView.contentOffset.y + viewWord.frame.size.height);
+    NSLog(@"%f", collectionView.frame.size.height);
+    if (y + h - collectionView.contentOffset.y + viewWord.frame.size.height >= collectionView.frame.size.height)
+    {
+        [collectionView setContentOffset:CGPointMake(0, ((y + h - collectionView.contentOffset.y + viewWord.frame.size.height) - collectionView.frame.size.height) + collectionView.contentOffset.y) animated:true];
+    }
     
     [super SetActionButton:1 Title:@"Edit"];
     [super SetActionButton:2 Title:@"Delete"];
@@ -182,6 +198,13 @@
 {
     [actionButton1 setHidden:true];
     [actionButton2 setHidden:true];
+}
+-(void)scrollViewDidScroll:(UIScrollView *)scrollView
+{
+    if (scrollView.tag == 1)
+    {
+        [viewWord setFrame:CGRectMake(viewWord.frame.origin.x, viewWord.startFrame.origin.y + 40 - wordCollectionView.contentOffset.y, viewWord.frame.size.width, viewWord.frame.size.height)];
+    }
 }
 
 

@@ -18,5 +18,6 @@
 +(void)KeyboardInView;
 +(void)KeyboardOffView;
 +(NSString*)GetDevice;
++(void)DeleteUnusedTags;
 
 @end
