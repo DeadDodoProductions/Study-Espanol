@@ -25,6 +25,9 @@
 
 #import "Database.h"
 
+#import "SVGKImage.h"
+#import "SVGKExporterUIImage.h"
+
 @interface BaseView ()
 
 @end
@@ -110,26 +113,36 @@ static CGPoint position;
     contentHeight = content.frame.size.height;
     
     [header setBackgroundColor:[UIColor colorWithRed:0 green:0 blue:0 alpha:1]];
-    homeButton = [[Button alloc]initWithFrame:CGRectMake(5, 5, 50, 20)];
+    
+    settingsButton = [[Button alloc]initWithFrame:CGRectMake(5, 2, 50, 26)];
+    [settingsButton setTitle:@"Settings" forState:UIControlStateNormal];
+    [settingsButton setTag:0];
+    [settingsButton addTarget:self action:@selector(HeaderButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
+    [header addSubview:settingsButton];
+    
+    homeButton = [[Button alloc]initWithFrame:CGRectMake(5, 2, 50, 26)];
     [homeButton setTitle:@"Casa" forState:UIControlStateNormal];
     [homeButton setTag:0];
     [homeButton addTarget:self action:@selector(HeaderButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [header addSubview:homeButton];
     
-    helpButton = [[Button alloc]initWithFrame:CGRectMake(header.frame.size.width - 25, 5, 20, 20)];
+    helpButton = [[Button alloc]initWithFrame:CGRectMake(header.frame.size.width - 31, 2, 26, 26)];
     //Set ? image here for help Button
-    [helpButton setImage:[UIImage imageNamed:@"helpButton.png"] forState:UIControlStateNormal];
+    SVGKImage *helpSVG = [SVGKImage imageNamed:@"helpButton.svg"];
+    [helpSVG setSize:CGSizeMake(20, 20)];
+    UIImage *helpImage = [SVGKExporterUIImage exportAsUIImage:helpSVG];
+    [helpButton setImage:helpImage forState:UIControlStateNormal];
     [helpButton setBackgroundColor:[UIColor clearColor]];
     [helpButton setTag:1];
     [header addSubview:helpButton];
     
-    actionButton1 = [[Button alloc]initWithFrame:CGRectMake(header.frame.size.width - 60, 5, 30, 20)];
+    actionButton1 = [[Button alloc]initWithFrame:CGRectMake(header.frame.size.width - 70, 2, 50, 26)];
     [actionButton1 setTag:2];
     [actionButton1 addTarget:self action:@selector(ActionButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [actionButton1 setHidden:true];
     [header addSubview:actionButton1];
     
-    actionButton2 = [[Button alloc]initWithFrame:CGRectMake(header.frame.size.width - 95, 5, 30, 20)];
+    actionButton2 = [[Button alloc]initWithFrame:CGRectMake(actionButton1.frame.origin.x - actionButton1.frame.size.width - 50, 2, 50, 26)];
     [actionButton2 setTag:3];
     [actionButton2 addTarget:self action:@selector(ActionButtonPressed:) forControlEvents:UIControlEventTouchUpInside];
     [actionButton2 setHidden:true];
@@ -174,14 +187,14 @@ static CGPoint position;
         [actionButton1 setTitle:title forState:UIControlStateNormal];
         [actionButton1 setHidden:false];
         CGSize size = [title sizeWithAttributes:[NSDictionary dictionaryWithObject:[UIFont fontWithName:@"Helvetica" size:20.0f] forKey:NSFontAttributeName]];
-        [actionButton1 setFrame:CGRectMake(helpButton.frame.origin.x - (size.width + 5), actionButton1.frame.origin.y, size.width, actionButton1.frame.size.height)];
+        [actionButton1 setFrame:CGRectMake(helpButton.frame.origin.x - (size.width + 10), actionButton1.frame.origin.y, size.width, actionButton1.frame.size.height)];
     }
     else
     {
         [actionButton2 setTitle:title forState:UIControlStateNormal];
         [actionButton2 setHidden:false];
         CGSize size = [title sizeWithAttributes:[NSDictionary dictionaryWithObject:[UIFont fontWithName:@"Helvetica" size:20.0f] forKey:NSFontAttributeName]];
-        [actionButton2 setFrame:CGRectMake(actionButton1.frame.origin.x - (size.width + 5), actionButton2.frame.origin.y, size.width, actionButton2.frame.size.height)];
+        [actionButton2 setFrame:CGRectMake(actionButton1.frame.origin.x - (size.width + 10), actionButton2.frame.origin.y, size.width, actionButton2.frame.size.height)];
     }
 }
 

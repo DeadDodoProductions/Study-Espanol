@@ -7,10 +7,11 @@
 //
 
 #import "BaseView.h"
+#import "WordTagSectionView.h"
 
 @class WordSectionView, WordTagSectionView, WordTypeSectionView, VerbTypeSectionView, MiscSectionView, ConjugationTypeSectionView;
 
-@interface AddEditView : BaseView <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate>
+@interface AddEditView : BaseView <UITableViewDataSource, UITableViewDelegate, UITextViewDelegate, WordTagSectionDelagate>
 {
     CGRect startRect;
     NSMutableArray *tags;
@@ -23,5 +24,6 @@
 }
 @property (nonatomic, readwrite) bool editingWord;
 - (void)isEditingWord;
+-(void)NewTag;
 
 @end

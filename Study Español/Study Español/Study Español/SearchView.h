@@ -25,5 +25,6 @@
 }
 - (id)initWithFrame:(CGRect)frame Home:(Home *)home;
 -(void)NewTag:(NSString*)tag TagTable:(UITableView*)tagTable;
+-(void)NewTag;
 
 @end

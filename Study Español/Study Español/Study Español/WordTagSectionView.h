@@ -10,6 +10,11 @@
 
 @class TextView, SearchView, Button;
 
+@protocol WordTagSectionDelagate<NSObject>
+-(void)AddTag:(NSString*)tag;
+-(void)RemoveTag;
+@end
+
 @interface WordTagSectionView : UIView <UITextFieldDelegate, UITextViewDelegate, UITableViewDataSource, UITableViewDelegate>
 {
     NSArray *tagsArray;
@@ -23,6 +28,7 @@
     Button *addButton;
 }
 @property (readwrite, nonatomic) CGPoint truePosition;
+@property (readwrite, nonatomic) id<WordTagSectionDelagate> delegate;
 - (id)initAddEditWithFrame:(CGRect)frame ParentView:(UIViewController*)parentView Layout:(int)layout;
 - (id)initSearchWithFrame:(CGRect)frame ParentView:(UIView*)parentView Layout:(int)layout;
 -(void)ClearTag;

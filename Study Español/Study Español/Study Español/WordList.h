@@ -9,12 +9,14 @@
 #import "BaseView.h"
 #import "ViewWord.h"
 
-@interface WordList : BaseView <ViewWordDelagate, UIScrollViewDelegate>
+@interface WordList : BaseView <ViewWordDelagate, UIScrollViewDelegate, UIAlertViewDelegate>
 {
     UICollectionView *wordCollectionView;
     UICollectionViewFlowLayout *flow;
     ViewWord *viewWord;
     int offsetX;
+    int cellHeight;
+    float cellWidth;
 }
 
 @end

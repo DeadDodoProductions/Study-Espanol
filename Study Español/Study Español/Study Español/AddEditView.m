@@ -119,6 +119,7 @@
     
     wordTagSectionView = [[WordTagSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, ((contentWidth - 3) * .5) - 1, contentHeight * .3) ParentView:self Layout:layout];
     [wordTagSectionView setBackgroundColor:[UIColor grayColor]];
+    [wordTagSectionView setDelegate:self];
     [content addSubview:wordTagSectionView];
     startingY = 2;
     
@@ -154,6 +155,7 @@
      
      wordTagSectionView = [[WordTagSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, ((contentWidth - 3) * .332) - 1, contentHeight) ParentView:self Layout:layout];
      [wordTagSectionView setBackgroundColor:[UIColor grayColor]];
+    [wordTagSectionView setDelegate:self];
      [content addSubview:wordTagSectionView];
      startingY = 2;
      
@@ -189,6 +191,7 @@
     
     wordTagSectionView = [[WordTagSectionView alloc]initAddEditWithFrame:CGRectMake(2, startingY, contentWidth - 4, contentHeight) ParentView:self Layout:layout];
     [wordTagSectionView setBackgroundColor:[UIColor grayColor]];
+    [wordTagSectionView setDelegate:self];
     [content addSubview:wordTagSectionView];
     startingY = wordTagSectionView.frame.origin.y + wordTagSectionView.frame.size.height + 2;
     
@@ -262,6 +265,7 @@
         if (editingWord)
         {
             [[Database GetInstance] Edit];
+            editingWord = false;
         }
         else
         {
@@ -335,15 +339,14 @@
 
 ///Tag Methods
 //Add and Remove Tags from the List
--(void)NewTag
+-(void)AddTag:(NSString *)tag
 {
-    NSLog(@"AdEditView: NewTag");
-    if (![[[[content subviews][1] subviews][1] text]  isEqual: @""])
+    NSLog(@"AdEditView: AddTag");
+    if (![tag isEqual: @""])
     {
-        [tags addObject:[[[[content subviews][1] subviews][1] text]lowercaseString]];
+        [tags addObject:[tag lowercaseString]];
         [[[content subviews][1] subviews][5] reloadData];
-        NSLog(@"New Tag: %@ -- %@", [[[content subviews][1] subviews][1] text], tags[tags.count - 1]);
-        [[[content subviews][1] subviews][1] setText:@""];
+        NSLog(@"New Tag: %@ -- %@", tag, tags[tags.count - 1]);
     }
 }
 -(void)RemoveTag

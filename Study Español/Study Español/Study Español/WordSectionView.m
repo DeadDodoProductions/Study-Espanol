@@ -34,6 +34,7 @@
             {
                 [newTextView setFrame:CGRectMake(newTextView.frame.origin.x, newTextView.frame.origin.y, newTextView.frame.size.width, newTextView.frame.size.height * 4)];
             }
+            [newTextView setFont:[UIFont systemFontOfSize:18]];
             [newTextView setDelegate:self];
             [self addSubview:newTextView];
             if ([[Database GetInstance] activeWord] != nil)

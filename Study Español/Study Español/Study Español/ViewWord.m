@@ -84,8 +84,9 @@
     }
     NSLog(@"Array Count: %lu", (unsigned long)[conjugationArray count]);
     int y = 5;
-    Button *closeButton = [[Button alloc]initWithFrame:CGRectMake(self.frame.size.width - 20, y, 10, 10)];
+    Button *closeButton = [[Button alloc]initWithFrame:CGRectMake(self.frame.size.width - 25, y, 20, 20)];
     [closeButton setTitle:@"^" forState:UIControlStateNormal];
+    [closeButton setBackgroundColor:[UIColor darkGrayColor]];
     [closeButton addTarget:self action:@selector(ButtonWasPressed:) forControlEvents:UIControlEventTouchUpInside];
     if (word.pronunciation.length > 0)
     {

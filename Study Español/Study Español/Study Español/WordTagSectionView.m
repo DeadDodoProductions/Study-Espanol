@@ -14,7 +14,7 @@
 #import "Tag.h"
 
 @implementation WordTagSectionView
-@synthesize truePosition;
+@synthesize truePosition, delegate;
 
 - (id)initAddEditWithFrame:(CGRect)frame ParentView:(UIViewController<UITableViewDelegate, UITableViewDataSource>*)parentView Layout:(int)layout
 {
@@ -41,12 +41,12 @@
         
         removeButton = [[Button alloc]initWithFrame:CGRectMake(5, tag.frame.origin.y + 5 + tag.frame.size.height, self.frame.size.width * .5 - 10, 30)];
         [removeButton setTitle:@"Remove" forState:UIControlStateNormal];
-        [removeButton addTarget:parentView action:@selector(RemoveTag) forControlEvents:UIControlEventTouchUpInside];
+        [removeButton addTarget:self action:@selector(RemoveTag) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:removeButton];
         
         addButton = [[Button alloc]initWithFrame:CGRectMake(removeButton.frame.size.width + 10, removeButton.frame.origin.y, self.frame.size.width * .5 - 10, 30)];
         [addButton setTitle:@"Add" forState:UIControlStateNormal];
-        [addButton addTarget:parentView action:@selector(NewTag) forControlEvents:UIControlEventTouchUpInside];
+        [addButton addTarget:self action:@selector(AddTag) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:addButton];
         
         if (layout == iPhone)
@@ -71,6 +71,7 @@
     if (self)
     {
         NSLog(@"Creating Word and Tag Section");
+        tableViewDelegate = parentView;
         truePosition = CGPointMake(parentView.frame.origin.x + self.frame.origin.x, parentView.frame.origin.y + self.frame.origin.y);
         UILabel *word = [[UILabel alloc]initWithFrame:CGRectMake(5, 5, self.frame.size.width * .15, 30)];
         [word setText:@"Word"];
@@ -97,12 +98,12 @@
         
         removeButton = [[Button alloc]initWithFrame:CGRectMake(5, tag.frame.origin.y + 5 + tag.frame.size.height, self.frame.size.width * .5 - 10, 30)];
         [removeButton setTitle:@"Remove" forState:UIControlStateNormal];
-        [removeButton addTarget:parentView action:@selector(RemoveTag) forControlEvents:UIControlEventTouchUpInside];
+        [removeButton addTarget:self action:@selector(RemoveTag) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:removeButton];
         
         addButton = [[Button alloc]initWithFrame:CGRectMake(removeButton.frame.size.width + 10, removeButton.frame.origin.y, self.frame.size.width * .5 - 10, 30)];
         [addButton setTitle:@"Add" forState:UIControlStateNormal];
-        [addButton addTarget:parentView action:@selector(NewTag) forControlEvents:UIControlEventTouchUpInside];
+        [addButton addTarget:self action:@selector(AddTag) forControlEvents:UIControlEventTouchUpInside];
         [self addSubview:addButton];
         
         if (layout == iPhone)
@@ -133,17 +134,7 @@
     {
         if (tagSearchTable == nil)
         {
-            //turn this into a horizontal table
-            tagSearchTable = [[UITableView alloc]init];
-            CGAffineTransform rotateTable = CGAffineTransformMakeRotation(-M_PI_2);
-            tagSearchTable.transform = rotateTable;
-            [tagSearchTable setFrame:CGRectMake(textView.frame.origin.x, textView.frame.origin.y, textView.frame.size.width, 0)];
-            [tagSearchTable setRowHeight:textView.frame.size.width * 0.3334];
-            [tagSearchTable setTag:1];
-            [tagSearchTable setDelegate:self];
-            [tagSearchTable setDataSource:self];
-            [self addSubview:tagSearchTable];
-            [self ChangeLayoutPositions:30];
+            [self CreateTagHintList:textView];
         }
         [removeButton addTarget:self action:@selector(HideTableView) forControlEvents:UIControlEventTouchUpInside];
         [addButton addTarget:self action:@selector(HideTableView) forControlEvents:UIControlEventTouchUpInside];
@@ -162,6 +153,10 @@
     NSLog(@"WordTagSectionView: TextViewDidChange");
     if([textView tag] == 1)
     {
+        if ([tagSearchTable isHidden] || tagSearchTable == nil)
+        {
+            [self CreateTagHintList:textView];
+        }
         NSString* text = [textView text];
         tagOptions = [[NSMutableArray alloc]init];
         for (int i = 0; i < tagsArray.count; i++)
@@ -224,6 +219,7 @@
     NSLog(@"%@", tagOptions);
     //got an error at this point, wasn't able to duplicate!
     [tagInput setText:tagOptions[indexPath.row]];
+    [self AddTag];
     [self HideTableView];
 }
 
@@ -244,5 +240,30 @@
     [removeButton setFrame:CGRectMake(removeButton.frame.origin.x, removeButton.frame.origin.y + a, removeButton.frame.size.width, removeButton.frame.size.height)];
     [addButton setFrame:CGRectMake(addButton.frame.origin.x, addButton.frame.origin.y + a, addButton.frame.size.width, addButton.frame.size.height)];
     [tagTable setFrame:CGRectMake(tagTable.frame.origin.x, tagTable.frame.origin.y + a, tagTable.frame.size.width, tagTable.frame.size.height - a)];
+}
+
+-(void)AddTag
+{
+    [delegate AddTag:[tagInput text]];
+    [tagInput setText:@""];
+}
+-(void)RemoveTag
+{
+    [delegate RemoveTag];
+}
+
+-(void)CreateTagHintList:(UITextView*)textView
+{
+    //turn this into a horizontal table
+    tagSearchTable = [[UITableView alloc]init];
+    CGAffineTransform rotateTable = CGAffineTransformMakeRotation(-M_PI_2);
+    tagSearchTable.transform = rotateTable;
+    [tagSearchTable setFrame:CGRectMake(textView.frame.origin.x, textView.frame.origin.y, textView.frame.size.width, 0)];
+    [tagSearchTable setRowHeight:textView.frame.size.width * 0.3334];
+    [tagSearchTable setTag:1];
+    [tagSearchTable setDelegate:self];
+    [tagSearchTable setDataSource:self];
+    [self addSubview:tagSearchTable];
+    [self ChangeLayoutPositions:30];
 }
 @end

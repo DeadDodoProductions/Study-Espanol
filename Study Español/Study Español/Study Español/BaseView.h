@@ -19,6 +19,7 @@
     UIScrollView *content;
     UIInterfaceOrientation orientation;
     CGSize screenSize;
+    Button *settingsButton;
     Button *homeButton;
     Button *actionButton1;
     Button *actionButton2;

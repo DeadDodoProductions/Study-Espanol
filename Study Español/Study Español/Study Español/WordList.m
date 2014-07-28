@@ -43,8 +43,6 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     [self CreateGUI];
-    viewWord = [[ViewWord alloc]init];
-    [content addSubview:viewWord];
 }
 - (void)didReceiveMemoryWarning
 {
@@ -55,34 +53,37 @@
 {
     UIInterfaceOrientation orientation = [UIApplication sharedApplication].statusBarOrientation;
     NSString *string = [Utilities GetDevice];
-    float width;
     if ([string isEqualToString:@"iPad"])
     {
         if (UIInterfaceOrientationIsPortrait(orientation))
         {
             NSLog(@"iPad Portrait");
-            width = roundf((contentWidth - 4) * .498);
+            layout = iPadPortrait;
+            cellWidth = roundf((contentWidth - 4) * .498);
         }
         else
         {
             NSLog(@"iPad Landscape");
-            width = roundf((contentWidth - 4) * .331);
+            layout = iPadLandscape;
+            cellWidth = roundf((contentWidth - 4) * .331);
         }
     }
     else
     {
+        layout = iPhone;
         if (UIInterfaceOrientationIsPortrait(orientation))
         {
             NSLog(@"iPhone Portrait");
-            width = roundf((contentWidth - 4));
+            cellWidth = roundf((contentWidth - 4));
         }
         else
         {
             NSLog(@"iPhone Landscape");
-            width = roundf((contentWidth - 4) * .497);
+            cellWidth = roundf((contentWidth - 4) * .497);
         }
     }
-    [flow setItemSize:CGSizeMake(width, 40)];
+    cellHeight = 40;
+    [flow setItemSize:CGSizeMake(cellWidth, cellHeight)];
     NSLog(@"Cell Width: %f", [flow itemSize].width);
 }
 
@@ -127,6 +128,14 @@
     else
     {
         NSLog(@"Delete(Action2) Button Pressed");
+        UIAlertView *alert = [[UIAlertView alloc]initWithTitle:@"Delete" message:@"Are you sure you want to delete?" delegate:self cancelButtonTitle:@"NO" otherButtonTitles:@"YES", nil];
+        [alert show];
+    }
+}
+-(void)alertView:(UIAlertView *)alertView didDismissWithButtonIndex:(NSInteger)buttonIndex
+{
+    if (buttonIndex == 1)
+    {
         //This should delete the word from the database and the table datasource then refresh the table
         NSLog(@"Word Count Before Deletion: %lu", (unsigned long)[[[Database GetInstance] words] count]);
         for (Word *a in [[Database GetInstance] words])
@@ -163,35 +172,55 @@
 }
 -(void)collectionView:(UICollectionView *)collectionView didSelectItemAtIndexPath:(NSIndexPath *)indexPath
 {
+    [viewWord setHidden:true];
     NSLog(@"Word Selected: %ld", (long)indexPath.row);
+    viewWord = [[ViewWord alloc]init];
     Word *word = [Database GetInstance].words[indexPath.row];
     [[Database GetInstance] setActiveWord:word];
     NSLog(@"Active Word: %@", [[[Database GetInstance] activeWord] english]);
-    int index = indexPath.row;
-    if (index >= 50)
+    
+    int columns;
+    if (layout == iPadLandscape)
     {
-        int a = index / 50;
-        index = index - (50 * a);
+        columns = 3;
     }
-    //use a math equation to determine if the word is in the first row, second row, or third row
-    int x = [[collectionView subviews][index] frame].origin.x;
-    int y = [[collectionView subviews][index] frame].origin.y;
-    int h = [[collectionView subviews][index] frame].size.height;
+    else if (layout == iPadPortrait)
+    {
+        columns = 2;
+    }
+    else
+    {
+        columns = 1;
+    }
+    
+    int xPos = indexPath.row % columns;
+    NSLog(@"xPos: %d", xPos);
+    int yPos = indexPath.row / columns;
+    NSLog(@"yPos: %d", yPos);
+
+    int x = (xPos * cellWidth) + (3 * xPos);
+    if (layout == iPadPortrait && x > 2)
+    {
+        x++;
+    }
+    int y = (yPos * cellHeight) + (2 * yPos);
+    
     NSLog(@"ViewWord Frame: X: %d Y: %d", x, y);
-    [viewWord setFrame:CGRectMake(x + 2, y + h  - collectionView.contentOffset.y, flow.itemSize.width, 0)];
+    [viewWord setFrame:CGRectMake(x + 2, y + cellHeight  - collectionView.contentOffset.y, flow.itemSize.width, 0)];
     [viewWord setStartFrame:CGRectMake(x, y, viewWord.frame.size.width, viewWord.frame.size.height)];
     [viewWord SetDelegate:self];
     [viewWord CreateWordView:word];
     
-    NSLog(@"%f", y + h - collectionView.contentOffset.y + viewWord.frame.size.height);
+    NSLog(@"%f", y + cellHeight - collectionView.contentOffset.y + viewWord.frame.size.height);
     NSLog(@"%f", collectionView.frame.size.height);
-    if (y + h - collectionView.contentOffset.y + viewWord.frame.size.height >= collectionView.frame.size.height)
+    if (y + cellHeight - collectionView.contentOffset.y + viewWord.frame.size.height >= collectionView.frame.size.height)
     {
-        [collectionView setContentOffset:CGPointMake(0, ((y + h - collectionView.contentOffset.y + viewWord.frame.size.height) - collectionView.frame.size.height) + collectionView.contentOffset.y) animated:true];
+        [collectionView setContentOffset:CGPointMake(0, ((y + cellHeight - collectionView.contentOffset.y + viewWord.frame.size.height) - collectionView.frame.size.height) + collectionView.contentOffset.y) animated:true];
     }
     
     [super SetActionButton:1 Title:@"Edit"];
     [super SetActionButton:2 Title:@"Delete"];
+    [content addSubview:viewWord];
     NSLog(@"Word View Created");
 }
 -(void)collectionView:(UICollectionView *)collectionView didDeselectItemAtIndexPath:(NSIndexPath *)indexPath
