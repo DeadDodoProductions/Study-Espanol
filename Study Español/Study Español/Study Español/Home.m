@@ -192,6 +192,10 @@
     {
         NSLog(@"Search(Action1) Button Pressed");
         [[Database GetInstance] Search];
+        if ([[[Database GetInstance] translate] isEqualToNumber:[NSNumber numberWithInt:0]])
+        {
+            
+        }
         if ([[[Database GetInstance] words] count] > 0)
         {
             [self GoToNewView];

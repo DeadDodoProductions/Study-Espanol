@@ -19,5 +19,8 @@
 +(void)KeyboardOffView;
 +(NSString*)GetDevice;
 +(void)DeleteUnusedTags;
++(NSArray*)SortAlphabetically:(NSArray*)array Sort:(NSString*)sortBy Order:(BOOL)ascending;
++(NSArray*)RandomizeArray:(NSArray*)array;
++(NSString*)AdjustWordForGender:(Word*)word;
 
 @end

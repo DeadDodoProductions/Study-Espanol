@@ -230,6 +230,7 @@
     {
         [tagOptions removeAllObjects];
         [tagSearchTable setHidden:true];
+        [tagSearchTable reloadData];
         [self ChangeLayoutPositions:-30];
     }
 }

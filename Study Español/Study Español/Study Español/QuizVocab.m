@@ -37,6 +37,7 @@
 {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [[Database GetInstance] setWords:[Utilities RandomizeArray:[Database GetInstance].words]];
     [self CreateGUI];
     textFields = [[NSMutableArray alloc]init];
     for (int i = 0; i < [[[Database GetInstance] words] count]; i++)
@@ -117,8 +118,10 @@
     for (int i = 0; i < [[[Database GetInstance] words] count]; i++)
     {
         Word *word = [[Database GetInstance] words][i];
+        NSString *english = [[word english] uppercaseString];
+        NSString *spanish = [[Utilities AdjustWordForGender:word] uppercaseString];
         NSLog(@"%@ -- %@ -- %@", [word english], [word spanish], textFields[i]);
-        if (![[[word english] uppercaseString] isEqualToString:[textFields[i] uppercaseString]] && ![[[word spanish] uppercaseString] isEqualToString:[textFields[i] uppercaseString]])
+        if (![english isEqualToString:[textFields[i] uppercaseString]] && ![spanish isEqualToString:[textFields[i] uppercaseString]])
         {
             [words addObject:word];
             [answers addObject:textFields[i]];
@@ -144,7 +147,7 @@
     Word *aWord = [[Database GetInstance] words][indexPath.row];
     if ([[[Database GetInstance] translate] isEqualToNumber:[NSNumber numberWithInt:0]])
     {
-        [[cell wordLabel] setText:[aWord spanish]];
+        [[cell wordLabel] setText:[NSString stringWithFormat:@"%@", [Utilities AdjustWordForGender:aWord]]];
     }
     else
     {

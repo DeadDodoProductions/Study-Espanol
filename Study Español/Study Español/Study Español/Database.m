@@ -9,6 +9,7 @@
 
 #import "Database.h"
 #import "AppDelegate.h"
+#import "Utilities.h"
 
 #import "Word.h"
 #import "Tag.h"
@@ -93,7 +94,14 @@ static Database *instance = nil;
     word.english = english;
     NSLog(@"English: %@", english);
     word.spanish = spanish;
-    NSLog(@"Spanish: %@", spanish);
+    NSString *beginning = [[word spanish] substringToIndex:3];
+    beginning = [beginning lowercaseString];
+    NSLog(@"Spanish: %@", beginning);
+    if ([beginning isEqualToString:@"la "] || [beginning isEqualToString:@"el "])
+    {
+        [word setSpanish:[[word spanish] stringByReplacingCharactersInRange:NSMakeRange(0, 3) withString:@""]];
+    }
+    NSLog(@"Spanish: %@", [word spanish]);
     word.pronunciation = pronunciation;
     NSLog(@"Pronunciation: %@", pronunciation);
     word.definition = definition;
@@ -274,7 +282,14 @@ static Database *instance = nil;
     NSArray *fetchedWords = [[appDelegate managedObjectContext] executeFetchRequest:fetchRequest error:&error];
     NSLog(@"Returning Fetched Words");
     
-    words = [self RandomizeArray:[NSArray arrayWithArray:fetchedWords]];
+    if ([translate isEqualToNumber:[NSNumber numberWithInt:0]])
+    {
+        words = [Utilities SortAlphabetically:fetchedWords Sort:@"spanish" Order:true];
+    }
+    else
+    {
+        words = [Utilities SortAlphabetically:fetchedWords Sort:@"english" Order:true];
+    }
     NSLog(@"Finished Search");
     NSLog(@"Found %lu Words for Search Criteria", (unsigned long)words.count);
     if (words.count <= 0)
@@ -298,28 +313,13 @@ static Database *instance = nil;
     
     NSError *error;
     NSArray *fetchedTags = [[appDelegate managedObjectContext] executeFetchRequest:fetchRequest error:&error];
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"tag" ascending:true];
-    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
-    NSArray *sortedArray = [fetchedTags sortedArrayUsingDescriptors:sortDescriptors];
+    NSArray *sortedArray = [Utilities SortAlphabetically:fetchedTags Sort:@"tag" Order:true];
     NSLog(@"%@", sortedArray);
     return sortedArray;
 }
 
 
 ///Database Manipulation Helper Methods
-//randmoizes the order of an array
--(NSArray*)RandomizeArray:(NSArray*)array
-{
-    NSLog(@"Randomizing Array");
-    NSMutableArray *temp = [[NSMutableArray alloc] initWithArray:array];
-    
-    for (int i = (int)[array count]; i > 1; i--)
-    {
-        int j = arc4random_uniform(i);
-        [temp exchangeObjectAtIndex:i-1 withObjectAtIndex:j];
-    }
-    return [NSArray arrayWithArray:temp];
-}
 //Creates a predicate for the Search Criteria
 -(NSPredicate*)CreateSearchPredicate
 {
@@ -375,7 +375,6 @@ static Database *instance = nil;
     wordMax = 0;
     wordType = nil;
     wordString = @"";
-    translate = [NSNumber numberWithInt:0];
     verbEnding = nil;
     verbRegular = nil;
     conjugations = nil;

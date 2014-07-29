@@ -166,7 +166,16 @@
     //English and Espanol will come from the List of Words located in a Singleton/Static class
     Word *aWord = [[Database GetInstance] words][indexPath.row];
     NSLog(@"%ld: %@ - %@", (long)indexPath.row, [aWord english], [aWord spanish]);
-    [[cell cellLabel] setText:[NSString stringWithFormat:@"%@ -- %@", [aWord english], [aWord spanish]]];
+    NSString *english = [aWord english];
+    NSString *espanol = [NSString stringWithFormat:@"%@", [Utilities AdjustWordForGender:aWord]];
+    if ([[[Database GetInstance] translate] isEqualToNumber:[NSNumber numberWithInt:0]])
+    {
+        [[cell cellLabel] setText:[NSString stringWithFormat:@"%@ -- %@", espanol, english]];
+    }
+    else
+    {
+        [[cell cellLabel] setText:[NSString stringWithFormat:@"%@ -- %@", english, espanol]];
+    }
     [[cell cellLabel] setTextAlignment:NSTextAlignmentCenter];
     return cell;
 }

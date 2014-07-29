@@ -46,6 +46,7 @@
     NSString *string = [Utilities GetDevice];
     NSArray *sectionsArray; //used to define the order each section is created and where it is located on screen
 
+    [[Database GetInstance] setTranslate:[NSNumber numberWithInt:0]];
     tags = [[NSMutableArray alloc]init];
     startRect = self.frame;
     

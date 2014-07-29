@@ -50,6 +50,7 @@
     [self addSubview:title];
     
     NSArray *array = [[NSArray alloc]initWithObjects:@"AR", @"ER", @"IR", @"Regular", @"Irregular", nil];
+    //Verb Ending
     for (int i = 0; i < 3; i++)
     {
         NSLog(@"Creating: %@", array[i]);
@@ -68,11 +69,12 @@
         {
             if ([[[[Database GetInstance] activeWord] verbEnding] isEqualToNumber:[NSNumber numberWithInt:i]])
             {
-                NSLog(@"It Worked!!");
                 [newSwitch setOn:true animated:true];
+                [[Database GetInstance] setVerbEnding:[NSNumber numberWithInt:i]];
             }
         }
     }
+    //Verb Regular
     for (int i = 0; i < 2; i++)
     {
         NSLog(@"Creating: %@", array[i + 3]);
@@ -91,8 +93,8 @@
         {
             if ([[[[Database GetInstance] activeWord] verbType] isEqualToNumber:[NSNumber numberWithInt:i]])
             {
-                NSLog(@"It Worked!!");
                 [newSwitch setOn:true animated:true];
+                [[Database GetInstance] setVerbRegular:[NSNumber numberWithInt:i]];
             }
         }
         [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, newLabel.frame.origin.y + newLabel.frame.size.height + 6)];

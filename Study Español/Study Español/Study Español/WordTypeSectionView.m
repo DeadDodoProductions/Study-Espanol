@@ -68,6 +68,7 @@
             {
                 NSLog(@"It Worked!!");
                 [newSwitch setOn:true animated:true];
+                [[Database GetInstance] setWordType:[NSNumber numberWithInt:i]];
             }
         }
         [self setFrame:CGRectMake(self.frame.origin.x, self.frame.origin.y, self.frame.size.width, newLabel.frame.origin.y + newLabel.frame.size.height + 6)];

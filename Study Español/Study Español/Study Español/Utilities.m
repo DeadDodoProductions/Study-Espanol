@@ -10,6 +10,7 @@
 #import "Utilities.h"
 #import "Database.h"
 #import "Tag.h"
+#import "Word.h"
 #import "AppDelegate.h"
 
 @implementation Utilities
@@ -63,6 +64,47 @@ static NSString *device;
 
         }
     }
+}
+
+//randmoizes the order of an array
++(NSArray*)RandomizeArray:(NSArray*)array
+{
+    NSLog(@"Randomizing Array");
+    NSMutableArray *temp = [[NSMutableArray alloc] initWithArray:array];
+    
+    for (int i = (int)[array count]; i > 1; i--)
+    {
+        int j = arc4random_uniform(i);
+        [temp exchangeObjectAtIndex:i-1 withObjectAtIndex:j];
+    }
+    return [NSArray arrayWithArray:temp];
+}
+
++(NSArray*)SortAlphabetically:(NSArray*)array Sort:(NSString*)sortBy Order:(BOOL)ascending
+{
+    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:sortBy ascending:ascending];
+    NSArray *sortDescriptors = [NSArray arrayWithObject:sortDescriptor];
+    return [array sortedArrayUsingDescriptors:sortDescriptors];
+}
+
++(NSString*)AdjustWordForGender:(Word*)word
+{
+    if ([[word wordType] isEqualToNumber:[NSNumber numberWithInt:0]])
+    {
+        if ([[word gender] isEqualToNumber:[NSNumber numberWithInt:1]])
+        {
+            return [NSString stringWithFormat:@"La %@", [word spanish]];
+        }
+        else if ([[word gender] isEqualToNumber:[NSNumber numberWithInt:0]])
+        {
+            return [NSString stringWithFormat:@"El %@", [word spanish]];
+        }
+        else
+        {
+            return [NSString stringWithFormat:@"%@", [word spanish]];
+        }
+    }
+    return [NSString stringWithFormat:@"%@", [word spanish]];
 }
 
 @end

@@ -37,10 +37,11 @@
     // Do any additional setup after loading the view.
     currentWord = 0;
     [self CreateGUI];
+    [[Database GetInstance] setWords:[Utilities RandomizeArray:[Database GetInstance].words]];
     Word *word = [[Database GetInstance] words][currentWord];
     if ([[[Database GetInstance] translate] isEqualToNumber:[NSNumber numberWithInt:0]])
     {
-        [wordLabel setText:[NSString stringWithFormat:@"%@", [word spanish]]];
+        [wordLabel setText:[NSString stringWithFormat:@"%@", [Utilities AdjustWordForGender:word]]];
     }
     else
     {
@@ -141,7 +142,7 @@
     Word *word = [[Database GetInstance] words][currentWord];
     if ([[[Database GetInstance] translate] isEqualToNumber:[NSNumber numberWithInt:0]])
     {
-        [wordLabel setText:[NSString stringWithFormat:@"%@", [word spanish]]];
+        [wordLabel setText:[NSString stringWithFormat:@"%@", [Utilities AdjustWordForGender:word]]];
     }
     else
     {
@@ -160,7 +161,7 @@
     Word *word = [[Database GetInstance] words][currentWord];
     if ([[[Database GetInstance] translate] isEqualToNumber:[NSNumber numberWithInt:0]])
     {
-        [wordLabel setText:[NSString stringWithFormat:@"%@", [word spanish]]];
+        [wordLabel setText:[NSString stringWithFormat:@"%@", [Utilities AdjustWordForGender:word]]];
     }
     else
     {
@@ -177,7 +178,7 @@
     }
     else
     {
-        [answerLabel setText:[NSString stringWithFormat:@"%@", [word spanish]]];
+        [wordLabel setText:[NSString stringWithFormat:@"%@", [Utilities AdjustWordForGender:word]]];
     }
 }
 
